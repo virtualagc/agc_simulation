@@ -1,3 +1,14 @@
+module nor1(y, a, rst);
+    parameter delay = 9;
+    parameter iv = 0;
+    input wire a, rst;
+    output reg y;
+    always @(*) begin
+        if (rst) y = iv;
+        else #delay y = ~a;
+    end
+endmodule
+
 module nor2(y, a, b, rst);
     parameter delay = 9;
     parameter iv = 0;

@@ -1,5 +1,25 @@
 `include "components/nor_gates.v"
 
+module U74HC04(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst);
+    parameter ic1 = 0;
+    parameter ic2 = 0;
+    parameter ic3 = 0;
+    parameter ic4 = 0;
+    parameter ic5 = 0;
+    parameter ic6 = 0;
+    localparam delay = 9;
+    input wire vcc, gnd, rst;
+    input wire a1, a2, a3, a4, a5, a6;
+    output wire y1, y2, y3, y4, y5, y6;
+
+    nor1 #(delay, ic1) A(y1, a1, rst);
+    nor1 #(delay, ic2) B(y2, a2, rst);
+    nor1 #(delay, ic3) C(y3, a3, rst);
+    nor1 #(delay, ic4) D(y4, a4, rst);
+    nor1 #(delay, ic5) E(y5, a5, rst);
+    nor1 #(delay, ic6) F(y6, a6, rst);
+endmodule
+
 module U74HC02(y1, a1, b1, y2, a2, b2, gnd, a3, b3, y3, a4, b4, y4, vcc, rst);
     parameter ic1 = 0;
     parameter ic2 = 0;
