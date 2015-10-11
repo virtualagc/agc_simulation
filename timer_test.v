@@ -7,7 +7,8 @@ module main;
     always #488.281 clock = !clock;
 
     wire vcc, gnd;
-    timer a1(vcc, gnd, rst, clock);
+    wire phs2, phs2_n, phs4, phs4_n, rt, ct, ct_n, wt, wt_n;
+    timer a1(vcc, gnd, rst, clock, phs2, phs2_n, phs4, phs4_n, rt, ct, ct_n, wt, wt_n);
     
     initial begin
         $dumpfile("dump.lxt");
