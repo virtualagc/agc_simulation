@@ -98,7 +98,7 @@ class VerilogGenerator(object):
         self.load_nets(root.find('nets'))
 
     def make_net_name(self, net):
-        name = net.attrib['name']
+        name = net.attrib['name'].replace('/','_n')
         if name.startswith('Net-'):
             return 'NET_' + net.attrib['code']
         else:
