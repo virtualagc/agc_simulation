@@ -6,7 +6,8 @@ module main;
     reg clock = 0;
     always #488.281 clock = !clock;
 
-    wire vcc, gnd;
+    reg vcc = 1;
+    reg gnd = 0;
     wire phs2, phs2_n, phs4, phs4_n, rt, ct, ct_n, wt, wt_n, ovfstb_n;
     reg stop = 0;
 
