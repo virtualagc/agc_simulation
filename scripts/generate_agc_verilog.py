@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import sys
 import os
+import re
 
 # Simple class representing a pin on a component
 class Pin(object):
@@ -98,7 +99,10 @@ class VerilogGenerator(object):
         self.load_nets(root.find('nets'))
 
     def make_net_name(self, net):
-        name = net.attrib['name'].replace('/','_n')
+        # Trailing slashes mean negated signals
+        name = re.sub('/$', '_n', net.attrib['name'])
+        # Otherwise, they're path seperators for a local symbol
+        name = name.replace('/','__')
         if name.startswith('Net-'):
             return 'NET_' + net.attrib['code']
         else:
