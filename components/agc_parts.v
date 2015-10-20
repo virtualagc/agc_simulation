@@ -1,4 +1,5 @@
 `include "components/nor_gates.v"
+`include "components/buffers.v"
 
 module U74HC04(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst);
     parameter ic1 = 0;
@@ -48,4 +49,18 @@ module U74HC27(a1, b1, a2, b2, c2, y2, gnd, y3, a3, b3, c3, y1, c1, vcc, rst);
     nor3 #(delay, ic1) A(y1, a1, b1, c1, rst);
     nor3 #(delay, ic2) B(y2, a2, b2, c2, rst);
     nor3 #(delay, ic3) C(y3, a3, b3, c3, rst);
+endmodule
+
+module U74LVC07(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst);
+    localparam delay = 2;
+    input wire vcc, gnd, rst;
+    input wire a1, a2, a3, a4, a5, a6;
+    output wire y1, y2, y3, y4, y5, y6;
+
+    od_buf #(delay) A(y1, a1);
+    od_buf #(delay) B(y2, a2);
+    od_buf #(delay) C(y3, a3);
+    od_buf #(delay) D(y4, a4);
+    od_buf #(delay) E(y5, a5);
+    od_buf #(delay) F(y6, a6);
 endmodule

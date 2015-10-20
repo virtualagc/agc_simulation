@@ -21,7 +21,7 @@ class Component(object):
     def __init__(self, comp, libparts):
         # Load the basics from this component's node
         self.ref = comp.attrib['ref']
-        self.type = comp.find('value').text
+        self.type = comp.find('libsource').attrib['part']
         self.initial_values = {}
         self.pins = []
         
@@ -30,7 +30,7 @@ class Component(object):
         
         # Build up a list of pins and their types
         if not self.load_pin_types(libparts):
-            raise RuntimeError('Unable to load pin types')
+            raise RuntimeError('Unable to load pin types for %s' % self.ref)
     
     def load_initial_values(self, comp):
         for part in comp.iterfind('.//part'):
@@ -70,20 +70,26 @@ class Component(object):
         # Build up a verilog representation of this component
         pin_names = [str(pin) for pin in self.pins]
         type_name = self.type
-        if type_name[0].isdigit():
-            # Lots of parts (like 74xx chips) start with a number, so prepend a U
-            # to make Verilog happy
-            type_name = 'U' + type_name
-
-        if any([iv == '1' for _,iv in self.initial_values.items()]):
-            # If any of the initial conditions for this component are 1, we need to print them out
-            ivs = [self.initial_values[part] for part in sorted(self.initial_values.keys())]
-            iv_string = ' #(' + ', '.join(ivs) + ') '
+        if self.ref[0] == 'R':
+            if 'VCC' in pin_names:
+                return 'pullup %s(%s)' % (self.ref, pin_names[0] if pin_names[0] != 'VCC' else pin_names[1])
+            else:
+                raise RuntimeError("Error processing resistor %s, not connected to VCC" % self.ref)
         else:
-            # Otherwise we'll just let everything default to 0.
-            iv_string = ' '
+            if type_name[0].isdigit():
+                # Lots of parts (like 74xx chips) start with a number, so prepend a U
+                # to make Verilog happy
+                type_name = 'U' + type_name
 
-        return type_name + iv_string + self.ref + '(' + ', '.join(pin_names) + ', SIM_RST)'
+            if any([iv == '1' for _,iv in self.initial_values.items()]):
+                # If any of the initial conditions for this component are 1, we need to print them out
+                ivs = [self.initial_values[part] for part in sorted(self.initial_values.keys())]
+                iv_string = ' #(' + ', '.join(ivs) + ') '
+            else:
+                # Otherwise we'll just let everything default to 0.
+                iv_string = ' '
+
+            return type_name + iv_string + self.ref + '(' + ', '.join(pin_names) + ', SIM_RST)'
         
 class VerilogGenerator(object):
     def __init__(self, module, root):
