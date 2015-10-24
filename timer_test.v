@@ -1,5 +1,6 @@
 `timescale 1ns/1ps
 `include "modules/timer.v"
+`include "modules/scaler.v"
 
 module main;
     reg rst = 1;
@@ -22,7 +23,12 @@ module main;
     reg wl16 = 0;
     reg wl16_n = 1;
 
-    timer a1(vcc, gnd, rst, clock, mstrtp, mstp, phs2, phs2_n, phs3_n, phs4, phs4_n, rt, rt_n, wt, wt_n, ct, ct_n, clk, tt_n, p01, p01_n, p02, p02_n, p03, p03_n, p04, p04_n, p05, p05_n, sby, alga, strt1, strt2, goj1, stopa, gojam, gojam_n, stop, stop_n, wl15, wl15_n, wl16, wl16_n, monwt, q2a, mgojam, mstpit_n);
+    reg rchat_n = 1;
+    reg rchbt_n = 1;
+    wire fs01_n;
+
+    scaler a1(vcc, gnd, rst, fs01_n, rchat_n, rchbt_n);
+    timer a2(vcc, gnd, rst, clock, mstrtp, mstp, phs2, phs2_n, phs3_n, phs4, phs4_n, rt, rt_n, wt, wt_n, ct, ct_n, clk, tt_n, p01, p01_n, p02, p02_n, p03, p03_n, p04, p04_n, p05, p05_n, sby, alga, strt1, strt2, goj1, stopa, gojam, gojam_n, stop, stop_n, wl15, wl15_n, wl16, wl16_n, fs01_n, monwt, q2a, mgojam, mstpit_n);
     
     initial begin
         $dumpfile("dump.lxt");
