@@ -1,3 +1,6 @@
+`ifndef _BUFFERS_V_
+`define _BUFFERS_V_
+
 module od_buf(y, a);
     parameter delay = 2;
     input wire a;
@@ -7,3 +10,5 @@ module od_buf(y, a);
         else #delay y = 1'b0;
     end
 endmodule
+
+`endif

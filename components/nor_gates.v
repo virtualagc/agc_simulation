@@ -1,3 +1,6 @@
+`ifndef _NOR_GATES_V_
+`define _NOR_GATES_V_
+
 module nor1(y, a, rst);
     parameter delay = 9;
     parameter iv = 0;
@@ -41,3 +44,5 @@ module nor4(y, a, b, c, d, rst);
         else #delay y = ~(a | b | c | d);
     end
 endmodule
+
+`endif
