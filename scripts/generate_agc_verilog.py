@@ -112,6 +112,8 @@ class VerilogGenerator(object):
         if name.startswith('Net-'):
             return 'NET_' + net.attrib['code']
         else:
+            if name[0].isdigit():
+                name = 'n' + name
             return name
     
     def load_components(self, components):
