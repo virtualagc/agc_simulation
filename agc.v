@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 `include "modules/timer.v"
 `include "modules/scaler.v"
 `include "modules/sq_register.v"
@@ -19,7 +20,6 @@ module main;
     reg strt1 = 0;
     reg strt2 = 0;
     reg goj1 = 0;
-
     reg wl16 = 0;
     reg wl16_n = 1;
     reg wl15 = 0;
@@ -45,6 +45,7 @@ module main;
     reg inkl = 0;
     reg inkbt1 = 0;
     reg inhlpls = 0;
+    reg relpls = 0;
     reg ovnhrp = 0;
     reg ruptor_n = 1;
     reg krpt = 0;
@@ -59,12 +60,23 @@ module main;
     initial begin
         $dumpfile("dump.lxt");
         $dumpvars(0, main);
-        #10 rst = 0;
+        #5000 rst = 0;
         #10000 strt1 = 1;
         #1000  strt1 = 0;
         #50000 goj1 = 1;
         #1000  goj1 = 0;
-        #5000000 strt1 = 1;
-        #5000 $finish;
+        #20000 wl13 = 1;
+        wl13_n = 0;
+        #5000 nisq = 1;
+        #5000 nisq = 0;
+        #20000 wl14 = 1;
+        wl14_n = 0;
+        #5000 nisq = 1;
+        #5000 nisq = 0;
+        #20000 ext = 1;
+        #5000 ext = 0;
+        #50000 strt1 = 1;
+        #5000 strt1 = 0;
+        #500000 $finish;
     end
 endmodule
