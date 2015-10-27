@@ -177,17 +177,17 @@ class VerilogGenerator(object):
             f.write('    input wire SIM_RST;\n')
 
             # Write out all of the wire declarations
-            for net, type in self.net_types.items():
+            for net, net_type in sorted(self.net_types.items()):
                 f.write('    ')
-                if type != 'internal':
+                if net_type != 'internal':
                     # For non-internal wires, write out the I/O type
-                    f.write('%s ' % type)
+                    f.write('%s ' % net_type)
                 f.write('wire %s;\n' % net)
                 
             f.write('\n')
 
             # Finally, dump the list of components
-            for ref, comp in self.components.items():
+            for ref, comp in sorted(self.components.items()):
                 if ref[0] == 'P':
                     continue
                 for pin in comp.unconnected_pins():
