@@ -54,6 +54,19 @@ module U74HC27(a1, b1, a2, b2, c2, y2, gnd, y3, a3, b3, c3, y1, c1, vcc, rst);
     nor3 #(delay, ic3) C(y3, a3, b3, c3, rst);
 endmodule
 
+module U74HC4002(y1, a1, b1, c1, d1, nc1, gnd, nc2, a2, b2, c2, d2, y2, vcc, rst);
+    parameter ic1 = 0;
+    parameter ic2 = 0;
+    localparam delay = 9;
+    input wire vcc, gnd, rst;
+    input wire a1, b1, c1, d1, a2, b2, c2, d2;
+    input wire nc1, nc2;
+    output wire y1, y2;
+
+    nor4 #(delay, ic1) A(y1, a1, b1, c1, d1, rst);
+    nor4 #(delay, ic2) B(y2, a2, b2, c2, d2, rst);
+endmodule
+
 module U74LVC07(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst);
     localparam delay = 2;
     input wire vcc, gnd, rst;
