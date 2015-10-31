@@ -2,6 +2,9 @@ import xml.etree.ElementTree as ET
 import sys
 import os
 import re
+from tkinter import *
+import traceback
+import argparse
 
 # Simple class representing a pin on a component
 class Pin(object):
@@ -201,21 +204,42 @@ class VerilogGenerator(object):
             f.write('endmodule');
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print('Usage: generate_agc_verilog.py <input_file> <ouput_file>')
-        sys.exit()
-
-    # Parse the netlist XML
-    tree = ET.parse(sys.argv[1])
-    root = tree.getroot()
+    parser = argparse.ArgumentParser(description="Generate AGC Verilog from KiCad XML netlist")
+    parser.add_argument('input_file', help="Input netlist XML file")
+    parser.add_argument('output_file', help="Output Verilog filename")
+    parser.add_argument('-g', '--gui', help="Show GUI dialogs", action="store_true")
+    args = parser.parse_args()
 
     # Determine the module name and output filename
-    filename = sys.argv[2]
+    filename = args.output_file
     module_path, ext = os.path.splitext(filename)
     module = os.path.basename(module_path)
     if ext == '':
         filename += '.v'
-        
-    # Make a verilog generator and use it to generate some verilog!
-    verilog_generator = VerilogGenerator(module, root)
-    verilog_generator.generate_file(filename)
+
+    if args.gui:
+        top = Tk()
+
+    try:
+        # Parse the netlist XML
+        tree = ET.parse(args.input_file)
+        root = tree.getroot()
+
+        # Make a verilog generator and use it to generate some verilog!
+        verilog_generator = VerilogGenerator(module, root)
+        verilog_generator.generate_file(filename)
+
+        if args.gui:
+            top.wm_title("AGC Verilog Generation Complete")
+            Message(top, text="Successfully generated code for module %s\n" % module, width=800).pack()
+            Button(top, text="OK", command=top.destroy).pack()
+            mainloop()
+
+    except:
+        if args.gui:
+            top.wm_title("AGC Verilog Generation Error")
+            Message(top, text="Error generating code for module %s:\n\n%s" % (module,traceback.format_exc()), width=800).pack()
+            Button(top, text="OK", command=top.destroy).pack()
+            mainloop()
+        else:
+            traceback.print_exc()

@@ -26,7 +26,7 @@ $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/gene
 	    RUNNING_KICAD=1; \
 	elif xdotool search --onlyvisible --name "KiCad"; then \
 	    echo "ERROR: KiCad running, but in module other than $(*F)"; \
-	    false; \
+	    exit 1; \
 	else kicad "$(HARDWARE_DIR)/$(*F)/$(*F).pro" & \
 	fi; \
 	xdotool search --sync --onlyvisible --name KiCad windowactivate; \
@@ -36,7 +36,13 @@ $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/gene
 	xdotool search --sync --onlyvisible --name "^Netlist$$" windowactivate; \
 	xdotool key shift+Tab shift+Tab Right Right Right Right Tab Tab Tab Tab Return; \
 	xdotool type $(shell pwd)/$@; \
-	xdotool key Return sleep 1.0; \
+	xdotool key Return; \
+	xdotool search --sync --onlyvisible --name "AGC Verilog Generation" windowactivate; \
+	if xdotool search --onlyvisible --name "AGC Verilog Generation Error">/dev/null; then \
+	    echo "Error generating code for module $(*F)"; \
+	    exit 1; \
+	fi; \
+	xdotool key Tab space sleep 0.2; \
 	if [ -z $$RUNNING_KICAD ]; then \
 	    xdotool search --sync --onlyvisible --name KiCad windowactivate; \
 	    xdotool key ctrl+q; \
