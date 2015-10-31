@@ -1,6 +1,6 @@
 `include "components/agc_parts.v"
 
-module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4, PHS4_n, RT, RT_n, WT, WT_n, CT, CT_n, CLK, TT_n, P01, P01_n, P02, P02_n, P03, P03_n, P04, P04_n, P05, P05_n, SBY, ALGA, STRT1, STRT2, GOJ1, STOPA, GOJAM, GOJAM_n, STOP, STOP_n, WL15, WL15_n, WL16, WL16_n, FS01_n, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, MONWT, Q2A, MGOJAM, MSTPIT_n);
+module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4, PHS4_n, RT, RT_n, WT, WT_n, CT, CT_n, CLK, TT_n, P01, P01_n, P02, P02_n, P03, P03_n, P04, P04_n, P05, P05_n, SBY, ALGA, STRT1, STRT2, GOJ1, STOPA, GOJAM, GOJAM_n, STOP, STOP_n, WL15, WL15_n, WL16, WL16_n, FS01_n, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, OVF_n, UNF_n, MONWT, Q2A, MGOJAM, MSTPIT_n);
     input wire SIM_RST;
     input wire ALGA;
     output wire CLK;
@@ -70,6 +70,7 @@ module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4,
     wire NET_180;
     wire NET_181;
     wire NET_182;
+    output wire OVF_n;
     output wire P01;
     output wire P01_n;
     output wire P02;
@@ -119,6 +120,7 @@ module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4,
     output wire T12;
     output wire T12_n;
     output wire TT_n;
+    output wire UNF_n;
     input wire VCC;
     input wire WL15;
     input wire WL15_n;
@@ -169,7 +171,6 @@ module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4,
     wire __A02_3__MT11;
     wire __A02_3__MT12;
     wire __A02_3__OVF;
-    wire __A02_3__OVF_n;
     wire __A02_3__T01DC_n;
     wire __A02_3__T02DC_n;
     wire __A02_3__T03DC_n;
@@ -183,7 +184,6 @@ module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4,
     wire __A02_3__T12DC_n;
     wire __A02_3__T12SET;
     wire __A02_3__UNF;
-    wire __A02_3__UNF_n;
 
     pullup R2001(NET_142);
     pullup R2002(__A02_3__T12SET);
@@ -287,5 +287,5 @@ module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4,
     wire U2045_11_NC;
     wire U2045_12_NC;
     wire U2045_13_NC;
-    U74HC04 U2045(__A02_3__OVF, __A02_3__OVF_n, __A02_3__UNF, __A02_3__UNF_n, U2045_5_NC, U2045_6_NC, GND, U2045_8_NC, U2045_9_NC, U2045_10_NC, U2045_11_NC, U2045_12_NC, U2045_13_NC, VCC, SIM_RST);
+    U74HC04 U2045(__A02_3__OVF, OVF_n, __A02_3__UNF, UNF_n, U2045_5_NC, U2045_6_NC, GND, U2045_8_NC, U2045_9_NC, U2045_10_NC, U2045_11_NC, U2045_12_NC, U2045_13_NC, VCC, SIM_RST);
 endmodule
