@@ -160,7 +160,7 @@ class VerilogGenerator(object):
         # Dump verilog to the given filename
         with open(filename, 'w') as f:
             # Necessary inclues
-            f.write('`include "components/agc_parts.v"\n\n')
+            f.write('`timescale 1ns/1ps\n\n')
             
             # Write the module name, along with the standard inputs
             f.write('module %s(VCC, GND, SIM_RST' % self.module)

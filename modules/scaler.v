@@ -1,4 +1,4 @@
-`include "components/agc_parts.v"
+`timescale 1ns/1ps
 
 module scaler(VCC, GND, SIM_RST, FS01_n, RCHAT_n, RCHBT_n);
     input wire SIM_RST;

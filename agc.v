@@ -1,9 +1,5 @@
 `timescale 1ns/1ps
 `default_nettype none
-`include "modules/timer.v"
-`include "modules/scaler.v"
-`include "modules/sq_register.v"
-`include "modules/stage_branch.v"
 
 module main;
     reg rst = 1;

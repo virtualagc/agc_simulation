@@ -1,8 +1,4 @@
-`ifndef _AGC_PARTS_V_
-`define _AGC_PARTS_V_
-
-`include "components/nor_gates.v"
-`include "components/buffers.v"
+`timescale 1ns/1ps
 
 module U74HC04(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst);
     parameter ic1 = 0;
@@ -80,5 +76,3 @@ module U74LVC07(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst);
     od_buf #(delay) E(y5, a5);
     od_buf #(delay) F(y6, a6);
 endmodule
-
-`endif

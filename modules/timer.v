@@ -1,4 +1,4 @@
-`include "components/agc_parts.v"
+`timescale 1ns/1ps
 
 module timer(VCC, GND, SIM_RST, CLOCK, MSTRTP, MSTP, PHS2, PHS2_n, PHS3_n, PHS4, PHS4_n, RT, RT_n, WT, WT_n, CT, CT_n, CLK, TT_n, P01, P01_n, P02, P02_n, P03, P03_n, P04, P04_n, P05, P05_n, SBY, ALGA, STRT1, STRT2, GOJ1, STOPA, GOJAM, GOJAM_n, STOP, STOP_n, WL15, WL15_n, WL16, WL16_n, FS01_n, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, OVF_n, UNF_n, MONWT, Q2A, MGOJAM, MSTPIT_n);
     input wire SIM_RST;

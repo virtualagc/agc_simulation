@@ -1,5 +1,4 @@
-`ifndef _NOR_GATES_V_
-`define _NOR_GATES_V_
+`timescale 1ns/1ps
 
 module nor1(y, a, rst);
     parameter delay = 9;
@@ -32,5 +31,3 @@ module nor4(y, a, b, c, d, rst);
     output wire y;
     assign #delay y = (rst) ? iv : ~(a|b|c|d);
 endmodule
-
-`endif

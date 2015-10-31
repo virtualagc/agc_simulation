@@ -1,4 +1,4 @@
-`include "components/agc_parts.v"
+`timescale 1ns/1ps
 
 module stage_branch(VCC, GND, SIM_RST, GOJAM, PHS2_n, PHS3_n, PHS4, PHS4_n, ST1, ST2, T01, T03, T12_n, SQEXT_n, SQ1_n, QC0_n, WL16_n, WL15_n, WL14_n, WL13_n, WL12_n, WL11_n, WL10_n, WL09_n, WL08_n, WL07_n, WL06_n, WL05_n, WL04_n, WL03_n, WL02_n, WL01_n, SUMA16_n, SUMB16_n, DVST, DVST_n, RSTSTG, TOV_n, OVF_n, UNF_n, TSGU_n, TSGN_n, TSGN2, TMZ_n, TPZG_n, GEQZRO_n, TL15, L15_n, TRSM_n, XT1_n, NDR100_n, XB7_n, INKL, STRTFC, ST0_n, ST1_n, STD2, ST3_n, ST4, MTCSAI);
     input wire SIM_RST;

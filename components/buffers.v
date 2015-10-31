@@ -1,5 +1,4 @@
-`ifndef _BUFFERS_V_
-`define _BUFFERS_V_
+`timescale 1ns/1ps
 
 module od_buf(y, a);
     parameter delay = 2;
@@ -7,5 +6,3 @@ module od_buf(y, a);
     output wire y;
     assign #delay y = (a == 1'b1) ? 1'bZ : 1'b0;
 endmodule
-
-`endif

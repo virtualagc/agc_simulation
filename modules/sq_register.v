@@ -1,4 +1,4 @@
-`include "components/agc_parts.v"
+`timescale 1ns/1ps
 
 module sq_register(VCC, GND, SIM_RST, GOJAM, NISQ, T01_n, T02, T12_n, PHS2_n, RT_n, CT_n, WT_n, WL16_n, WL14_n, WL13_n, WL12_n, WL11_n, WL10_n, EXT, EXTPLS, INKL, RELPLS, INHLPLS, OVNHRP, RUPTOR_n, KRPT, n5XP4, ST0_n, ST1_n, ST3_n, STD2, BR2_n, BR1B2B, RXOR0, STRTFC, GOJ1, SQ1_n, QC0_n, SQEXT_n, MNHRPT, MTCSAI);
     input wire SIM_RST;
