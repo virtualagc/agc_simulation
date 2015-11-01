@@ -31,7 +31,7 @@ $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/gene
 	fi; \
 	xdotool search --sync --onlyvisible --name KiCad windowactivate; \
 	xdotool key ctrl+e; \
-	xdotool search --sync --onlyvisible --name "^\[ $(*F)" windowactivate; \
+	xdotool search --sync --onlyvisible --name "^\[ .*?$(*F)\)$$" windowactivate; \
 	xdotool key alt+t n; \
 	xdotool search --sync --onlyvisible --name "^Netlist$$" windowactivate; \
 	xdotool key shift+Tab shift+Tab Right Right Right Right Tab Tab Tab Tab Return; \
