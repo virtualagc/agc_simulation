@@ -9,14 +9,18 @@ SOURCES = components/nor_gates.v\
 	  components/buffers.v\
 	  components/agc_parts.v\
 	  $(AUTOGEN_FILES)\
-	  agc.v
+	  agc.v\
+	  test_agc.v
 
 OBJECTS = 
 
 HARDWARE_DIR=~/agc_hardware/
 
-agc: $(SOURCES)
-	iverilog -o agc $^
+test_agc: $(SOURCES)
+	iverilog -o $@ $^
+
+agc.v: $(AUTOGEN_FILES)
+	python scripts/generate_agc_backplane.py $@ modules/
 
 .SECONDEXPANSION:
 $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/generate_agc_verilog.py

@@ -1,4 +1,5 @@
 *.xml
 *.lxt
 *.swp
-agc
+test_agc
+agc.v
