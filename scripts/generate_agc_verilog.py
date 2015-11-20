@@ -136,6 +136,7 @@ class VerilogGenerator(object):
             # that at least one of the net's connections are to a pin of type "output"
             external_signal = False
             output_connected = False
+            open_drain_connected = False
             for node in net.iter('node'):
                 # Attach this net to all of its pins
                 ref = node.attrib['ref']
@@ -146,12 +147,18 @@ class VerilogGenerator(object):
                 # Determine the wire type
                 if ref[0] == 'P':
                     external_signal = True
-                if self.components[ref].pins[pin_num-1].type == 'output':
+
+                pin_type = self.components[ref].pins[pin_num-1].type
+                if pin_type == 'output':
                     output_connected = True
+                elif pin_type == 'openCol':
+                    open_drain_connected = True
             
             if external_signal:
                 if output_connected:
                     net_type = 'output'
+                elif open_drain_connected:
+                    net_type = 'inout'
                 else:
                     net_type = 'input'
             else:
