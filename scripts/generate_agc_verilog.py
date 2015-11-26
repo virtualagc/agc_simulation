@@ -2,9 +2,13 @@ import xml.etree.ElementTree as ET
 import sys
 import os
 import re
-from tkinter import *
 import traceback
 import argparse
+
+try:
+    from tkinter import *
+except:
+    from Tkinter import *
 
 # Simple class representing a pin on a component
 class Pin(object):
