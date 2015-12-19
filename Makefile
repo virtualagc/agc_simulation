@@ -1,7 +1,8 @@
 MODULES = scaler\
 	  timer\
 	  sq_register\
-	  stage_branch
+	  stage_branch\
+	  crosspoint_nqi
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
