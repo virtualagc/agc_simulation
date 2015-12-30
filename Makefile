@@ -3,7 +3,8 @@ MODULES = scaler\
 	  sq_register\
 	  stage_branch\
 	  crosspoint_nqi\
-	  crosspoint_ii
+	  crosspoint_ii \
+	  service_gates
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
