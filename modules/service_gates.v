@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module service_gates(VCC, GND, SIM_RST, T10_n, P04_n, CT_n, RT_n, TT_n, WT_n, MP3A, STFET1_n, A2X_n, CGMC, CI_n, L2GD_n, NEAC, PIFL_n, RA_n, RB_n, RC_n, RCH_n, RG_n, RL_n, RL10BB, RQ_n, RSC_n, RU_n, RUS_n, RZ_n, U2BBK, WA_n, WB_n, WCH_n, WG_n, WL_n, WQ_n, WS_n, WSC_n, WY_n, WY12_n, WYD_n, WZ_n, ZAP_n, CYL_n, CYR_n, EDOP_n, SR_n, EAC_n, GINH, L15_n, PIPPLS_n, SB2_n, SCAD_n, SHIFT, XB0_n, XB1_n, XB2_n, XB3_n, XB4_n, XB5_n, XB6_n, XT0_n, A2XG_n, CAG, CBG, CGG, CLG1G, CQG, CUG, CZG, CI01_n, G2LSG_n, L2GDG_n, RAG_n, RBLG_n, RCG_n, RGG_n, RLG_n, RQG_n, RULOG_n, RZG_n, WAG_n, WALSG_n, WBG_n, WG1G_n, WG3G_n, WG4G_n, WLG_n, WQG_n, WYDG_n, WYDLOG_n, WYLOG_n, WZG_n);
+module service_gates(VCC, GND, SIM_RST, T10_n, P04_n, CT_n, RT_n, TT_n, WT_n, MP3A, STFET1_n, A2X_n, CGMC, CI_n, L2GD_n, NEAC, PIFL_n, RA_n, RB_n, RC_n, RCH_n, RG_n, RL_n, RL10BB, RQ_n, RSC_n, RU_n, RUS_n, RZ_n, U2BBK, WA_n, WB_n, WCH_n, WG_n, WL_n, WQ_n, WS_n, WSC_n, WY_n, WY12_n, WYD_n, WZ_n, ZAP_n, CYL_n, CYR_n, EDOP_n, SR_n, EAC_n, GINH, L15_n, PIPPLS_n, SB2_n, SCAD_n, SHIFT, XB0_n, XB1_n, XB2_n, XB3_n, XB4_n, XB5_n, XB6_n, XT0_n, A2XG_n, CAG, CBG, CGG, CLG1G, CQG, CUG, CZG, CI01_n, G2LSG_n, L2GDG_n, RAG_n, RBHG_n, RBLG_n, RCG_n, RGG_n, RLG_n, RQG_n, RULOG_n, RZG_n, WAG_n, WALSG_n, WBG_n, WG1G_n, WG3G_n, WG4G_n, WLG_n, WQG_n, WYDG_n, WYDLOG_n, WYLOG_n, WZG_n);
     input wire SIM_RST;
     output wire A2XG_n;
     input wire A2X_n;
@@ -35,7 +35,7 @@ module service_gates(VCC, GND, SIM_RST, T10_n, P04_n, CT_n, RT_n, TT_n, WT_n, MP
     wire NET_140;
     wire NET_141;
     wire NET_142;
-    wire NET_145;
+    wire NET_143;
     wire NET_146;
     wire NET_147;
     wire NET_149;
@@ -101,6 +101,7 @@ module service_gates(VCC, GND, SIM_RST, T10_n, P04_n, CT_n, RT_n, TT_n, WT_n, MP
     input wire PIPPLS_n;
     output wire RAG_n;
     input wire RA_n;
+    output wire RBHG_n;
     output wire RBLG_n;
     input wire RB_n;
     output wire RCG_n;
@@ -200,7 +201,6 @@ module service_gates(VCC, GND, SIM_RST, T10_n, P04_n, CT_n, RT_n, TT_n, WT_n, MP
     wire __A07_2__MWFBG;
     wire __A07_2__RBBEG_n;
     wire __A07_2__RBBK;
-    wire __A07_2__RBHG_n;
     wire __A07_2__RCHG_n;
     wire __A07_2__REBG_n;
     wire __A07_2__RFBG_n;
@@ -231,9 +231,9 @@ module service_gates(VCC, GND, SIM_RST, T10_n, P04_n, CT_n, RT_n, TT_n, WT_n, MP
     U74HC27 U7008(__A07_1__WGA_n, WT_n, __A07_1__WGA_n, WT_n, CYL_n, NET_168, GND, NET_172, __A07_1__WGA_n, WT_n, EDOP_n, NET_169, CYR_n, VCC, SIM_RST);
     U74HC04 U7009(NET_169, __A07_1__WG5G_n, NET_168, WG3G_n, NET_172, __A07_1__WEDOPG_n, GND, __A07_1__MWZG, WZG_n, __A07_1__MWLG, WLG_n, __A07_1__MWAG, WAG_n, VCC, SIM_RST);
     U74HC02 #(0, 0, 0, 1) U7010(WG4G_n, NET_173, NET_169, NET_170, WT_n, WZ_n, GND, __A07_1__WSCG_n, XB5_n, NET_171, NET_170, NET_171, WZG_n, VCC, SIM_RST);
-    U74HC02 U7011(CZG, WZG_n, CT_n, NET_145, WL_n, WT_n, GND, __A07_1__WSCG_n, XB1_n, NET_142, NET_136, CT_n, CLG1G, VCC, SIM_RST);
-    U74HC27 #(0, 1, 0) U7012(XB1_n, XT0_n, NET_145, NET_146, NET_142, WLG_n, GND, NET_137, NET_138, NET_139, __A07_1__WALSG, NET_146, __A07_1__WCHG_n, VCC, SIM_RST);
-    U74HC4002 U7013(NET_135, NET_145, NET_146, NET_142, __A07_1__WALSG, NET_140, GND, NET_141, NET_142, NET_146, NET_145, __A07_2__G2LSG, NET_136, VCC, SIM_RST);
+    U74HC02 U7011(CZG, WZG_n, CT_n, NET_140, WL_n, WT_n, GND, __A07_1__WSCG_n, XB1_n, NET_143, NET_136, CT_n, CLG1G, VCC, SIM_RST);
+    U74HC27 #(0, 1, 0) U7012(XB1_n, XT0_n, NET_140, NET_146, NET_143, WLG_n, GND, NET_137, NET_138, NET_139, __A07_1__WALSG, NET_146, __A07_1__WCHG_n, VCC, SIM_RST);
+    U74HC4002 U7013(NET_135, NET_140, NET_146, NET_143, __A07_1__WALSG, NET_141, GND, NET_142, NET_143, NET_146, NET_140, __A07_2__G2LSG, NET_136, VCC, SIM_RST);
     U74HC02 #(0, 0, 0, 1) U7014(__A07_1__CLG2G, NET_135, CT_n, NET_138, WT_n, WA_n, GND, __A07_1__WSCG_n, XB0_n, NET_139, NET_138, NET_139, WAG_n, VCC, SIM_RST);
     U74HC02 U7015(CAG, NET_137, CT_n, NET_153, WT_n, WS_n, GND, __A07_1__WSG_n, CT_n, __A07_1__CSG, WT_n, WQ_n, NET_152, VCC, SIM_RST);
     U74HC04 #(0, 0, 0, 0, 0, 1) U7016(NET_153, __A07_1__WSG_n, __A07_1__WSG_n, __A07_1__MWSG, WQG_n, __A07_1__MWQG, GND, __A07_1__P04A, P04_n, RCG_n, NET_207, G2LSG_n, __A07_2__G2LSG, VCC, SIM_RST);
@@ -257,7 +257,7 @@ module service_gates(VCC, GND, SIM_RST, T10_n, P04_n, CT_n, RT_n, TT_n, WT_n, MP
     U74HC02 U7030(NET_176, XB5_n, __A07_2__RSCG_n, NET_178, __A07_2__RSCG_n, XB3_n, GND, RT_n, RU_n, NET_198, RT_n, RUS_n, NET_199, VCC, SIM_RST);
     wire U7031_12_NC;
     wire U7031_13_NC;
-    U74HC04 U7031(NET_198, __A07_2__RUG_n, NET_199, __A07_2__RUSG_n, RULOG_n, __A07_2__MRULOG, GND, __A07_2__RBHG_n, NET_201, NET_202, RL10BB, U7031_12_NC, U7031_13_NC, VCC, SIM_RST);
+    U74HC04 U7031(NET_198, __A07_2__RUG_n, NET_199, __A07_2__RUSG_n, RULOG_n, __A07_2__MRULOG, GND, RBHG_n, NET_201, NET_202, RL10BB, U7031_12_NC, U7031_13_NC, VCC, SIM_RST);
     U74HC02 U7032(RULOG_n, NET_198, NET_199, NET_201, RT_n, RB_n, GND, RT_n, NET_202, NET_200, NET_201, NET_200, RBLG_n, VCC, SIM_RST);
     wire U7037_1_NC;
     wire U7037_2_NC;
