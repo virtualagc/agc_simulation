@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CUG, CZG, L2GDG_n, RAG_n, RCG_n, RGG_n, RLG_n, RQG_n, RZG_n, WAG_n, WALSG_n, WBG_n, WLG_n, WQG_n, WZG_n, CI01_n, MONEX, PONEX, TWOX, XUY05_n, XUY06_n, CH01, CH02, CH03, CH04, G01ED, G02ED, G03ED, G04ED, MCRO_n, G2LSG_n, G05_n, G06_n, G07_n, MDT01, MDT02, MDT03, MDT04, SA01, SA02, SA03, SA04, RBLG_n, RULOG_n, WL05_n, WL06_n, WG1G_n, WG3G_n, WG4G_n, WYDLOG_n, WYDG_n, WYLOG_n, RB1, R1C, R15, RB2, WL16_n, L01_n, L02_n, WL01_n, WL02_n, WL03_n, WL04_n);
+module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CUG, CZG, L2GDG_n, RAG_n, RCG_n, RGG_n, RLG_n, RQG_n, RZG_n, WAG_n, WALSG_n, WBG_n, WLG_n, WQG_n, WZG_n, CI01_n, MONEX, PONEX, TWOX, XUY05_n, XUY06_n, CH01, CH02, CH03, CH04, G01ED, G02ED, G03ED, G04ED, MCRO_n, G2LSG_n, G05_n, G06_n, G07_n, MDT01, MDT02, MDT03, MDT04, SA01, SA02, SA03, SA04, RBLG_n, RULOG_n, WL05_n, WL06_n, WG1G_n, WG3G_n, WG4G_n, WYDLOG_n, WYDG_n, WYLOG_n, RB1, R1C, R15, RB2, WL16_n, CI05_n, CO06, L01_n, L02_n, L04_n, WL01_n, WL02_n, WL03_n, WL04_n);
     input wire SIM_RST;
     input wire A2XG_n;
     input wire CAG;
@@ -11,8 +11,10 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     input wire CH03;
     input wire CH04;
     input wire CI01_n;
+    output wire CI05_n;
     input wire CLG1G;
     input wire CLXC;
+    inout wire CO06;
     input wire CQG;
     input wire CUG;
     input wire CZG;
@@ -27,6 +29,7 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     input wire GND;
     inout wire L01_n;
     inout wire L02_n;
+    inout wire L04_n;
     input wire L2GDG_n;
     input wire MCRO_n;
     input wire MDT01;
@@ -283,9 +286,7 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     wire __A08_2___B2_n;
     wire __A08_2___CI_IN;
     wire __A08_2___CI_INTERNAL;
-    wire __A08_2___CI_OUT;
     wire __A08_2___CO_IN;
-    wire __A08_2___CO_OUT;
     wire __A08_2___G1;
     wire __A08_2___G1_n;
     wire __A08_2___G2;
@@ -293,7 +294,6 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     wire __A08_2___GEM1;
     wire __A08_2___GEM2;
     wire __A08_2___L1_n;
-    wire __A08_2___L2_n;
     wire __A08_2___MWL1;
     wire __A08_2___MWL2;
     wire __A08_2___Q1_n;
@@ -320,13 +320,13 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     pullup R8008(L02_n);
     pullup R8009(__A08_1___Z2_n);
     pullup R8010(__A08_1___G2_n);
-    pullup R8011(__A08_2___CO_OUT);
+    pullup R8011(CO06);
     pullup R8012(__A08_2___RL1_n);
     pullup R8013(__A08_2___L1_n);
     pullup R8015(__A08_2___Z1_n);
     pullup R8016(__A08_2___G1_n);
     pullup R8017(__A08_2___RL2_n);
-    pullup R8018(__A08_2___L2_n);
+    pullup R8018(L04_n);
     pullup R8019(__A08_2___Z2_n);
     pullup R8020(__A08_2___G2_n);
     U74HC02 U8001(NET_196, A2XG_n, __A08_1___A1_n, NET_191, WYLOG_n, WL01_n, GND, WL16_n, WYDLOG_n, NET_190, __A08_1__Y1_n, CUG, __A08_1__Y1, VCC, SIM_RST);
@@ -387,7 +387,7 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     U74HC27 U8038(NET_290, __A08_2___XUY1, __A08_2___SUMA1, __A08_2___SUMB1, RULOG_n, NET_272, GND, NET_274, XUY05_n, __A08_2___XUY1, __A08_2___CI_IN, __A08_2___SUMA1, __A08_2___CI_IN, VCC, SIM_RST);
     U74HC04 U8039(__A08_2___CI_IN, NET_288, __A08_2___G1_n, __A08_2___GEM1, __A08_2___RL1_n, __A08_2___WL1, GND, WL03_n, __A08_2___WL1, __A08_2___MWL1, __A08_2___RL1_n, NET_235, __A08_2___CI_INTERNAL, VCC, SIM_RST);
     U74HC02 U8040(__A08_2___SUMB1, NET_289, NET_288, NET_273, WAG_n, WL03_n, GND, WL05_n, WALSG_n, NET_270, __A08_2___A1_n, CAG, NET_269, VCC, SIM_RST);
-    U74LVC07 U8041(NET_274, __A08_2___CO_OUT, NET_271, __A08_2___RL1_n, NET_280, __A08_2___L1_n, GND, __A08_2___Z1_n, NET_304, __A08_2___RL1_n, NET_305, __A08_2___RL1_n, NET_311, VCC, SIM_RST);
+    U74LVC07 U8041(NET_274, CO06, NET_271, __A08_2___RL1_n, NET_280, __A08_2___L1_n, GND, __A08_2___Z1_n, NET_304, __A08_2___RL1_n, NET_305, __A08_2___RL1_n, NET_311, VCC, SIM_RST);
     U74HC27 #(1, 0, 1) U8042(NET_273, NET_270, NET_272, NET_268, CH03, NET_271, GND, NET_280, NET_277, NET_279, NET_278, __A08_2___A1_n, NET_269, VCC, SIM_RST);
     U74HC02 U8043(NET_268, RAG_n, __A08_2___A1_n, NET_277, WLG_n, WL03_n, GND, G06_n, G2LSG_n, NET_279, __A08_2___L1_n, CLG1G, NET_278, VCC, SIM_RST);
     wire U8044_1_NC;
@@ -407,7 +407,7 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     U74HC02 #(0, 0, 1, 0) U8047(NET_306, RZG_n, __A08_2___Z1_n, NET_312, WBG_n, WL03_n, GND, NET_312, NET_310, __A08_2___B1_n, __A08_2___B1_n, CBG, NET_310, VCC, SIM_RST);
     U74HC02 U8048(NET_296, RBLG_n, __A08_2___B1_n, NET_295, NET_310, RCG_n, GND, WL02_n, WG3G_n, NET_299, WL04_n, WG4G_n, NET_298, VCC, SIM_RST);
     U74HC27 U8049(NET_308, NET_291, MDT03, R1C, R15, NET_311, GND, NET_309, NET_296, NET_295, NET_300, NET_305, NET_306, VCC, SIM_RST);
-    U74LVC07 U8050(NET_237, __A08_2___CO_OUT, NET_309, __A08_2___RL1_n, NET_292, __A08_2___G1_n, GND, __A08_2___G1_n, NET_293, __A08_2___RL2_n, NET_224, __A08_2___L2_n, NET_263, VCC, SIM_RST);
+    U74LVC07 U8050(NET_237, CO06, NET_309, __A08_2___RL1_n, NET_292, __A08_2___G1_n, GND, __A08_2___G1_n, NET_293, __A08_2___RL2_n, NET_224, L04_n, NET_263, VCC, SIM_RST);
     U74HC02 U8051(NET_297, L2GDG_n, L02_n, NET_294, WG1G_n, WL03_n, GND, __A08_2___G1_n, CGG, __A08_2___G1, RGG_n, __A08_2___G1_n, NET_300, VCC, SIM_RST);
     U74HC4002 U8052(NET_292, G03ED, SA03, NET_299, NET_298, NET_302, GND, NET_301, G04ED, SA04, NET_248, NET_247, NET_250, VCC, SIM_RST);
     wire U8053_3_NC;
@@ -422,11 +422,11 @@ module four_bit_1(VCC, GND, SIM_RST, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC, CQG, CU
     U74HC02 U8054(NET_226, A2XG_n, __A08_2___A2_n, NET_240, WYLOG_n, WL04_n, GND, WL03_n, WYDG_n, NET_241, __A08_2__Y2_n, CUG, __A08_2__Y2, VCC, SIM_RST);
     U74HC27 #(1, 0, 1) U8055(MONEX, NET_226, __A08_2__X2_n, CLXC, CUG, __A08_2__X2, GND, __A08_2__Y2_n, NET_240, NET_241, __A08_2__Y2, __A08_2__X2_n, __A08_2__X2, VCC, SIM_RST);
     U74HC02 U8056(NET_238, __A08_2__X2_n, __A08_2__Y2_n, __A08_2___XUY2, __A08_2__X2, __A08_2__Y2, GND, XUY06_n, __A08_2___XUY2, NET_237, NET_238, __A08_2___XUY2, NET_236, VCC, SIM_RST);
-    U74HC27 U8057(NET_238, __A08_2___XUY2, NET_238, __A08_2___SUMA2, __A08_2___CO_IN, __A08_2___CI_OUT, GND, NET_239, __A08_2___SUMA2, __A08_2___SUMB2, RULOG_n, __A08_2___SUMA2, __A08_2___CI_INTERNAL, VCC, SIM_RST);
+    U74HC27 U8057(NET_238, __A08_2___XUY2, NET_238, __A08_2___SUMA2, __A08_2___CO_IN, CI05_n, GND, NET_239, __A08_2___SUMA2, __A08_2___SUMB2, RULOG_n, __A08_2___SUMA2, __A08_2___CI_INTERNAL, VCC, SIM_RST);
     U74HC02 U8058(__A08_2___SUMB2, NET_236, NET_235, NET_225, WAG_n, WL04_n, GND, WL06_n, WALSG_n, NET_227, __A08_2___A2_n, CAG, NET_223, VCC, SIM_RST);
     U74HC27 #(1, 0, 1) U8059(NET_225, NET_227, NET_239, NET_222, CH04, NET_224, GND, NET_263, NET_266, NET_267, NET_259, __A08_2___A2_n, NET_223, VCC, SIM_RST);
-    U74HC02 U8060(NET_222, RAG_n, __A08_2___A2_n, NET_266, WLG_n, WL04_n, GND, G07_n, G2LSG_n, NET_267, __A08_2___L2_n, CLG1G, NET_259, VCC, SIM_RST);
-    U74HC27 U8061(RLG_n, __A08_2___L2_n, NET_261, NET_260, NET_228, NET_229, GND, NET_232, MDT04, R1C, R15, NET_261, GND, VCC, SIM_RST);
+    U74HC02 U8060(NET_222, RAG_n, __A08_2___A2_n, NET_266, WLG_n, WL04_n, GND, G07_n, G2LSG_n, NET_267, L04_n, CLG1G, NET_259, VCC, SIM_RST);
+    U74HC27 U8061(RLG_n, L04_n, NET_261, NET_260, NET_228, NET_229, GND, NET_232, MDT04, R1C, R15, NET_261, GND, VCC, SIM_RST);
     U74HC02 #(0, 1, 0, 0) U8062(NET_257, WQG_n, WL04_n, __A08_2___Q2_n, NET_257, NET_258, GND, __A08_2___Q2_n, CQG, NET_258, RQG_n, __A08_2___Q2_n, NET_260, VCC, SIM_RST);
     U74LVC07 U8063(NET_229, __A08_2___RL2_n, NET_230, __A08_2___Z2_n, NET_232, __A08_2___RL2_n, GND, __A08_2___RL2_n, NET_253, __A08_2___G2_n, NET_250, __A08_2___G2_n, NET_249, VCC, SIM_RST);
     U74HC02 #(0, 1, 0, 0) U8064(NET_262, WZG_n, WL04_n, NET_230, NET_262, NET_231, GND, __A08_2___Z2_n, CZG, NET_231, RZG_n, __A08_2___Z2_n, NET_228, VCC, SIM_RST);
