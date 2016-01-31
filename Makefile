@@ -3,11 +3,12 @@ MODULES = scaler\
 	  sq_register\
 	  stage_branch\
 	  crosspoint_nqi\
-	  crosspoint_ii \
-	  service_gates \
-	  four_bit_1 \
-	  four_bit_2 \
-	  four_bit_3
+	  crosspoint_ii\
+	  service_gates\
+	  four_bit_1\
+	  four_bit_2\
+	  four_bit_3\
+	  four_bit_4
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
