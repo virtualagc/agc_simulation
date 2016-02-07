@@ -8,7 +8,8 @@ MODULES = scaler\
 	  four_bit_1\
 	  four_bit_2\
 	  four_bit_3\
-	  four_bit_4
+	  four_bit_4\
+	  parity_s_register
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
