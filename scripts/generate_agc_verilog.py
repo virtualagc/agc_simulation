@@ -21,7 +21,7 @@ class Pin(object):
     def __str__(self):
         # If this pin has a net connected, use the net name.
         # Otherwise, make a "not connected" name using the component ref and pin number
-        return self.net if self.net is not None else self.ref + '_' + str(self.number) + '_NC'
+        return self.net if self.net is not None else ' '
 
 # Class representing each component in a schematic
 class Component(object):
@@ -75,11 +75,19 @@ class Component(object):
 
     def __str__(self):
         # Build up a verilog representation of this component
-        pin_names = [str(pin) for pin in self.pins]
+        pin_names = []
+        open_drains = []
+
+        for pin in self.pins:
+            if pin.type == 'openCol' and pin.net is not None:
+                open_drains.append(pin.number)
+
+            pin_names.append(str(pin))
+
         type_name = self.type
         if self.ref[0] == 'R':
             if 'VCC' in pin_names:
-                return 'pullup %s(%s)' % (self.ref, pin_names[0] if pin_names[0] != 'VCC' else pin_names[1])
+                return 'pullup %s(%s);' % (self.ref, pin_names[0] if pin_names[0] != 'VCC' else pin_names[1])
             else:
                 raise RuntimeError("Error processing resistor %s, not connected to VCC" % self.ref)
         else:
@@ -96,7 +104,12 @@ class Component(object):
                 # Otherwise we'll just let everything default to 0.
                 iv_string = ' '
 
-            return type_name + iv_string + self.ref + '(' + ', '.join(pin_names) + ', SIM_RST)'
+            if open_drains:
+                comment = ' //OD:' + ','.join(str(p) for p in open_drains)
+            else:
+                comment = ''
+
+            return type_name + iv_string + self.ref + '(' + ', '.join(pin_names) + ', SIM_RST, SIM_CLK);' + comment
         
 class VerilogGenerator(object):
     def __init__(self, module, root):
@@ -104,6 +117,14 @@ class VerilogGenerator(object):
         self.root = root
         self.components = {}
         self.net_types = {}
+
+        # Find the module number for signal naming
+        self.module_name = 'Z99'
+        for sheet in root.find('design').iter('sheet'):
+            sheet_name = re.match('/([AB]\d{2})', sheet.attrib['name'])
+            if sheet_name is not None:
+                self.module_name = sheet_name.group(1)
+                break
         
         # Build a list of all of the components for this module
         self.load_components(root.find('components'))
@@ -111,13 +132,14 @@ class VerilogGenerator(object):
         # Build a netlist and attach it to the components
         self.load_nets(root.find('nets'))
 
+
     def make_net_name(self, net):
         # Trailing slashes mean negated signals
         name = re.sub('/$', '_n', net.attrib['name'])
         # Otherwise, they're path seperators for a local symbol
         name = name.replace('/','__')
         if name.startswith('Net-'):
-            return 'NET_' + net.attrib['code']
+            return '__' + self.module_name + '_NET_' + net.attrib['code']
         else:
             if name[0].isdigit():
                 name = 'n' + name
@@ -139,6 +161,7 @@ class VerilogGenerator(object):
             # means this net is connected to a connector, and "output connected" means
             # that at least one of the net's connections are to a pin of type "output"
             external_signal = False
+            input_connected = False
             output_connected = False
             open_drain_connected = False
             for node in net.iter('node'):
@@ -157,18 +180,10 @@ class VerilogGenerator(object):
                     output_connected = True
                 elif pin_type == 'openCol':
                     open_drain_connected = True
+                elif pin_type == 'input':
+                    input_connected = True
             
-            if external_signal:
-                if output_connected:
-                    net_type = 'output'
-                elif open_drain_connected:
-                    net_type = 'inout'
-                else:
-                    net_type = 'input'
-            else:
-                net_type = 'internal'
-                
-            self.net_types[net_name] = net_type
+            self.net_types[net_name] = (external_signal, input_connected, output_connected, open_drain_connected)
 
     def generate_file(self, filename):
         # Dump verilog to the given filename
@@ -177,7 +192,7 @@ class VerilogGenerator(object):
             f.write('`timescale 1ns/1ps\n\n')
             
             # Write the module name, along with the standard inputs
-            f.write('module %s(VCC, GND, SIM_RST' % self.module)
+            f.write('module %s(VCC, GND, SIM_RST, SIM_CLK' % self.module)
             
             # Assuming P1 is the 'backplane connector', write out its attached
             # pins in order as the module inputs
@@ -188,15 +203,32 @@ class VerilogGenerator(object):
                 f.write(', ' + pin.net)
 
             f.write(');\n')
+            f.write('    input wire VCC;\n')
+            f.write('    input wire GND;\n')
             f.write('    input wire SIM_RST;\n')
+            f.write('    input wire SIM_CLK;\n')
 
             # Write out all of the wire declarations
             for net, net_type in sorted(self.net_types.items()):
+                if net in ['VCC', 'GND']:
+                    continue
                 f.write('    ')
-                if net_type != 'internal':
+                io_type = ''
+                if net_type[0]:
                     # For non-internal wires, write out the I/O type
-                    f.write('%s ' % net_type)
-                f.write('wire %s;\n' % net)
+                    if net_type[1] and net_type[3]:
+                        io_type = 'inout '
+                    elif net_type[2] or net_type[3]:
+                        io_type = 'output '
+                    else:
+                        io_type = 'input '
+
+                if net_type[3]:
+                    comment = ' //FPGA:wand'
+                else:
+                    comment = ''
+
+                f.write('%swire %s;%s\n' % (io_type, net, comment))
                 
             f.write('\n')
 
@@ -204,12 +236,8 @@ class VerilogGenerator(object):
             for ref, comp in sorted(self.components.items()):
                 if ref[0] == 'P':
                     continue
-                for pin in comp.unconnected_pins():
-                    # Make sure we declare any wires for unconnected pins that
-                    # wouldn't have made it into the netlist
-                    f.write('    wire %s;\n' % pin)
 
-                f.write('    %s;\n' % comp)
+                f.write('    %s\n' % comp)
             
             # And close out the module
             f.write('endmodule');

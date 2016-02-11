@@ -13,22 +13,31 @@ MODULES = scaler\
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
-SOURCES = components/nor_gates.v\
-	  components/buffers.v\
-	  components/agc_parts.v\
-	  $(AUTOGEN_FILES)\
-	  agc.v\
-	  test_agc.v
-
-OBJECTS = 
+COMMON_SOURCES = components/nor_1.v\
+		 components/nor_2.v\
+		 components/nor_3.v\
+		 components/nor_4.v\
+		 components/od_buf.v\
+		 components/U74HC04.v\
+		 components/U74HC02.v\
+		 components/U74HC27.v\
+		 components/U74HC4002.v\
+		 components/U74LVC07.v\
+		 $(AUTOGEN_FILES)
 
 HARDWARE_DIR=~/agc_hardware/
 
-test_agc: $(SOURCES)
+.phony: all
+all: test_agc de0_nano/fpga_agc.v
+
+test_agc: $(COMMON_SOURCES) agc.v test_agc.v
 	iverilog -o $@ $^
 
-agc.v: $(AUTOGEN_FILES)
+agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 	python scripts/generate_agc_backplane.py $@ modules/
+
+de0_nano/fpga_agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
+	python scripts/generate_agc_backplane.py $@ modules/ --fpga
 
 .SECONDEXPANSION:
 $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/generate_agc_verilog.py
