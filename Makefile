@@ -28,10 +28,13 @@ COMMON_SOURCES = components/nor_1.v\
 HARDWARE_DIR=~/agc_hardware/
 
 .phony: all
-all: test_agc de0_nano/fpga_agc.v
+all: test_agc test_fpga
 
 test_agc: $(COMMON_SOURCES) agc.v test_agc.v
 	iverilog -o $@ $^
+
+test_fpga: $(COMMON_SOURCES) de0_nano/fpga_agc.v test_agc.v
+	iverilog -DTARGET_FPGA -o $@ $^
 
 agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 	python scripts/generate_agc_backplane.py $@ modules/

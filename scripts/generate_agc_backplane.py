@@ -114,7 +114,10 @@ with open(args.filename, 'w') as f:
     f.write('`timescale 1ns/1ps\n\n')
 
     # Write the module declaration
-    f.write('module agc(VCC, GND, SIM_RST, SIM_CLK, ' + ', '.join(sorted_inputs))
+    f.write('module ');
+    if args.fpga:
+        f.write('fpga_')
+    f.write('agc(VCC, GND, SIM_RST, SIM_CLK, ' + ', '.join(sorted_inputs))
     f.write(', ' + ', '.join(sorted_outputs))
     f.write(');\n\n')
 

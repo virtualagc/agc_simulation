@@ -12,6 +12,10 @@ module nor_4(y, a, b, c, d, rst, clk);
     always @(posedge clk)
     begin
         y = next_val;
+    end
+
+    always @(negedge clk)
+    begin
         next_val = ~(a|b|c|d);
     end
 `else
