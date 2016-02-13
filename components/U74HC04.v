@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module U74HC04(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst, clk);
     parameter ic1 = 0;

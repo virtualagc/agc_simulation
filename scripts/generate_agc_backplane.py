@@ -77,7 +77,9 @@ for m in modules:
             module_body = ''
             lines = s.split('\n')
             for line in lines:
-                if (not 'wire' in line) and (not 'timescale' in line) and (not 'module' in line) and (not 'pullup' in line):
+                if (line and (not 'wire' in line) and (not 'timescale' in line) and 
+                        (not 'module' in line) and (not 'pullup' in line) and
+                        (not 'default_nettype' in line)):
                     parts = re.match('(.*?)(U\d+)\((.*?)\); //OD:([\d,]+)', line)
                     if parts is not None:
                         prefix = parts.group(1)
@@ -111,7 +113,8 @@ sorted_outputs = sorted(outputs)
 sorted_internals = sorted(internals)
 
 with open(args.filename, 'w') as f:
-    f.write('`timescale 1ns/1ps\n\n')
+    f.write('`timescale 1ns/1ps\n')
+    f.write('`default_nettype none\n\n')
 
     # Write the module declaration
     f.write('module ');
@@ -119,7 +122,7 @@ with open(args.filename, 'w') as f:
         f.write('fpga_')
     f.write('agc(VCC, GND, SIM_RST, SIM_CLK, ' + ', '.join(sorted_inputs))
     f.write(', ' + ', '.join(sorted_outputs))
-    f.write(');\n\n')
+    f.write(');\n')
 
     # Write out wire declarations
     f.write('    input wire VCC;\n')

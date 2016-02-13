@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module nor_3(y, a, b, c, rst, clk);
     parameter delay = 9;

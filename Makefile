@@ -25,7 +25,7 @@ COMMON_SOURCES = components/nor_1.v\
 		 components/U74LVC07.v\
 		 $(AUTOGEN_FILES)
 
-HARDWARE_DIR=~/agc_hardware/
+HARDWARE_DIR=~/agc/agc_hardware/
 
 .phony: all
 all: test_agc test_fpga

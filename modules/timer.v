@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, STRT2, GOJ1, WL15_n, WL15, WL16_n, WL16, PHS2_n, PHS4, PHS3_n, GOJAM, PHS4_n, CT_n, RT_n, TT_n, WT_n, P04_n, T12A, FS01_n, T01_n, T01, T02_n, T02, T03_n, T03, T04_n, T04, T05_n, T05, T06_n, T06, T07_n, T07, T08_n, T08, T09_n, T09, T10_n, T10, T11_n, T11, T12_n, T12, UNF_n, OVF_n, SB2_n, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
     input wire VCC;

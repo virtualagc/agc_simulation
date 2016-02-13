@@ -188,8 +188,9 @@ class VerilogGenerator(object):
     def generate_file(self, filename):
         # Dump verilog to the given filename
         with open(filename, 'w') as f:
-            # Necessary inclues
-            f.write('`timescale 1ns/1ps\n\n')
+            # Settings
+            f.write('`timescale 1ns/1ps\n')
+            f.write('`default_nettype none\n\n')
             
             # Write the module name, along with the standard inputs
             f.write('module %s(VCC, GND, SIM_RST, SIM_CLK' % self.module)

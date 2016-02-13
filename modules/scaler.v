@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module scaler(VCC, GND, SIM_RST, SIM_CLK, FS01_n, RCHAT_n, RCHBT_n);
     input wire VCC;

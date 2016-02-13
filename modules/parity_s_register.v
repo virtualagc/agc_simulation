@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n, T12A, TPARG_n, TSUDO_n, FUTEXT, CGG, CSG, WEDOPG_n, WSG_n, G01, G02, G03, G04, G05, G06, G07, G08, G09, G10, G11, G12, G13, G14, G15, G16, WL01_n, WL02_n, WL03_n, WL04_n, WL05_n, WL06_n, WL07_n, WL08_n, WL09_n, WL10_n, WL11_n, WL12_n, WL13_n, WL14_n, RAD, SAP, SCAD, OCTAD2, n8XP5, MONPAR, XB0_n, XB1_n, XB2_n, XB3_n, CYL_n, CYR_n, EDOP_n, GINH, SR_n, EXTPLS, INHPLS, RELPLS, G01ED, G02ED, G03ED, G04ED, G05ED, G06ED, G07ED, GEQZRO_n, RADRG, RADRZ, S11, S12);
     input wire VCC;

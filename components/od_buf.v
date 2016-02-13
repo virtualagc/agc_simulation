@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module od_buf(y, a);
     parameter delay = 2;

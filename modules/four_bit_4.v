@@ -1,4 +1,5 @@
 `timescale 1ns/1ps
+`default_nettype none
 
 module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2G, CLXC, CQG, CUG, CZG, L2GDG_n, RAG_n, RCG_n, RGG_n, RLG_n, RQG_n, RZG_n, WAG_n, WALSG_n, WBG_n, WLG_n, WQG_n, WZG_n, CI13_n, CO14, BXVX, MONEX, XUY01_n, XUY02_n, CH13, CH14, CH16, L12_n, G2LSG_n, WL01_n, WL02_n, G01_n, MDT13, MDT14, MDT15, MDT16, SA13, SA14, SA16, RBHG_n, RULOG_n, RUG_n, G16SW_n, WG1G_n, WG2G_n, WG3G_n, WG4G_n, WG5G_n, WYDG_n, WYHIG_n, R1C, US2SG, WL12_n, WHOMPA, EAC_n, G13, G13_n, G14, G14_n, G15, G15_n, G16, L15_n, SUMA15_n, SUMB15_n, SUMA16_n, SUMB16_n, WL13_n, WL14_n, WL15, WL15_n, WL16, WL16_n, XUY13_n, XUY14_n);
     input wire VCC;
