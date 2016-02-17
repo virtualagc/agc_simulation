@@ -1,10 +1,10 @@
 `timescale 1ns/1ps
 
 module U74HC02(y1, a1, b1, y2, a2, b2, gnd, a3, b3, y3, a4, b4, y4, vcc, rst, clk);
-    parameter ic1 = 0;
-    parameter ic2 = 0;
-    parameter ic3 = 0;
-    parameter ic4 = 0;
+    parameter ic1 = 1'b0;
+    parameter ic2 = 1'b0;
+    parameter ic3 = 1'b0;
+    parameter ic4 = 1'b0;
     localparam delay = 9;
     input wire vcc, gnd, rst, clk;
     input wire a1, b1, a2, b2, a3, b3, a4, b4;
