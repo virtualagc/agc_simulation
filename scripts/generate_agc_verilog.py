@@ -43,12 +43,12 @@ class Component(object):
         for part in comp.iterfind('.//part'):
             part_unit = part.attrib['unit']
             # Unless otherwise specified, assume everything starts at 0
-            self.initial_values[part_unit] = '0'
+            self.initial_values[part_unit] = "1'b0"
 
             # Look for the initial condition field
             for f in part.iterfind('.//field'):
                 if f.attrib['name'] == 'Initial':
-                    self.initial_values[part_unit] = f.text
+                    self.initial_values[part_unit] = "1'b" + f.text
                     break
     
     def load_pin_types(self, libparts):
@@ -96,7 +96,7 @@ class Component(object):
                 # to make Verilog happy
                 type_name = 'U' + type_name
 
-            if any([iv == '1' for _,iv in self.initial_values.items()]):
+            if any([iv == "1'b1" for _,iv in self.initial_values.items()]):
                 # If any of the initial conditions for this component are 1, we need to print them out
                 ivs = [self.initial_values[part] for part in sorted(self.initial_values.keys())]
                 iv_string = ' #(' + ', '.join(ivs) + ') '
@@ -160,30 +160,40 @@ class VerilogGenerator(object):
             # Very, very basic Verilog wire type determination. "External signal"
             # means this net is connected to a connector, and "output connected" means
             # that at least one of the net's connections are to a pin of type "output"
+            num_nodes = len(net)
+
             external_signal = False
             input_connected = False
             output_connected = False
             open_drain_connected = False
+            not_connected = False
             for node in net.iter('node'):
                 # Attach this net to all of its pins
                 ref = node.attrib['ref']
                 pin_num = int(node.attrib['pin'])
-                
-                self.components[ref].pins[pin_num-1].net = net_name
-                
-                # Determine the wire type
-                if ref[0] == 'P':
-                    external_signal = True
 
                 pin_type = self.components[ref].pins[pin_num-1].type
-                if pin_type == 'output':
+                if pin_type == 'NotConnected':
+                    if num_nodes != 1:
+                        raise RuntimeError('Found an NC pin connected to something else')
+                    not_connected = True
+                    break
+                elif pin_type == 'output':
                     output_connected = True
                 elif pin_type == 'openCol':
                     open_drain_connected = True
                 elif pin_type == 'input':
                     input_connected = True
+                
+                # Determine the wire type
+                if ref[0] == 'P':
+                    external_signal = True
+
+
+                self.components[ref].pins[pin_num-1].net = net_name
             
-            self.net_types[net_name] = (external_signal, input_connected, output_connected, open_drain_connected)
+            if not not_connected:
+                self.net_types[net_name] = (external_signal, input_connected, output_connected, open_drain_connected)
 
     def generate_file(self, filename):
         # Dump verilog to the given filename

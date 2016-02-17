@@ -2,8 +2,8 @@
 `default_nettype none
 
 module U74HC4002(y1, a1, b1, c1, d1, nc1, gnd, nc2, a2, b2, c2, d2, y2, vcc, rst, clk);
-    parameter ic1 = 0;
-    parameter ic2 = 0;
+    parameter ic1 = 1'b0;
+    parameter ic2 = 1'b0;
     localparam delay = 9;
     input wire vcc, gnd, rst, clk;
     input wire a1, b1, c1, d1, a2, b2, c2, d2;

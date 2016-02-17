@@ -2,12 +2,12 @@
 `default_nettype none
 
 module U74HC04(a1, y1, a2, y2, a3, y3, gnd, y4, a4, y5, a5, y6, a6, vcc, rst, clk);
-    parameter ic1 = 0;
-    parameter ic2 = 0;
-    parameter ic3 = 0;
-    parameter ic4 = 0;
-    parameter ic5 = 0;
-    parameter ic6 = 0;
+    parameter ic1 = 1'b0;
+    parameter ic2 = 1'b0;
+    parameter ic3 = 1'b0;
+    parameter ic4 = 1'b0;
+    parameter ic5 = 1'b0;
+    parameter ic6 = 1'b0;
     localparam delay = 9;
     input wire vcc, gnd, rst, clk;
     input wire a1, a2, a3, a4, a5, a6;

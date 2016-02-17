@@ -3,7 +3,7 @@
 
 module nor_1(y, a, rst, clk);
     parameter delay = 9;
-    parameter iv = 0;
+    parameter iv = 1'b0;
     input wire a, rst, clk;
 
 `ifdef TARGET_FPGA
