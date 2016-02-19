@@ -34,10 +34,14 @@ module main;
     reg CH13 = 0;
     reg CH14 = 0;
     reg CH16 = 0;
+    reg CHINC = 0;
     reg CHINC_n = 1;
     reg CLOCK = 0;
     reg DINC = 0;
     reg DINC_n = 1;
+    reg EB9 = 0;
+    reg EB10 = 0;
+    reg EB11_n = 1;
     reg FETCH0 = 0;
     reg FETCH0_n = 1;
     reg FETCH1 = 0;
@@ -46,6 +50,7 @@ module main;
     reg INKL = 0;
     reg INKL_n = 1;
     reg INOTLD = 0;
+    reg MAMU = 0;
     reg MCDU = 0;
     reg MDT01 = 0;
     reg MDT02 = 0;
@@ -65,6 +70,7 @@ module main;
     reg MDT16 = 0;
     reg MINC = 0;
     reg MNHRPT = 0;
+    reg MNHSBF = 0;
     reg MONPAR = 0;
     reg MONPCH = 0;
     reg MONWBK = 0;
@@ -98,30 +104,10 @@ module main;
     reg SHANC_n = 1;
     reg SHIFT = 0;
     reg SHIFT_n = 1;
-    reg STBE = 0;
-    reg STBF = 0;
     reg STFET1_n = 1;
     reg STORE1_n = 1;
     reg STRT1 = 0;
     reg STRT2 = 0;
-    reg TPARG_n = 1;
-    reg XB0_n = 1;
-    reg XB1_n = 1;
-    reg XB2_n = 1;
-    reg XB3_n = 1;
-    reg XB4_n = 1;
-    reg XB5_n = 1;
-    reg XB6_n = 1;
-    reg XB7_n = 1;
-    reg XT0_n = 1;
-    reg XT1_n = 1;
-    reg XT2_n = 1;
-    reg XT3_n = 1;
-    reg XT4_n = 1;
-    reg XT5_n = 1;
-    reg XT6_n = 1;
-    reg YB0_n = 1;
-    reg YT0_n = 1;
     wire MGOJAM;
     wire MT01;
     wire MT02;
@@ -145,7 +131,7 @@ module main;
 `else
     agc
 `endif
-        AGC(VCC, GND, SIM_RST, SIM_CLK, ALGA, C24A, C25A, C26A, C27A, C30A, C37P, C40P, C41P, C42P, C43P, C44P, CDUSTB_n, CH01, CH02, CH03, CH04, CH05, CH06, CH07, CH08, CH09, CH10, CH11, CH12, CH13, CH14, CH16, CHINC_n, CLOCK, DINC, DINC_n, FETCH0, FETCH0_n, FETCH1, G16SW_n, INCSET_n, INKL, INKL_n, INOTLD, MCDU, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MINC, MNHRPT, MONPAR, MONPCH, MONWBK, MON_n, MSTP, MSTRTP, MTCSAI, OVNHRP, PCDU, PIPPLS_n, RCHAT_n, RCHBT_n, RUPTOR_n, SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA08, SA09, SA10, SA11, SA12, SA13, SA14, SA16, SAP, SBY, SHANC_n, SHIFT, SHIFT_n, STBE, STBF, STFET1_n, STORE1_n, STRT1, STRT2, TPARG_n, XB0_n, XB1_n, XB2_n, XB3_n, XB4_n, XB5_n, XB6_n, XB7_n, XT0_n, XT1_n, XT2_n, XT3_n, XT4_n, XT5_n, XT6_n, YB0_n, YT0_n, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
+        AGC(VCC, GND, SIM_RST, SIM_CLK, ALGA, C24A, C25A, C26A, C27A, C30A, C37P, C40P, C41P, C42P, C43P, C44P, CDUSTB_n, CH01, CH02, CH03, CH04, CH05, CH06, CH07, CH08, CH09, CH10, CH11, CH12, CH13, CH14, CH16, CHINC, CHINC_n, CLOCK, DINC, DINC_n, EB10, EB11_n, EB9, FETCH0, FETCH0_n, FETCH1, G16SW_n, INCSET_n, INKL, INKL_n, INOTLD, MAMU, MCDU, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MINC, MNHRPT, MNHSBF, MONPAR, MONPCH, MONWBK, MON_n, MSTP, MSTRTP, MTCSAI, OVNHRP, PCDU, PIPPLS_n, RCHAT_n, RCHBT_n, RUPTOR_n, SA01, SA02, SA03, SA04, SA05, SA06, SA07, SA08, SA09, SA10, SA11, SA12, SA13, SA14, SA16, SAP, SBY, SHANC_n, SHIFT, SHIFT_n, STFET1_n, STORE1_n, STRT1, STRT2, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
 
 
     initial begin
@@ -156,8 +142,10 @@ module main;
         #5000 STRT1 = 0;
         #200000 SA13 = 1;
         SA14 = 1;
+        SA12 = 1;
         #200000 SA13 = 0;
         SA14 = 0;
+        SA12 = 0;
         #400000 $finish;
     end
 endmodule

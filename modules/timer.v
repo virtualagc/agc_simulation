@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, STRT2, GOJ1, WL15_n, WL15, WL16_n, WL16, PHS2_n, PHS4, PHS3_n, GOJAM, PHS4_n, CT_n, RT_n, TT_n, WT_n, P04_n, T12A, FS01_n, T01_n, T01, T02_n, T02, T03_n, T03, T04_n, T04, T05_n, T05, T06_n, T06, T07_n, T07, T08_n, T08, T09_n, T09, T10_n, T10, T11_n, T11, T12_n, T12, UNF_n, OVF_n, SB2_n, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
+module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, STRT2, GOJ1, WL15_n, WL15, WL16_n, WL16, PHS2_n, PHS4, PHS3_n, GOJAM, PHS4_n, CT_n, RT_n, TT_n, WT_n, P04_n, T12A, FS01_n, T01_n, T01, T02_n, T02, T03_n, T03, T04_n, T04, T05_n, T05, T06_n, T06, T07_n, T07, T08_n, T08, T09_n, T09, T10_n, T10, T11_n, T11, T12_n, T12, TIMR, OVF_n, UNF_n, MGOJAM, SB2_n, MT02, MT01, MT04, MT03, MT06, MT05, MT08, MT07, MT10, MT09, MT12, MT11);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
@@ -83,6 +83,7 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     output wire T12;
     output wire T12A;
     output wire T12_n;
+    output wire TIMR;
     output wire TT_n;
     output wire UNF_n;
     input wire WL15;
@@ -129,7 +130,6 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     wire __A02_2__SB2;
     wire __A02_2__SB4;
     wire __A02_2__T12DC_n;
-    wire __A02_2__TIMR;
     wire __A02_3__OVF;
     wire __A02_3__T01DC_n;
     wire __A02_3__T02DC_n;
@@ -212,7 +212,7 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     U74HC27 #(1'b0, 1'b1, 1'b0) U2007(__A02_1__cdiv_2__D, __A02_1__cdiv_2__F, __A02_1__cdiv_2__B, __A02_1__cdiv_2__F, __A02_1__cdiv_2__C, __A02_1__cdiv_2__A, GND, P03, __A02_2__EDSET, __A02_NET_168, P03_n, __A02_1__cdiv_2__B, __A02_1__cdiv_2__A, VCC, SIM_RST, SIM_CLK);
     U74HC04 #(1'b1, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0) U2008(__A02_1__cdiv_2__D, __A02_1__RINGA_n, __A02_1__oddset, __A02_1__ODDSET_n, __A02_1__cdiv_2__C, __A02_1__RINGB_n, GND, __A02_1__evnset, __A02_1__RINGB_n, __A02_1__EVNSET_n, __A02_1__evnset, RT, __A02_1__cdiv_1__A, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b0, 1'b1) U2009(__A02_1__ovfstb_r1, CT_n, __A02_1__ovfstb_r2, __A02_1__ovfstb_r2, __A02_1__ovfstb_r6, __A02_1__ovfstb_r1, GND, __A02_1__ovfstb_r4, __A02_1__ovfstb_r2, __A02_1__ovfstb_r3, __A02_1__ovfstb_r3, __A02_1__ovfstb_r1, __A02_1__ovfstb_r4, VCC, SIM_RST, SIM_CLK);
-    U74HC04 #(1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0) U2010(CT, PHS3_n, WT_n, CLK, WT_n, MONWT, GND, Q2A, WT_n, RT_n, RT, __A02_2__TIMR, __A02_NET_159, VCC, SIM_RST, SIM_CLK);
+    U74HC04 #(1'b1, 1'b0, 1'b0, 1'b0, 1'b0, 1'b0) U2010(CT, PHS3_n, WT_n, CLK, WT_n, MONWT, GND, Q2A, WT_n, RT_n, RT, TIMR, __A02_NET_159, VCC, SIM_RST, SIM_CLK);
     U74HC27 U2011(__A02_1__RINGB_n, P05_n, P04, P05, __A02_1__RINGA_n, __A02_NET_166, GND, __A02_NET_148, __A02_2__T12DC_n, __A02_NET_152, __A02_1__EVNSET_n, __A02_NET_164, P04_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2012(P01, __A02_NET_164, P01_n, P01_n, P01, __A02_NET_166, GND, __A02_1__RINGA_n, P01, __A02_NET_169, P01_n, __A02_1__RINGB_n, __A02_NET_167, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2013(P02, __A02_NET_169, P02_n, P02_n, P02, __A02_NET_167, GND, __A02_1__RINGB_n, P02, __A02_NET_168, P02_n, __A02_1__RINGA_n, __A02_NET_162, VCC, SIM_RST, SIM_CLK);

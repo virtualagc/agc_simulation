@@ -9,7 +9,8 @@ MODULES = scaler\
 	  four_bit_2\
 	  four_bit_3\
 	  four_bit_4\
-	  parity_s_register
+	  parity_s_register\
+	  memory_timing_addressing
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
@@ -25,7 +26,7 @@ COMMON_SOURCES = components/nor_1.v\
 		 components/U74LVC07.v\
 		 $(AUTOGEN_FILES)
 
-HARDWARE_DIR=~/agc/agc_hardware/
+HARDWARE_DIR=~/agc_hardware/
 
 .phony: all
 all: test_agc test_fpga
