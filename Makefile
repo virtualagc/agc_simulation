@@ -10,7 +10,8 @@ MODULES = scaler\
 	  four_bit_3\
 	  four_bit_4\
 	  parity_s_register\
-	  memory_timing_addressing
+	  memory_timing_addressing\
+	  rupt_service
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
