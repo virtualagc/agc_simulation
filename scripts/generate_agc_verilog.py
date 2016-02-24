@@ -79,7 +79,7 @@ class Component(object):
         open_drains = []
 
         for pin in self.pins:
-            if pin.type == 'openCol' and pin.net is not None:
+            if pin.type in ['openCol', '3state'] and pin.net is not None:
                 open_drains.append(pin.number)
 
             pin_names.append(str(pin))
@@ -88,6 +88,8 @@ class Component(object):
         if self.ref[0] == 'R':
             if 'VCC' in pin_names:
                 return 'pullup %s(%s);' % (self.ref, pin_names[0] if pin_names[0] != 'VCC' else pin_names[1])
+            elif 'GND' in pin_names:
+                return 'pulldown %s(%s);' % (self.ref, pin_names[0] if pin_names[0] != 'GND' else pin_names[1])
             else:
                 raise RuntimeError("Error processing resistor %s, not connected to VCC" % self.ref)
         else:
@@ -180,7 +182,7 @@ class VerilogGenerator(object):
                     break
                 elif pin_type == 'output':
                     output_connected = True
-                elif pin_type == 'openCol':
+                elif pin_type in ['openCol', '3state']:
                     open_drain_connected = True
                 elif pin_type == 'input':
                     input_connected = True
