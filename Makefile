@@ -11,7 +11,8 @@ MODULES = scaler\
 	  four_bit_4\
 	  parity_s_register\
 	  memory_timing_addressing\
-	  rupt_service
+	  rupt_service\
+	  fixed_erasable_memory
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
@@ -25,24 +26,32 @@ COMMON_SOURCES = components/nor_1.v\
 		 components/U74HC27.v\
 		 components/U74HC4002.v\
 		 components/U74LVC07.v\
+		 components/SST39VF200A.v\
 		 $(AUTOGEN_FILES)
 
 HARDWARE_DIR=~/agc_hardware/
 
+ROM=roms/colossus237.v
+
 .phony: all
 all: test_agc test_fpga
 
-test_agc: $(COMMON_SOURCES) agc.v test_agc.v
-	iverilog -o $@ $^
+test_agc: $(COMMON_SOURCES) agc.v test_agc.v $(ROM)
+	cp $(ROM) roms/rom.v
+	iverilog -o $@ $(COMMON_SOURCES) agc.v test_agc.v
 
-test_fpga: $(COMMON_SOURCES) de0_nano/fpga_agc.v test_agc.v
-	iverilog -DTARGET_FPGA -o $@ $^
+test_fpga: $(COMMON_SOURCES) de0_nano/fpga_agc.v test_agc.v $(ROM)
+	cp $(ROM) roms/rom.v
+	iverilog -DTARGET_FPGA -o $@ $(COMMON_SOURCES) de0_nano/fpga_agc.v test_agc.v
 
 agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 	python scripts/generate_agc_backplane.py $@ modules/
 
 de0_nano/fpga_agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 	python scripts/generate_agc_backplane.py $@ modules/ --fpga
+
+roms/colossus237.v: roms/colossus237.bin scripts/bin_to_verilog_rom.py
+	python scripts/bin_to_verilog_rom.py $< $@
 
 .SECONDEXPANSION:
 $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/generate_agc_verilog.py

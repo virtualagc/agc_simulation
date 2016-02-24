@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S12_n, WL01_n, WL02_n, WL03_n, WL09_n, WL10_n, WL11_n, WL12_n, WL13_n, WL14_n, WL16_n, SUMA01_n, SUMB01_n, SUMA02_n, SUMB02_n, SUMA03_n, SUMB03_n, SUMA11_n, SUMB11_n, SUMA12_n, SUMB12_n, SUMA13_n, SUMB13_n, SUMA14_n, SUMB14_n, SUMA16_n, SUMB16_n, XB0_n, XB1_n, XB4_n, XB6_n, XB7_n, XT0_n, XT1_n, XT2_n, XT3_n, XT4_n, XT5_n, E5, E6, E7_n, STRGAT, CEBG, CFBG, OVF_n, R6, RB1F, RBBEG_n, REBG_n, RFBG_n, RRPA, RSTRT, U2BBKG_n, WBBEG_n, WEBG_n, WFBG_n, WOVR_n, ZOUT_n, DLKPLS, HNDRPT, KRPT, KYRPT1, KYRPT2, RADRPT, UPRUPT, CA2_n, CA3_n, CAD1, CAD2, CAD3, CAD4, CAD5, CAD6, MKRPT, EB9, EB10, EB11_n, RL01_n, RL02_n, RL03_n, RL04_n, RL05_n, RL06_n, RL09_n, RL10_n, RL11_n, RL12_n, RL13_n, RL14_n, RL15_n, RL16_n, RUPTOR_n);
+module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S12_n, WL01_n, WL02_n, WL03_n, WL09_n, WL10_n, WL11_n, WL12_n, WL13_n, WL14_n, WL16_n, SUMA01_n, SUMB01_n, SUMA02_n, SUMB02_n, SUMA03_n, SUMB03_n, SUMA11_n, SUMB11_n, SUMA12_n, SUMB12_n, SUMA13_n, SUMB13_n, SUMA14_n, SUMB14_n, SUMA16_n, SUMB16_n, XB0_n, XB1_n, XB4_n, XB6_n, XB7_n, XT0_n, XT1_n, XT2_n, XT3_n, XT4_n, XT5_n, E5, E6, E7_n, STRGAT, CEBG, CFBG, OVF_n, R6, RB1F, RBBEG_n, REBG_n, RFBG_n, RRPA, RSTRT, U2BBKG_n, WBBEG_n, WEBG_n, WFBG_n, WOVR_n, ZOUT_n, DLKPLS, HNDRPT, KRPT, KYRPT1, KYRPT2, RADRPT, UPRUPT, CA2_n, CA3_n, CAD1, CAD2, CAD3, CAD4, CAD5, CAD6, MKRPT, EB9, EB10, EB11_n, RL01_n, RL02_n, RL03_n, RL04_n, RL05_n, RL06_n, RL09_n, RL10_n, RL11_n, RL12_n, RL13_n, RL14_n, RL15_n, RL16_n, RUPTOR_n, ROPER, ROPES, ROPET, HIMOD, LOMOD, STR19, STR210, STR311, STR14, STR58, STR912);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
@@ -24,10 +24,12 @@ module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S
     output wire EB11_n;
     output wire EB9;
     input wire GOJAM;
+    output wire HIMOD;
     input wire HNDRPT;
     input wire KRPT;
     input wire KYRPT1;
     input wire KYRPT2;
+    output wire LOMOD;
     input wire MKRPT;
     input wire OVF_n;
     input wire R6;
@@ -50,6 +52,9 @@ module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S
     output wire RL14_n; //FPGA:wand
     output wire RL15_n; //FPGA:wand
     output wire RL16_n; //FPGA:wand
+    output wire ROPER;
+    output wire ROPES;
+    output wire ROPET;
     input wire RRPA;
     input wire RSTRT;
     output wire RUPTOR_n;
@@ -57,6 +62,12 @@ module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S
     input wire S10_n;
     input wire S11_n;
     input wire S12_n;
+    output wire STR14;
+    output wire STR19;
+    output wire STR210;
+    output wire STR311;
+    output wire STR58;
+    output wire STR912;
     input wire STRGAT;
     input wire SUMA01_n;
     input wire SUMA02_n;
@@ -148,10 +159,8 @@ module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S
     wire __A15_2__2510H;
     wire __A15_2__2510L;
     wire __A15_2__DRPRST;
-    wire __A15_2__HIMOD;
     wire __A15_2__KY1RST;
     wire __A15_2__KY2RST;
-    wire __A15_2__LOMOD;
     wire __A15_2__NE00;
     wire __A15_2__NE01;
     wire __A15_2__NE012_n;
@@ -167,19 +176,10 @@ module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S
     wire __A15_2__NE2510_n;
     wire __A15_2__NE345_n;
     wire __A15_2__NE6710_n;
-    wire __A15_2__ROPER;
-    wire __A15_2__ROPES;
-    wire __A15_2__ROPET;
     wire __A15_2__RPTAD3;
     wire __A15_2__RPTAD4;
     wire __A15_2__RPTAD5;
-    wire __A15_2__STR14;
-    wire __A15_2__STR19;
-    wire __A15_2__STR210;
-    wire __A15_2__STR311;
     wire __A15_2__STR412;
-    wire __A15_2__STR58;
-    wire __A15_2__STR912;
     wire __A15_2__T6RPT;
     wire __A15_NET_149;
     wire __A15_NET_150;
@@ -347,18 +347,18 @@ module rupt_service(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T10, S10, S10_n, S11_n, S
     U74HC04 U15044(RRPA, __A15_1__RRPA1_n, STRGAT, __A15_NET_277, __A15_1__F11, __A15_NET_276, GND, __A15_NET_291, __A15_1__F11_n, __A15_NET_290, S10, __A15_NET_289, S10_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 U15045(__A15_NET_308, __A15_2__RPTAD5, CAD5,  ,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC27 U15046(CAD2, __A15_1__BBK2, CAD1, __A15_1__BBK1, RB1F, __A15_NET_305, GND, __A15_2__STR412, __A15_NET_277, __A15_NET_290, __A15_NET_276, __A15_NET_306, R6, VCC, SIM_RST, SIM_CLK);
-    U74HC27 U15047(__A15_NET_277, __A15_NET_289, __A15_NET_277, __A15_NET_290, __A15_NET_291, __A15_2__STR210, GND, __A15_2__STR19, __A15_NET_277, __A15_NET_289, __A15_NET_291, __A15_2__STR311, __A15_NET_276, VCC, SIM_RST, SIM_CLK);
+    U74HC27 U15047(__A15_NET_277, __A15_NET_289, __A15_NET_277, __A15_NET_290, __A15_NET_291, STR210, GND, STR19, __A15_NET_277, __A15_NET_289, __A15_NET_291, STR311, __A15_NET_276, VCC, SIM_RST, SIM_CLK);
     U74HC02 U15048(__A15_NET_288, __A15_1__F16, __A15_1__F15, __A15_NET_286, __A15_1__F16, __A15_1__F15_n, GND, __A15_1__F15, __A15_1__F16_n, __A15_NET_245, __A15_2__NE036_n, __A15_1__F12, __A15_2__036L, VCC, SIM_RST, SIM_CLK);
     U74HC04 U15049(__A15_NET_288, __A15_NET_294, __A15_1__F14_n, __A15_NET_295, __A15_1__F13_n, __A15_NET_293, GND, __A15_NET_292, __A15_1__F13, __A15_NET_284, __A15_1__F14, __A15_NET_285, __A15_NET_286, VCC, SIM_RST, SIM_CLK);
     U74HC27 U15050(__A15_NET_294, __A15_NET_295, __A15_NET_294, __A15_NET_295, __A15_NET_292, __A15_2__NE01, GND, __A15_2__NE02, __A15_NET_294, __A15_NET_284, __A15_NET_293, __A15_2__NE00, __A15_NET_293, VCC, SIM_RST, SIM_CLK);
     U74HC27 U15051(__A15_NET_294, __A15_NET_284, __A15_NET_285, __A15_NET_295, __A15_NET_293, __A15_2__NE04, GND, __A15_2__NE05, __A15_NET_285, __A15_NET_295, __A15_NET_292, __A15_2__NE03, __A15_NET_292, VCC, SIM_RST, SIM_CLK);
     U74HC27 U15052(__A15_NET_285, __A15_NET_284, __A15_NET_285, __A15_NET_284, __A15_NET_292, __A15_2__NE07, GND, __A15_2__NE10, __A15_NET_287, __A15_NET_295, __A15_NET_293, __A15_2__NE06, __A15_NET_293, VCC, SIM_RST, SIM_CLK);
-    U74HC04 U15053(__A15_NET_245, __A15_NET_287, __A15_NET_263, __A15_2__STR14, __A15_2__NE012_n, __A15_2__ROPER, GND, __A15_2__LOMOD, __A15_NET_273, __A15_2__STR58, __A15_NET_274, __A15_2__ROPES, __A15_2__NE345_n, VCC, SIM_RST, SIM_CLK);
+    U74HC04 U15053(__A15_NET_245, __A15_NET_287, __A15_NET_263, STR14, __A15_2__NE012_n, ROPER, GND, LOMOD, __A15_NET_273, STR58, __A15_NET_274, ROPES, __A15_2__NE345_n, VCC, SIM_RST, SIM_CLK);
     U74HC27 U15054(__A15_2__NE00, __A15_2__NE03, __A15_2__NE00, __A15_2__NE01, __A15_2__NE02, __A15_2__NE012_n, GND, __A15_2__NE147_n, __A15_2__NE01, __A15_2__NE04, __A15_2__NE07, __A15_2__NE036_n, __A15_2__NE06, VCC, SIM_RST, SIM_CLK);
     U74HC27 U15055(__A15_2__NE04, __A15_2__NE03, __A15_2__NE02, __A15_2__NE05, __A15_2__NE10, __A15_2__NE2510_n, GND, __A15_2__NE6710_n, __A15_2__NE06, __A15_2__NE07, __A15_2__NE10, __A15_2__NE345_n, __A15_2__NE05, VCC, SIM_RST, SIM_CLK);
     U74HC02 U15056(__A15_2__147H, __A15_2__NE147_n, __A15_1__F12_n, __A15_2__2510L, __A15_2__NE2510_n, __A15_1__F12, GND, __A15_2__NE036_n, __A15_1__F12_n, __A15_2__036H, __A15_2__NE147_n, __A15_1__F12, __A15_2__147L, VCC, SIM_RST, SIM_CLK);
     U74HC02 U15057(__A15_2__2510H, __A15_2__NE2510_n, __A15_1__F12_n, __A15_NET_263, __A15_2__036L, __A15_2__147H, GND, __A15_2__2510L, __A15_2__036H, __A15_NET_274, __A15_2__147L, __A15_2__2510H, __A15_NET_255, VCC, SIM_RST, SIM_CLK);
     U74HC27 U15058(__A15_2__036L, __A15_2__147L, __A15_2__147H, __A15_2__2510H, __A15_2__2510L, __A15_NET_270, GND,  ,  ,  ,  , __A15_NET_273, __A15_2__036H, VCC, SIM_RST, SIM_CLK);
-    U74HC04 U15059(__A15_NET_270, __A15_2__HIMOD, __A15_NET_255, __A15_2__STR912, __A15_2__NE6710_n, __A15_2__ROPET, GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
+    U74HC04 U15059(__A15_NET_270, HIMOD, __A15_NET_255, STR912, __A15_2__NE6710_n, ROPET, GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC02 U15060(__A15_2__RPTAD5, __A15_1__RRPA1_n, __A15_NET_246,  ,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
 endmodule
