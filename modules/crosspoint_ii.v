@@ -6,7 +6,7 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     input wire GND;
     input wire SIM_RST;
     input wire SIM_CLK;
-    output wire A2X_n; //FPGA:wand
+    output wire A2X_n; //FPGA#wand
     input wire AD0;
     input wire ADS0;
     input wire AUG0_n;
@@ -23,7 +23,7 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     input wire CCS0_n;
     input wire CDUSTB_n;
     output wire CGMC;
-    output wire CI_n; //FPGA:wand
+    output wire CI_n; //FPGA#wand
     output wire CLXC;
     input wire DAS0;
     input wire DAS1;
@@ -60,7 +60,7 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     output wire MCRO_n;
     input wire MINC;
     output wire MONEX;
-    inout wire MONEX_n; //FPGA:wand
+    inout wire MONEX_n; //FPGA#wand
     input wire MONPCH;
     input wire MON_n;
     input wire MP0T10;
@@ -80,30 +80,30 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     input wire PTWOX;
     input wire R15;
     output wire R1C;
-    inout wire R1C_n; //FPGA:wand
+    inout wire R1C_n; //FPGA#wand
     input wire R6;
     input wire RADRG;
     input wire RADRZ;
     input wire RAND0;
     output wire RB1;
     output wire RB1F;
-    inout wire RB1_n; //FPGA:wand
+    inout wire RB1_n; //FPGA#wand
     input wire RBSQ;
-    output wire RB_n; //FPGA:wand
+    output wire RB_n; //FPGA#wand
     output wire RCH_n;
-    output wire RC_n; //FPGA:wand
-    output wire RG_n; //FPGA:wand
-    output wire RPTSET; //FPGA:wand
+    output wire RC_n; //FPGA#wand
+    output wire RG_n; //FPGA#wand
+    output wire RPTSET; //FPGA#wand
     input wire RRPA;
     input wire RUPT0;
     input wire RUPT1;
     output wire RUS_n;
-    output wire RU_n; //FPGA:wand
-    output wire RZ_n; //FPGA:wand
+    output wire RU_n; //FPGA#wand
+    output wire RZ_n; //FPGA#wand
     input wire SHIFT;
     output wire ST1;
     output wire ST2;
-    inout wire ST2_n; //FPGA:wand
+    inout wire ST2_n; //FPGA#wand
     input wire STBE;
     input wire STBF;
     input wire STFET1_n;
@@ -131,23 +131,23 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     input wire T12;
     input wire T12USE_n;
     input wire TL15;
-    output wire TOV_n; //FPGA:wand
+    output wire TOV_n; //FPGA#wand
     output wire TSGU_n;
     output wire TWOX;
     input wire WAND0;
-    output wire WA_n; //FPGA:wand
-    output wire WB_n; //FPGA:wand
-    output wire WG_n; //FPGA:wand
+    output wire WA_n; //FPGA#wand
+    output wire WB_n; //FPGA#wand
+    output wire WG_n; //FPGA#wand
     output wire WHOMP;
     output wire WHOMPA;
-    output wire WL_n; //FPGA:wand
+    output wire WL_n; //FPGA#wand
     output wire WOVR_n;
     output wire WQ_n;
-    output wire WSC_n; //FPGA:wand
-    output wire WS_n; //FPGA:wand
-    output wire WYD_n; //FPGA:wand
-    output wire WY_n; //FPGA:wand
-    output wire WZ_n; //FPGA:wand
+    output wire WSC_n; //FPGA#wand
+    output wire WS_n; //FPGA#wand
+    output wire WYD_n; //FPGA#wand
+    output wire WY_n; //FPGA#wand
+    output wire WZ_n; //FPGA#wand
     output wire ZAP_n;
     wire __A06_1__DVXP1;
     wire __A06_1__L02A_n;
@@ -190,9 +190,9 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     wire __A06_NET_204;
     wire __A06_NET_205;
     wire __A06_NET_206;
-    wire __A06_NET_207; //FPGA:wand
+    wire __A06_NET_207; //FPGA#wand
     wire __A06_NET_208;
-    wire __A06_NET_209; //FPGA:wand
+    wire __A06_NET_209; //FPGA#wand
     wire __A06_NET_210;
     wire __A06_NET_211;
     wire __A06_NET_213;
@@ -201,11 +201,11 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     wire __A06_NET_217;
     wire __A06_NET_218;
     wire __A06_NET_219;
-    wire __A06_NET_220; //FPGA:wand
+    wire __A06_NET_220; //FPGA#wand
     wire __A06_NET_221;
     wire __A06_NET_222;
     wire __A06_NET_223;
-    wire __A06_NET_224; //FPGA:wand
+    wire __A06_NET_224; //FPGA#wand
     wire __A06_NET_225;
     wire __A06_NET_226;
     wire __A06_NET_230;
@@ -221,7 +221,7 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     wire __A06_NET_243;
     wire __A06_NET_244;
     wire __A06_NET_245;
-    wire __A06_NET_246; //FPGA:wand
+    wire __A06_NET_246; //FPGA#wand
     wire __A06_NET_247;
     wire __A06_NET_248;
     wire __A06_NET_249;
@@ -251,14 +251,14 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     wire __A06_NET_278;
     wire __A06_NET_279;
     wire __A06_NET_280;
-    wire __A06_NET_281; //FPGA:wand
+    wire __A06_NET_281; //FPGA#wand
     wire __A06_NET_282;
     wire __A06_NET_283;
     wire __A06_NET_284;
     wire __A06_NET_285;
     wire __A06_NET_286;
     wire __A06_NET_287;
-    wire __A06_NET_288; //FPGA:wand
+    wire __A06_NET_288; //FPGA#wand
     wire __A06_NET_289;
     wire __A06_NET_290;
     wire __A06_NET_291;
@@ -331,7 +331,7 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     input wire n7XP19;
     input wire n7XP4;
     input wire n7XP9;
-    inout wire n8PP4; //FPGA:wand
+    inout wire n8PP4; //FPGA#wand
     input wire n8XP6;
     input wire n9XP1;
     input wire n9XP5;
@@ -367,7 +367,7 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     U74HC27 U6001(T04, T07, __A06_NET_285, __A06_NET_286, __A06_NET_287, __A06_NET_284, GND, __A06_NET_302, T01, T03, T05, __A06_NET_299, T10, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6002(__A06_NET_285, __A06_NET_299, DV376_n, __A06_NET_286, T01_n, DV1376_n, GND, T04_n, DV4_n, __A06_NET_287, MP1_n, __A06_NET_288, __A06_NET_289, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b0, 1'b1) U6003(T07, T09, __A06_1__L15A_n, __A06_1__L02A_n, L01_n, __A06_NET_301, GND, __A06_NET_342, T05, T08, T11, __A06_NET_303, T11, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6004(__A06_NET_302, __A06_NET_288, __A06_NET_303, __A06_NET_288, __A06_NET_300, A2X_n, GND, RB_n, __A06_NET_314, WYD_n, __A06_NET_315, WY_n, __A06_NET_306, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U6004(__A06_NET_302, __A06_NET_288, __A06_NET_303, __A06_NET_288, __A06_NET_300, A2X_n, GND, RB_n, __A06_NET_314, WYD_n, __A06_NET_315, WY_n, __A06_NET_306, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 #(1'b1, 1'b1, 1'b1, 1'b0) U6005(__A06_NET_313, __A06_NET_289, n2XP7, L2GD_n, __A06_1__ZIP, __A06_1__DVXP1, GND, __A06_1__DVXP1, __A06_NET_307, __A06_NET_315, __A06_NET_304, __A06_NET_305, __A06_NET_308, VCC, SIM_RST, SIM_CLK);
     U74HC04 U6006(L01_n, __A06_NET_291, __A06_1__L02A_n, __A06_NET_341, __A06_1__L15A_n, __A06_NET_290, GND, __A06_1__DVXP1, __A06_NET_284, __A06_1__ZIP, __A06_NET_313, __A06_NET_339, __A06_NET_340, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b0) U6007(n7XP19, __A06_1__ZIP, __A06_1__DVXP1, __A06_NET_310, RBSQ, __A06_NET_314, GND, __A06_NET_317, __A06_NET_291, __A06_NET_341, __A06_NET_290, __A06_NET_300, __A06_1__DVXP1, VCC, SIM_RST, SIM_CLK);
@@ -377,12 +377,12 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     U74HC27 U6011(__A06_NET_313, __A06_NET_339, __A06_NET_340, __A06_NET_317, __A06_NET_313, __A06_NET_310, GND, __A06_NET_304, __A06_NET_341, __A06_1__L15A_n, L01_n, __A06_1__ZIPCI, __A06_NET_301, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b1, 1'b1, 1'b0) U6012(__A06_NET_278, __A06_NET_311, __A06_NET_273, __A06_NET_282, __A06_NET_277, DIVSTG, GND, T08, T10, __A06_NET_279, MP1_n, __A06_NET_281, __A06_NET_267, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b1) U6013(T06, T09, DV376_n, __A06_NET_276, T12USE_n, __A06_NET_277, GND, __A06_NET_280, T02, T04, T06, __A06_NET_276, T12, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6014(__A06_NET_280, __A06_NET_281, __A06_NET_279, __A06_NET_281, __A06_NET_274, WL_n, GND, RG_n, __A06_NET_271, WB_n, __A06_NET_292, RU_n, __A06_NET_293, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U6014(__A06_NET_280, __A06_NET_281, __A06_NET_279, __A06_NET_281, __A06_NET_274, WL_n, GND, RG_n, __A06_NET_271, WB_n, __A06_NET_292, RU_n, __A06_NET_293, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U6015(__A06_NET_269, T01, T03, __A06_NET_268, __A06_NET_269, MP3_n, GND, __A06_NET_267, __A06_NET_268, ZAP_n, n5XP28, __A06_NET_275, TSGU_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b1, 1'b1, 1'b1) U6016(__A06_NET_274, __A06_NET_275, n5XP12, __A06_NET_298, RRPA, n5XP4, GND, n5XP15, n3XP6, WQ_n, n9XP5, n6XP8, __A06_NET_347, VCC, SIM_RST, SIM_CLK);
     U74HC4002 #(1'b0, 1'b1) U6017(__A06_NET_271, n5XP4, RADRG, __A06_NET_275, n5XP28,  , GND,  , n5XP28, n1XP10, __A06_NET_283, n2XP3, __A06_NET_292, VCC, SIM_RST, SIM_CLK);
     U74HC4002 U6018(__A06_NET_293, __A06_NET_283, __A06_1__ZAP, n5XP12, n6XP5,  , GND,  , PRINC, PINC, MINC, DINC, __A06_NET_231, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6019(__A06_NET_298, WZ_n, __A06_NET_346, TOV_n, __A06_NET_347, WSC_n, GND, WG_n, __A06_NET_343, __A06_NET_220, __A06_NET_218, __A06_NET_220, __A06_NET_221, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U6019(__A06_NET_298, WZ_n, __A06_NET_346, TOV_n, __A06_NET_347, WSC_n, GND, WG_n, __A06_NET_343, __A06_NET_220, __A06_NET_218, __A06_NET_220, __A06_NET_221, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 U6020(n6XP5, n3XP2, BR1_n, PHS4_n, TSGU_n, RB1F, GND, CLXC, TSGU_n, BR1, PHS4_n, __A06_NET_346, n9XP5, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b1, 1'b1) U6021(__A06_NET_343, n6XP8, n6XP8, PIFL_n, __A06_1__DVXP1, __A06_NET_345, GND, PTWOX, MONEX, __A06_NET_329, MONEX, B15X, __A06_NET_330, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U6022(PIFL_n, __A06_NET_344, STBE, n1XP10, STBF, __A06_NET_328, GND, __A06_NET_218, __A06_NET_262, __A06_NET_265, INCR0, __A06_NET_345, T02, VCC, SIM_RST, SIM_CLK);
@@ -392,7 +392,7 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     U74HC02 U6026(__A06_NET_265, DIM0_n, BR12B_n, __A06_NET_221, PINC, __A06_NET_219, GND, BR12B_n, DINC_n, __A06_NET_219, T06_n, __A06_NET_220, __A06_2__6XP10, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6027(__A06_NET_223, MINC, MCDU, __A06_NET_222, AUG0_n, BR1_n, GND, DIM0_n, BR1B2B_n, __A06_NET_266, BR1B2B_n, DINC_n, __A06_NET_213, VCC, SIM_RST, SIM_CLK);
     U74HC27 U6028(__A06_NET_222, __A06_NET_266, BR1B2B_n, CDUSTB_n, DINC_n, __A06_2__POUT, GND, __A06_2__MOUT, BR12B_n, CDUSTB_n, DINC_n, __A06_NET_217, __A06_NET_213, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6029(__A06_NET_223, __A06_NET_224, __A06_NET_217, __A06_NET_224, __A06_NET_214, MONEX_n, GND, WA_n, __A06_NET_238, RB1_n, __A06_NET_226, R1C_n, __A06_NET_225, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U6029(__A06_NET_223, __A06_NET_224, __A06_NET_217, __A06_NET_224, __A06_NET_214, MONEX_n, GND, WA_n, __A06_NET_238, RB1_n, __A06_NET_226, R1C_n, __A06_NET_225, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U6030(__A06_NET_215, T06_n, __A06_NET_224, __A06_NET_211, PCDU, MCDU, GND, T06_n, __A06_NET_211, __A06_2__6XP12, __A06_NET_237, T07_n, __A06_NET_236, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b1) U6031(BR2_n, DINC_n, DAS0, DAS1, MSU0, __A06_NET_237, GND, __A06_NET_238, __A06_NET_236, __A06_2__7XP7, __A06_NET_243, __A06_2__ZOUT, CDUSTB_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6032(__A06_NET_239, DV4_n, BR1B2B, __A06_2__7XP7, T07_n, __A06_NET_234, GND, WAND0, INOTLD, __A06_NET_241, T07_n, __A06_NET_241, n7XP14, VCC, SIM_RST, SIM_CLK);
@@ -400,22 +400,22 @@ module crosspoint_ii(VCC, GND, SIM_RST, SIM_CLK, GOJAM, T01, T01_n, T02, T02_n, 
     U74HC04 U6034(__A06_2__7XP11, __A06_NET_225, __A06_NET_203, PONEX, ST2_n, ST2, GND, ST1, __A06_NET_254, __A06_NET_250, __A06_2__PSEUDO, __A06_NET_252, __A06_2__RDBANK, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6035(__A06_2__7XP15, __A06_NET_232, T07_n, __A06_NET_230, __A06_NET_231, T07_n, GND, PRINC, INKL, __A06_NET_189, IC9, DXCH0, __A06_NET_187, VCC, SIM_RST, SIM_CLK);
     U74HC27 U6036(PCDU, MCDU, n7XP9, n11XP2, __A06_2__7XP15, RUS_n, GND, __A06_NET_188, __A06_NET_230, __A06_NET_242, __A06_NET_243, __A06_NET_232, SHIFT, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6037(__A06_NET_188, RU_n, __A06_NET_191, WSC_n, __A06_NET_190, WG_n, GND, RB_n, __A06_NET_183, n8PP4, __A06_NET_181, n8PP4, __A06_NET_186, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U6037(__A06_NET_188, RU_n, __A06_NET_191, WSC_n, __A06_NET_190, WG_n, GND, RB_n, __A06_NET_183, n8PP4, __A06_NET_181, n8PP4, __A06_NET_186, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 #(1'b0, 1'b0, 1'b1) U6038(__A06_NET_189, T07_n, T04_n, MON_n, FETCH1, __A06_NET_193, GND, __A06_NET_191, __A06_NET_192, __A06_NET_193, __A06_NET_194, __A06_NET_192, MONPCH, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6039(__A06_NET_190, __A06_NET_192, __A06_NET_194, __A06_NET_194, T07_n, __A06_NET_187, GND, __A06_2__10XP9, __A06_NET_194, __A06_NET_183, T08_n, n8PP4, __A06_2__8XP4, VCC, SIM_RST, SIM_CLK);
     U74HC27 U6040(RUPT1, DAS1, IC17, MASK0, IC11, __A06_NET_186, GND, __A06_NET_184, IC6, IC7, IC9, __A06_NET_181, MSU0, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6041(__A06_NET_184, n8PP4, __A06_NET_206, __A06_NET_207, __A06_NET_204, __A06_NET_207, GND, WS_n, __A06_NET_205, __A06_NET_209, __A06_NET_208, __A06_NET_209, __A06_NET_196, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U6041(__A06_NET_184, n8PP4, __A06_NET_206, __A06_NET_207, __A06_NET_204, __A06_NET_207, GND, WS_n, __A06_NET_205, __A06_NET_209, __A06_NET_208, __A06_NET_209, __A06_NET_196, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 #(1'b0, 1'b1, 1'b0) U6042(T08_n, RUPT0, __A06_NET_207, R6, R15, __A06_NET_205, GND, __A06_NET_196, ADS0, IC11, __A06_NET_244, __A06_NET_206, DAS0, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6043(__A06_NET_204, MP1, DV1376, __A06_NET_210, MP3_n, BR1_n, GND, __A06_NET_210, CCS0, __A06_NET_208, T11_n, __A06_NET_209, __A06_NET_243, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6044(__A06_NET_244, DAS1_n, BR2_n, __A06_NET_198, __A06_1__ZIPCI, __A06_2__6XP12, GND, CCS0_n, BR1B2B_n, __A06_NET_201, T10_n, NDXX1_n, EXT, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U6045(T03_n, DAS1_n, __A06_NET_248, __A06_NET_242, n2XP5, __A06_NET_261, GND, __A06_NET_259, IC7, DCS0, SU0, __A06_NET_242, ADS0, VCC, SIM_RST, SIM_CLK);
     U74HC4002 #(1'b1, 1'b0) U6046(__A06_NET_203, n8XP6, n7XP4, n10XP8, __A06_2__6XP10,  , GND,  , IC6, DCA0, AD0, __A06_NET_201, __A06_NET_202, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6047(__A06_NET_198, CI_n, __A06_NET_261, WA_n, __A06_NET_258, RC_n, GND, __A06_NET_246, __A06_NET_259, __A06_NET_246, __A06_NET_257, ST2_n, __A06_NET_260, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U6047(__A06_NET_198, CI_n, __A06_NET_261, WA_n, __A06_NET_258, RC_n, GND, __A06_NET_246, __A06_NET_259, __A06_NET_246, __A06_NET_257, ST2_n, __A06_NET_260, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U6048(__A06_2__10XP9, T10_n, __A06_NET_202, __A06_NET_249, IC6, IC7, GND, T10_n, __A06_NET_249, __A06_NET_248, T10_n, __A06_NET_246, __A06_NET_245, VCC, SIM_RST, SIM_CLK);
     U74HC02 U6049(__A06_NET_258, __A06_NET_245, __A06_2__7XP7, __A06_NET_257, __A06_NET_247, DV4B1B, GND, CCS0_n, BR12B_n, __A06_NET_247, T10_n, MP1_n, __A06_2__10XP15, VCC, SIM_RST, SIM_CLK);
     U74HC27 U6050(__A06_2__8XP4, __A06_2__10XP15, __A06_2__8XP4, RADRZ, n9XP1, __A06_NET_253, GND, NEAC, __A06_NET_255, TL15, GOJAM, __A06_NET_260, RADRZ, VCC, SIM_RST, SIM_CLK);
     U74HC4002 U6051(__A06_NET_254, n2XP8, n10XP1, MP0T10, __A06_2__10XP15,  , GND,  , __A06_1__DVXP1, GOJAM, NISQ, __A06_1__WHOMP_n, WHOMP, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U6052(__A06_NET_253, RZ_n, __A06_NET_250, RPTSET, __A06_NET_252, RU_n, GND, RC_n, __A06_NET_337,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8
+    U74LVC07 U6052(__A06_NET_253, RZ_n, __A06_NET_250, RPTSET, __A06_NET_252, RU_n, GND, RC_n, __A06_NET_337,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8
     U74HC02 #(1'b1, 1'b0, 1'b0, 1'b0) U6053(__A06_NET_255, MP0T10, NEAC, __A06_NET_251, RADRZ, __A06_2__PSEUDO, GND, T06_n, STFET1_n, __A06_2__RDBANK, __A06_1__ZIPCI, n3XP7, __A06_NET_337, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b0) U6054(__A06_NET_251, GOJAM, n3XP7, n5XP21, n4XP11, RCH_n, GND,  ,  ,  ,  , __A06_2__PSEUDO, RADRG, VCC, SIM_RST, SIM_CLK);
     U74HC04 #(1'b0, 1'b0, 1'b0, 1'b1, 1'b0, 1'b0) U6055(R1C_n, R1C, RB1_n, RB1, L02_n, __A06_NET_331, GND, __A06_1__L02A_n, __A06_NET_331, __A06_NET_332, L15_n, __A06_1__L15A_n, __A06_NET_332, VCC, SIM_RST, SIM_CLK);

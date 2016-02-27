@@ -16,7 +16,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     output wire BR2;
     output wire BR2_n;
     output wire BRDIF_n;
-    output wire CI_n; //FPGA:wand
+    output wire CI_n; //FPGA#wand
     output wire DIVSTG;
     output wire DIV_n;
     output wire DV1;
@@ -41,7 +41,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     output wire INOUT_n;
     output wire KRPT;
     input wire L15_n;
-    output wire L16_n; //FPGA:wand
+    output wire L16_n; //FPGA#wand
     output wire MP0T10;
     input wire MP0_n;
     input wire MP1;
@@ -60,13 +60,13 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     input wire QC2_n;
     input wire QC3_n;
     output wire R15;
-    output wire R1C_n; //FPGA:wand
+    output wire R1C_n; //FPGA#wand
     output wire RAND0;
-    output wire RA_n; //FPGA:wand
-    output wire RB1_n; //FPGA:wand
+    output wire RA_n; //FPGA#wand
+    output wire RB1_n; //FPGA#wand
     output wire RB2;
-    output wire RB_n; //FPGA:wand
-    output wire RC_n; //FPGA:wand
+    output wire RB_n; //FPGA#wand
+    output wire RC_n; //FPGA#wand
     output wire READ0;
     output wire ROR0;
     output wire RRPA;
@@ -111,17 +111,17 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     output wire T12USE_n;
     input wire T12_n;
     output wire TL15;
-    inout wire TMZ_n; //FPGA:wand
+    inout wire TMZ_n; //FPGA#wand
     input wire TOV_n;
     input wire TPZG_n;
     input wire TRSM;
     input wire TS0_n;
-    inout wire TSGN_n; //FPGA:wand
+    inout wire TSGN_n; //FPGA#wand
     input wire TSGU_n;
     input wire UNF_n;
     output wire WAND0;
     output wire WCH_n;
-    output wire WG_n; //FPGA:wand
+    output wire WG_n; //FPGA#wand
     input wire WL01_n;
     input wire WL02_n;
     input wire WL03_n;
@@ -138,9 +138,9 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     input wire WL14_n;
     input wire WL15_n;
     input wire WL16_n;
-    output wire WL_n; //FPGA:wand
+    output wire WL_n; //FPGA#wand
     output wire WOR0;
-    output wire WY_n; //FPGA:wand
+    output wire WY_n; //FPGA#wand
     input wire XB7_n;
     input wire XT1_n;
     wire __A04_1__DV0;
@@ -151,7 +151,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     wire __A04_1__MST1;
     wire __A04_1__MST2;
     wire __A04_1__MST3;
-    wire __A04_1__SGUM; //FPGA:wand
+    wire __A04_1__SGUM; //FPGA#wand
     wire __A04_1__ST1376_n;
     wire __A04_1__ST376;
     wire __A04_1__ST376_n;
@@ -195,14 +195,14 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     wire __A04_NET_207;
     wire __A04_NET_210;
     wire __A04_NET_211;
-    wire __A04_NET_212; //FPGA:wand
-    wire __A04_NET_215; //FPGA:wand
-    wire __A04_NET_216; //FPGA:wand
+    wire __A04_NET_212; //FPGA#wand
+    wire __A04_NET_215; //FPGA#wand
+    wire __A04_NET_216; //FPGA#wand
     wire __A04_NET_217;
     wire __A04_NET_218;
     wire __A04_NET_219;
     wire __A04_NET_220;
-    wire __A04_NET_221; //FPGA:wand
+    wire __A04_NET_221; //FPGA#wand
     wire __A04_NET_222;
     wire __A04_NET_229;
     wire __A04_NET_230;
@@ -213,7 +213,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     wire __A04_NET_235;
     wire __A04_NET_236;
     wire __A04_NET_237;
-    wire __A04_NET_238; //FPGA:wand
+    wire __A04_NET_238; //FPGA#wand
     wire __A04_NET_241;
     wire __A04_NET_242;
     wire __A04_NET_243;
@@ -223,7 +223,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     wire __A04_NET_247;
     wire __A04_NET_248;
     wire __A04_NET_249;
-    wire __A04_NET_250; //FPGA:wand
+    wire __A04_NET_250; //FPGA#wand
     wire __A04_NET_251;
     wire __A04_NET_252;
     wire __A04_NET_253;
@@ -249,7 +249,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     wire __A04_NET_277;
     wire __A04_NET_278;
     wire __A04_NET_279;
-    wire __A04_NET_280; //FPGA:wand
+    wire __A04_NET_280; //FPGA#wand
     wire __A04_NET_281;
     wire __A04_NET_282;
     wire __A04_NET_283;
@@ -307,13 +307,13 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     output wire n3XP7;
     output wire n4XP11;
     output wire n4XP5;
-    output wire n5XP11; //FPGA:wand
+    output wire n5XP11; //FPGA#wand
     output wire n5XP28;
     output wire n5XP4;
     output wire n6XP5;
     input wire n7XP14;
     output wire n7XP19;
-    output wire n8PP4; //FPGA:wand
+    output wire n8PP4; //FPGA#wand
     output wire n8XP5;
     output wire n8XP6;
     output wire n9XP1;
@@ -330,7 +330,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     pullup R4021(n8PP4);
     U74HC02 #(1'b0, 1'b0, 1'b0, 1'b1) U4001(T12USE_n, DVST, __A04_NET_243, DIVSTG, T12USE_n, T03, GND, __A04_NET_244, __A04_NET_242, __A04_NET_268, GOJAM, MTCSAI, __A04_NET_249, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U4002(T03, T12USE_n, T12USE_n, RSTSTG, GOJAM, __A04_NET_243, GND, __A04_NET_242, PHS3_n, __A04_NET_243, T12_n, __A04_NET_244, PHS3_n, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U4003(__A04_NET_249, __A04_NET_250, __A04_NET_248, __A04_NET_250, __A04_NET_229, __A04_NET_238, GND, __A04_NET_238, __A04_NET_232, __A04_1__SGUM, __A04_NET_198, __A04_1__SGUM, __A04_NET_197, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U4003(__A04_NET_249, __A04_NET_250, __A04_NET_248, __A04_NET_250, __A04_NET_229, __A04_NET_238, GND, __A04_NET_238, __A04_NET_232, __A04_1__SGUM, __A04_NET_198, __A04_1__SGUM, __A04_NET_197, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 #(1'b1, 1'b1, 1'b0) U4004(ST1, __A04_NET_245, __A04_1__STG1, __A04_1__STG3, __A04_1__STG2, __A04_NET_231, GND, __A04_NET_254, __A04_1__STG2, __A04_1__STG3, __A04_NET_236, __A04_NET_248, __A04_NET_247, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4005(__A04_NET_247, __A04_NET_250, T01, __A04_NET_245, __A04_NET_234, __A04_NET_269, GND, __A04_NET_268, __A04_NET_250, __A04_NET_241, __A04_NET_247, __A04_NET_268, __A04_NET_246, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U4006(__A04_NET_236, __A04_NET_241, __A04_1__STG1, __A04_1__STG1, __A04_NET_236, __A04_NET_246, GND, ST2, __A04_NET_230, __A04_NET_229, __A04_NET_234, __A04_NET_236, __A04_NET_235, VCC, SIM_RST, SIM_CLK);
@@ -350,13 +350,13 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     U74HC27 #(1'b0, 1'b0, 1'b1) U4020(PHS4_n, WL16_n, __A04_NET_191, __A04_NET_188, __A04_NET_215, __A04_NET_194, GND, __A04_NET_195, __A04_NET_216, __A04_NET_193, __A04_NET_192, __A04_NET_188, TSGN_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4021(__A04_NET_193, TSGN_n, PHS3_n, __A04_NET_192, __A04_NET_189, PHS3_n, GND, TOV_n, PHS2_n, __A04_NET_205, __A04_1__SGUM, __A04_NET_186, __A04_NET_187, VCC, SIM_RST, SIM_CLK);
     U74HC4002 U4022(__A04_NET_196, __A04_NET_183, PHS3_n, TSGU_n, PHS4,  , GND,  , WL16_n, WL15_n, WL14_n, WL13_n, __A04_NET_217, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U4023(__A04_NET_187, __A04_NET_216, __A04_NET_194, __A04_NET_216, __A04_NET_195, __A04_NET_215, GND, __A04_NET_215, __A04_NET_190, __A04_NET_221, __A04_NET_217, __A04_NET_221, __A04_NET_220, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U4023(__A04_NET_187, __A04_NET_216, __A04_NET_194, __A04_NET_216, __A04_NET_195, __A04_NET_215, GND, __A04_NET_215, __A04_NET_190, __A04_NET_221, __A04_NET_217, __A04_NET_221, __A04_NET_220, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 #(1'b1, 1'b0, 1'b0, 1'b0) U4024(__A04_NET_190, __A04_NET_205, __A04_NET_196, __A04_NET_200, TOV_n, OVF_n, GND, __A04_NET_210, PHS3_n, __A04_NET_207, TMZ_n, PHS4_n, __A04_NET_222, VCC, SIM_RST, SIM_CLK);
     U74HC04 U4025(__A04_NET_215, BR1_n, __A04_1__TSGN2, __A04_NET_210, __A04_NET_212, BR2, GND, BR2_n, __A04_NET_204, DV4_n, DV4, __A04_NET_332, __A04_NET_331, VCC, SIM_RST, SIM_CLK);
     U74HC27 U4026(GEQZRO_n, PHS4_n, WL16_n, PHS4_n, __A04_NET_210, __A04_NET_202, GND, __A04_NET_203, __A04_NET_202, __A04_NET_221, __A04_NET_204, __A04_NET_201, TPZG_n, VCC, SIM_RST, SIM_CLK);
     U74HC4002 U4027(__A04_NET_220, WL12_n, WL11_n, WL10_n, WL09_n,  , GND,  , WL08_n, WL07_n, WL06_n, WL05_n, __A04_NET_219, VCC, SIM_RST, SIM_CLK);
     U74HC4002 #(1'b0, 1'b1) U4028(__A04_NET_218, WL04_n, WL03_n, WL02_n, WL01_n,  , GND,  , __A04_NET_212, __A04_NET_207, __A04_NET_206, __A04_NET_205, __A04_NET_204, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U4029(__A04_NET_219, __A04_NET_221, __A04_NET_218, __A04_NET_221, __A04_NET_222, __A04_NET_221, GND, __A04_NET_212, __A04_NET_199, __A04_NET_212, __A04_NET_203,  ,  , VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10
+    U74LVC07 U4029(__A04_NET_219, __A04_NET_221, __A04_NET_218, __A04_NET_221, __A04_NET_222, __A04_NET_221, GND, __A04_NET_212, __A04_NET_199, __A04_NET_212, __A04_NET_203,  ,  , VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10
     U74HC02 U4030(__A04_NET_206, TMZ_n, PHS3_n, __A04_NET_199, __A04_NET_201, __A04_NET_200, GND, SQ0_n, EXST0_n, __A04_NET_331, QC3_n, SQEXT_n, __A04_NET_277, VCC, SIM_RST, SIM_CLK);
     U74HC27 U4031(__A04_NET_332, SQR10, QC0_n, __A04_NET_332, SQR10_n, __A04_2__WRITE0, GND, RAND0, SQR10, __A04_NET_332, QC1_n, READ0, QC0_n, VCC, SIM_RST, SIM_CLK);
     U74HC04 U4032(READ0, __A04_2__READ0_n, __A04_2__WRITE0, __A04_2__WRITE0_n, WOR0, __A04_2__WOR0_n, GND, RXOR0_n, RXOR0, __A04_2__RUPT0_n, RUPT0, __A04_2__RUPT1_n, RUPT1, VCC, SIM_RST, SIM_CLK);
@@ -366,13 +366,13 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     U74HC02 U4036(PRINC, __A04_NET_277, __A04_NET_276, RRPA, T03_n, __A04_2__RUPT1_n, GND, T03_n, RXOR0_n, n3XP7, __A04_NET_270, T03_n, __A04_NET_273, VCC, SIM_RST, SIM_CLK);
     U74HC27 U4037(EXST0_n, SQ0_n, INOUT, DV4, PRINC, __A04_NET_311, GND, __A04_NET_327, __A04_NET_273, __A04_NET_271, __A04_NET_278, INOUT, __A04_2__RUPT0_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4038(__A04_NET_270, ROR0, WOR0, __A04_NET_272, T03_n, __A04_NET_274, GND, RAND0, WAND0, __A04_NET_274, DV4_n, T05_n, n5XP28, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U4039(__A04_NET_327, RB_n, __A04_NET_326, RC_n, __A04_NET_329, n5XP11, GND, n5XP11, __A04_NET_328, RA_n, __A04_NET_330, WG_n, __A04_NET_300, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U4039(__A04_NET_327, RB_n, __A04_NET_326, RC_n, __A04_NET_329, n5XP11, GND, n5XP11, __A04_NET_328, RA_n, __A04_NET_330, WG_n, __A04_NET_300, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 #(1'b0, 1'b0, 1'b1) U4040(__A04_NET_272, __A04_NET_282, T05_n, INOUT_n, READ0, __A04_NET_329, GND, WCH_n, __A04_NET_283, n7XP14, __A04_NET_284, __A04_NET_326, __A04_NET_279, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4041(__A04_NET_328, __A04_2__WRITE0, RXOR0, __A04_NET_271, __A04_2__READ0_n, T05_n, GND, __A04_2__WRITE0_n, T05_n, __A04_NET_283, T05_n, __A04_2__WOR0_n, __A04_NET_284, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4042(__A04_NET_282, T05_n, RXOR0_n, __A04_NET_285, T02_n, __A04_2__WRITE0_n, GND, T02_n, INOUT_n, n2XP3, T09_n, __A04_2__RUPT0_n, n9XP1, VCC, SIM_RST, SIM_CLK);
     U74HC27 U4043(__A04_NET_283, __A04_NET_282, RUPT1, IC13, IC12, __A04_NET_286, GND, __A04_NET_300, n9XP1, __A04_NET_279, __A04_NET_278, __A04_NET_330, n2XP3, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4044(__A04_NET_279, T09_n, RXOR0_n, __A04_NET_278, T09_n, __A04_NET_286, GND, __A04_NET_282, __A04_NET_285, __A04_NET_337, T01_n, __A04_2__RUPT1_n, RB2, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U4045(__A04_NET_337, WG_n, __A04_NET_335, __A04_NET_280, __A04_NET_336, __A04_NET_280, GND, RA_n, __A04_NET_314, WG_n, __A04_NET_301, TMZ_n, __A04_NET_323, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U4045(__A04_NET_337, WG_n, __A04_NET_335, __A04_NET_280, __A04_NET_336, __A04_NET_280, GND, RA_n, __A04_NET_314, WG_n, __A04_NET_301, TMZ_n, __A04_NET_323, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 U4046(RUPT0, RUPT1, INOUT, MP1, MP3A, __A04_NET_335, GND, __A04_NET_336, __A04_1__DV0, IC15, DV1376, __A04_NET_281, RSM3, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4047(R15, __A04_NET_281, T01_n, n1XP10, T01_n, __A04_1__DV0_n, GND, MP0_n, T03_n, __A04_NET_288, INOUT_n, T03_n, __A04_NET_319, VCC, SIM_RST, SIM_CLK);
     U74HC27 U4048(T02_n, __A04_1__DV0_n, BRDIF_n, TS0_n, T04_n, __A04_NET_299, GND, __A04_NET_294, T04_n, BR1, MP0_n, n2XP5, BR1, VCC, SIM_RST, SIM_CLK);
@@ -388,9 +388,9 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     U74HC04 #(1'b0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0) U4058(RSC_n, __A04_2__MRSC, __A04_NET_316, __A04_NET_312, TRSM, __A04_NET_211, GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b1) U4059( ,  , __A04_NET_319, B15X, n7XP19, __A04_NET_325, GND, __A04_NET_320, n8XP5, __A04_NET_318, __A04_NET_296,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC02 U4060(__A04_NET_323, n2XP5, n1XP10, __A04_NET_291, __A04_NET_299, __A04_NET_298, GND, n1XP10, MP0T10, __A04_NET_290, __A04_NET_293, __A04_NET_316, __A04_NET_292, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U4061(__A04_NET_325, WY_n, __A04_NET_320, WY_n, __A04_NET_322, WL_n, GND, RC_n, __A04_NET_297, RB_n, __A04_NET_295, CI_n, __A04_NET_291, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U4061(__A04_NET_325, WY_n, __A04_NET_320, WY_n, __A04_NET_322, WL_n, GND, RC_n, __A04_NET_297, RB_n, __A04_NET_295, CI_n, __A04_NET_291, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 #(1'b1, 1'b0, 1'b0) U4062(__A04_NET_294, __A04_NET_321, __A04_NET_321, n2XP5, __A04_NET_296, __A04_NET_297, GND, __A04_NET_295, __A04_NET_294, n7XP19, __A04_NET_318, __A04_NET_322, n6XP5, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U4063(__A04_NET_290, TSGN_n, __A04_NET_287, TSGN_n, __A04_NET_292, RB1_n, GND, L16_n, __A04_NET_312, R1C_n, __A04_NET_310, n8PP4, __A04_NET_311, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U4063(__A04_NET_290, TSGN_n, __A04_NET_287, TSGN_n, __A04_NET_292, RB1_n, GND, L16_n, __A04_NET_312, R1C_n, __A04_NET_310, n8PP4, __A04_NET_311, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 U4064(__A04_NET_289, __A04_NET_288,  ,  ,  ,  , GND,  ,  ,  ,  , __A04_NET_287, __A04_NET_308, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4065(__A04_NET_310, __A04_NET_316, __A04_NET_309, __A04_2__BRXP3, T03_n, IC15_n, GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC4002 U4066(RSC_n, __A04_NET_315, __A04_NET_324, __A04_NET_308, __A04_2__BRXP3,  , GND,  , __A04_NET_315, __A04_NET_303, __A04_NET_324, __A04_2__BRXP3, __A04_NET_301, VCC, SIM_RST, SIM_CLK);

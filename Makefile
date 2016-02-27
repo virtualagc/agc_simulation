@@ -27,7 +27,6 @@ COMMON_SOURCES = components/nor_1.v\
 		 components/U74HC4002.v\
 		 components/U74LVC07.v\
 		 components/SST39VF200A.v\
-		 $(AUTOGEN_FILES)
 
 HARDWARE_DIR=~/agc_hardware/
 
@@ -36,7 +35,7 @@ ROM=roms/colossus237.v
 .phony: all
 all: test_agc test_fpga
 
-test_agc: $(COMMON_SOURCES) agc.v test_agc.v $(ROM)
+test_agc: $(COMMON_SOURCES) $(AUTOGEN_FILES) agc.v test_agc.v $(ROM)
 	cp $(ROM) roms/rom.v
 	iverilog -o $@ $(COMMON_SOURCES) agc.v test_agc.v
 

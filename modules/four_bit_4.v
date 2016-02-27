@@ -25,17 +25,17 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     output wire EAC_n;
     input wire G01_n;
     output wire G13;
-    inout wire G13_n; //FPGA:wand
+    inout wire G13_n; //FPGA#wand
     output wire G14;
-    inout wire G14_n; //FPGA:wand
+    inout wire G14_n; //FPGA#wand
     output wire G15;
-    inout wire G15_n; //FPGA:wand
+    inout wire G15_n; //FPGA#wand
     output wire G16;
     input wire G16SW_n;
     input wire G2LSG_n;
     input wire L12_n;
-    inout wire L15_n; //FPGA:wand
-    inout wire L16_n; //FPGA:wand
+    inout wire L15_n; //FPGA#wand
+    inout wire L16_n; //FPGA#wand
     input wire L2GDG_n;
     input wire MDT13;
     input wire MDT14;
@@ -47,10 +47,10 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     input wire RBHG_n;
     input wire RCG_n;
     input wire RGG_n;
-    inout wire RL13_n; //FPGA:wand
-    inout wire RL14_n; //FPGA:wand
-    inout wire RL15_n; //FPGA:wand
-    inout wire RL16_n; //FPGA:wand
+    inout wire RL13_n; //FPGA#wand
+    inout wire RL14_n; //FPGA#wand
+    inout wire RL15_n; //FPGA#wand
+    inout wire RL16_n; //FPGA#wand
     input wire RLG_n;
     input wire RQG_n;
     input wire RUG_n;
@@ -95,8 +95,8 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     input wire XUY02_n;
     output wire XUY13_n;
     output wire XUY14_n;
-    inout wire Z15_n; //FPGA:wand
-    inout wire Z16_n; //FPGA:wand
+    inout wire Z15_n; //FPGA#wand
+    inout wire Z16_n; //FPGA#wand
     wire __A11_1__X1;
     wire __A11_1__X1_n;
     wire __A11_1__X2;
@@ -112,8 +112,8 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     wire __A11_1___CI_INTERNAL;
     wire __A11_1___GEM1;
     wire __A11_1___GEM2;
-    wire __A11_1___L1_n; //FPGA:wand
-    wire __A11_1___L2_n; //FPGA:wand
+    wire __A11_1___L1_n; //FPGA#wand
+    wire __A11_1___L2_n; //FPGA#wand
     wire __A11_1___MWL1;
     wire __A11_1___MWL2;
     wire __A11_1___Q1_n;
@@ -122,8 +122,8 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     wire __A11_1___RL_OUT_2;
     wire __A11_1___WL1;
     wire __A11_1___WL2;
-    wire __A11_1___Z1_n; //FPGA:wand
-    wire __A11_1___Z2_n; //FPGA:wand
+    wire __A11_1___Z1_n; //FPGA#wand
+    wire __A11_1___Z2_n; //FPGA#wand
     wire __A11_2__X1;
     wire __A11_2__X1_n;
     wire __A11_2__X2;
@@ -138,9 +138,9 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     wire __A11_2___B2_n;
     wire __A11_2___CI_IN;
     wire __A11_2___CI_INTERNAL;
-    wire __A11_2___CO_IN; //FPGA:wand
-    wire __A11_2___CO_OUT; //FPGA:wand
-    wire __A11_2___G2_n; //FPGA:wand
+    wire __A11_2___CO_IN; //FPGA#wand
+    wire __A11_2___CO_OUT; //FPGA#wand
+    wire __A11_2___G2_n; //FPGA#wand
     wire __A11_2___GEM1;
     wire __A11_2___GEM2;
     wire __A11_2___MWL1;
@@ -328,13 +328,13 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     U74HC27 U11004( ,  , SUMA13_n, SUMB13_n, RULOG_n, __A11_NET_180, GND, __A11_NET_184, __A11_2___XUY1, XUY13_n, CI13_n,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC04 U11005(CI13_n, __A11_NET_199, G13_n, __A11_1___GEM1, RL13_n, __A11_1___WL1, GND, WL13_n, __A11_1___WL1, __A11_1___MWL1, RL13_n, __A11_NET_150, __A11_1___CI_INTERNAL, VCC, SIM_RST, SIM_CLK);
     U74HC02 U11006(SUMB13_n, __A11_NET_200, __A11_NET_199, __A11_NET_183, WAG_n, WL13_n, GND, WL15_n, WALSG_n, __A11_NET_185, __A11_1___A1_n, CAG, __A11_NET_181, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U11007(__A11_NET_184, __A11_2___CO_IN, __A11_NET_178, RL13_n, __A11_NET_191, __A11_1___L1_n, GND, __A11_1___Z1_n, __A11_NET_214, RL13_n, __A11_NET_215, RL13_n, __A11_NET_213, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U11007(__A11_NET_184, __A11_2___CO_IN, __A11_NET_178, RL13_n, __A11_NET_191, __A11_1___L1_n, GND, __A11_1___Z1_n, __A11_NET_214, RL13_n, __A11_NET_215, RL13_n, __A11_NET_213, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U11008(__A11_NET_179, RAG_n, __A11_1___A1_n, __A11_NET_182, WLG_n, WL13_n, GND, WL01_n, WALSG_n, __A11_NET_189, __A11_1___L1_n, CLG2G, __A11_NET_190, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U11009( ,  ,  , __A11_NET_187, WQG_n, WL13_n, GND, __A11_NET_187, __A11_NET_186, __A11_1___Q1_n, __A11_1___Q1_n, CQG, __A11_NET_186, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U11010(__A11_NET_188, RQG_n, __A11_1___Q1_n, __A11_NET_217, WZG_n, WL13_n, GND, __A11_NET_217, __A11_NET_216, __A11_NET_214, __A11_1___Z1_n, CZG, __A11_NET_216, VCC, SIM_RST, SIM_CLK);
     U74HC27 U11011(__A11_1___RL_OUT_1, __A11_NET_188, MDT13, R1C, GND, __A11_NET_213, GND, __A11_NET_220, __A11_NET_218, __A11_NET_219, __A11_NET_205, __A11_NET_215, __A11_NET_212, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U11012(__A11_NET_212, RZG_n, __A11_1___Z1_n, __A11_NET_221, WBG_n, WL13_n, GND, __A11_NET_221, __A11_NET_222, __A11_1___B1_n, __A11_1___B1_n, CBG, __A11_NET_222, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U11013(__A11_NET_163, __A11_2___CO_IN, __A11_NET_220, RL13_n, __A11_NET_204, G13_n, GND, G13_n, __A11_NET_203, RL14_n, __A11_NET_130, __A11_1___L2_n, __A11_NET_140, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U11013(__A11_NET_163, __A11_2___CO_IN, __A11_NET_220, RL13_n, __A11_NET_204, G13_n, GND, G13_n, __A11_NET_203, RL14_n, __A11_NET_130, __A11_1___L2_n, __A11_NET_140, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U11014(__A11_NET_218, RBHG_n, __A11_1___B1_n, __A11_NET_219, __A11_NET_222, RCG_n, GND, WL12_n, WG3G_n, __A11_NET_209, WL14_n, WG4G_n, __A11_NET_208, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b1) U11015(__A11_NET_183, __A11_NET_185, __A11_NET_180, __A11_NET_179, CH13, __A11_NET_178, GND, __A11_NET_191, __A11_NET_182, __A11_NET_189, __A11_NET_190, __A11_1___A1_n, __A11_NET_181, VCC, SIM_RST, SIM_CLK);
     U74HC02 U11016(__A11_NET_207, L2GDG_n, L12_n, __A11_NET_206, WG1G_n, WL13_n, GND, G13_n, CGG, G13, RGG_n, G13_n, __A11_NET_205, VCC, SIM_RST, SIM_CLK);
@@ -349,7 +349,7 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     U74HC02 U11025(__A11_NET_135, RAG_n, __A11_1___A2_n, __A11_NET_168, WLG_n, WL14_n, GND, WL02_n, WALSG_n, __A11_NET_169, __A11_1___L2_n, CLG2G, __A11_NET_170, VCC, SIM_RST, SIM_CLK);
     U74HC27 U11026(RLG_n, __A11_1___L2_n, __A11_1___RL_OUT_2, __A11_NET_136, __A11_NET_142, __A11_NET_141, GND, __A11_NET_131, MDT14, R1C, GND, __A11_1___RL_OUT_2, GND, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U11027(__A11_NET_172, WQG_n, WL14_n, __A11_1___Q2_n, __A11_NET_172, __A11_NET_171, GND, __A11_1___Q2_n, CQG, __A11_NET_171, RQG_n, __A11_1___Q2_n, __A11_NET_136, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U11028(__A11_NET_141, RL14_n, __A11_NET_138, __A11_1___Z2_n, __A11_NET_131, RL14_n, GND, RL14_n, __A11_NET_173, G14_n, __A11_NET_155, G14_n, __A11_NET_162, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U11028(__A11_NET_141, RL14_n, __A11_NET_138, __A11_1___Z2_n, __A11_NET_131, RL14_n, GND, RL14_n, __A11_NET_173, G14_n, __A11_NET_155, G14_n, __A11_NET_162, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U11029(__A11_NET_137, WZG_n, WL14_n, __A11_NET_138, __A11_NET_137, __A11_NET_139, GND, __A11_1___Z2_n, CZG, __A11_NET_139, RZG_n, __A11_1___Z2_n, __A11_NET_142, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U11030(__A11_NET_176, WBG_n, WL14_n, __A11_1___B2_n, __A11_NET_176, __A11_NET_177, GND, __A11_1___B2_n, CBG, __A11_NET_177, RBHG_n, __A11_1___B2_n, __A11_NET_175, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U11031(__A11_NET_175, __A11_NET_174, __A11_NET_161, __A11_NET_160, G14, __A11_NET_162, GND, __A11_NET_256, GND, XUY02_n, __A11_2___XUY2, __A11_NET_173, __A11_NET_154, VCC, SIM_RST, SIM_CLK);
@@ -362,7 +362,7 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     U74HC27 U11038( ,  , SUMA15_n, SUMB15_n, RULOG_n, __A11_NET_273, GND, __A11_NET_277, XUY01_n, __A11_2___XUY1, __A11_2___CI_IN,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC04 U11039(__A11_2___CI_IN, __A11_NET_293, G15_n, __A11_2___GEM1, RL15_n, WL15, GND, WL15_n, WL15, __A11_2___MWL1, RL15_n, __A11_NET_243, __A11_2___CI_INTERNAL, VCC, SIM_RST, SIM_CLK);
     U74HC02 U11040(SUMB15_n, __A11_NET_292, __A11_NET_293, __A11_NET_276, WAG_n, WL15_n, GND, G16SW_n, WALSG_n, __A11_NET_278, __A11_2___A1_n, CAG, __A11_NET_274, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U11041(__A11_NET_277, __A11_2___CO_OUT, __A11_NET_272, RL15_n, __A11_NET_284, L15_n, GND, Z15_n, __A11_NET_307, RL15_n, __A11_NET_308, RL15_n, __A11_NET_306, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U11041(__A11_NET_277, __A11_2___CO_OUT, __A11_NET_272, RL15_n, __A11_NET_284, L15_n, GND, Z15_n, __A11_NET_307, RL15_n, __A11_NET_308, RL15_n, __A11_NET_306, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 #(1'b1, 1'b0, 1'b1) U11042(__A11_NET_276, __A11_NET_278, __A11_NET_273, __A11_NET_271, CH16, __A11_NET_272, GND, __A11_NET_284, __A11_NET_275, __A11_NET_282, __A11_NET_283, __A11_2___A1_n, __A11_NET_274, VCC, SIM_RST, SIM_CLK);
     U74HC02 U11043(__A11_NET_271, RAG_n, __A11_2___A1_n, __A11_NET_275, WLG_n, WL15_n, GND, G01_n, G2LSG_n, __A11_NET_282, L15_n, CLG1G, __A11_NET_283, VCC, SIM_RST, SIM_CLK);
     U74HC27 U11044( ,  ,  ,  ,  ,  , GND, __A11_2___RL_OUT_1, RLG_n, L15_n, VCC,  ,  , VCC, SIM_RST, SIM_CLK);
@@ -371,7 +371,7 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U11047(__A11_NET_305, RZG_n, Z15_n, __A11_NET_314, WBG_n, WL15_n, GND, __A11_NET_314, __A11_NET_315, __A11_2___B1_n, __A11_2___B1_n, CBG, __A11_NET_315, VCC, SIM_RST, SIM_CLK);
     U74HC02 U11048(__A11_NET_312, RBHG_n, __A11_2___B1_n, __A11_NET_313, __A11_NET_315, RCG_n, GND, GND, VCC, __A11_NET_302, GND, VCC, __A11_NET_301, VCC, SIM_RST, SIM_CLK);
     U74HC27 U11049(__A11_2___RL_OUT_1, __A11_NET_281, MDT15, R1C, __A11_2___RL_OUT_2, __A11_NET_306, GND, __A11_NET_311, __A11_NET_312, __A11_NET_313, __A11_NET_298, __A11_NET_308, __A11_NET_305, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U11050(__A11_NET_256, __A11_2___CO_OUT, __A11_NET_311, RL15_n, __A11_NET_297, G15_n, GND, G15_n, __A11_NET_296, RL16_n, __A11_NET_223, L16_n, __A11_NET_233, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U11050(__A11_NET_256, __A11_2___CO_OUT, __A11_NET_311, RL15_n, __A11_NET_297, G15_n, GND, G15_n, __A11_NET_296, RL16_n, __A11_NET_223, L16_n, __A11_NET_233, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U11051(__A11_NET_300, L2GDG_n, __A11_1___L2_n, __A11_NET_299, WG1G_n, WL15_n, GND, G15_n, CGG, G15, RGG_n, G15_n, __A11_NET_298, VCC, SIM_RST, SIM_CLK);
     U74HC4002 #(1'b1, 1'b0) U11052(__A11_NET_297, GND, SA16, __A11_NET_302, __A11_NET_301,  , GND,  , GND, SA16, __A11_NET_250, __A11_NET_249, __A11_NET_248, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b0) U11053(__A11_NET_300, __A11_NET_299,  ,  ,  ,  , GND,  ,  ,  ,  , __A11_NET_296, G15, VCC, SIM_RST, SIM_CLK);
@@ -384,7 +384,7 @@ module four_bit_4(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLG2
     U74HC02 U11060(__A11_NET_228, RAG_n, __A11_2___A2_n, __A11_NET_261, WLG_n, WL16_n, GND, __A11_2___G2_n, G2LSG_n, __A11_NET_262, L16_n, CLG1G, __A11_NET_263, VCC, SIM_RST, SIM_CLK);
     U74HC27 U11061(RLG_n, L16_n, __A11_2___RL_OUT_2, __A11_NET_229, __A11_NET_235, __A11_NET_234, GND, __A11_NET_224, MDT16, R1C, US2SG, __A11_2___RL_OUT_2, GND, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U11062(__A11_NET_265, WQG_n, WL16_n, __A11_2___Q2_n, __A11_NET_265, __A11_NET_264, GND, __A11_2___Q2_n, CQG, __A11_NET_264, RQG_n, __A11_2___Q2_n, __A11_NET_229, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U11063(__A11_NET_234, RL16_n, __A11_NET_231, Z16_n, __A11_NET_224, RL16_n, GND, RL16_n, __A11_NET_266, __A11_2___G2_n, __A11_NET_248, __A11_2___G2_n, __A11_NET_255, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U11063(__A11_NET_234, RL16_n, __A11_NET_231, Z16_n, __A11_NET_224, RL16_n, GND, RL16_n, __A11_NET_266, __A11_2___G2_n, __A11_NET_248, __A11_2___G2_n, __A11_NET_255, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U11064(__A11_NET_230, WZG_n, WL16_n, __A11_NET_231, __A11_NET_230, __A11_NET_232, GND, Z16_n, CZG, __A11_NET_232, RZG_n, Z16_n, __A11_NET_235, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U11065(__A11_NET_269, WBG_n, WL16_n, __A11_2___B2_n, __A11_NET_269, __A11_NET_270, GND, __A11_2___B2_n, CBG, __A11_NET_270, RBHG_n, __A11_2___B2_n, __A11_NET_268, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U11066(__A11_NET_268, __A11_NET_267, __A11_NET_254, __A11_NET_253, G16, __A11_NET_255, GND,  ,  ,  ,  , __A11_NET_266, __A11_NET_247, VCC, SIM_RST, SIM_CLK);

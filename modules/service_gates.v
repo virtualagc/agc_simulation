@@ -167,7 +167,7 @@ module service_gates(VCC, GND, SIM_RST, SIM_CLK, T10_n, P04_n, CT_n, RT_n, TT_n,
     wire __A07_NET_159;
     wire __A07_NET_160;
     wire __A07_NET_161;
-    wire __A07_NET_162; //FPGA:wand
+    wire __A07_NET_162; //FPGA#wand
     wire __A07_NET_163;
     wire __A07_NET_164;
     wire __A07_NET_165;
@@ -223,7 +223,7 @@ module service_gates(VCC, GND, SIM_RST, SIM_CLK, T10_n, P04_n, CT_n, RT_n, TT_n,
     U74HC04 #(1'b1, 1'b1, 1'b1, 1'b0, 1'b0, 1'b1) U7004(__A07_NET_158, WYDG_n, __A07_NET_162, WYDLOG_n, __A07_NET_163, WBG_n, GND, __A07_1__MWBG, WBG_n, __A07_1__MWG, __A07_1__WGA_n, WG1G_n, __A07_1__WGNORM, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b0, 1'b1) U7005(__A07_NET_159, WYD_n, WT_n, __A07_NET_163, WB_n, WT_n, GND, WBG_n, CT_n, CBG, __A07_1__WGNORM, __A07_NET_175, WG2G_n, VCC, SIM_RST, SIM_CLK);
     U74HC27 U7006(SHIFT, NEAC, __A07_1__WGA_n, WT_n, GINH, __A07_1__WGNORM, GND, __A07_NET_175, __A07_1__WGA_n, WT_n, SR_n, __A07_NET_161, __A07_NET_164, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U7007(__A07_NET_159, __A07_NET_162, __A07_NET_161, __A07_NET_162,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //OD:2,4
+    U74LVC07 U7007(__A07_NET_159, __A07_NET_162, __A07_NET_161, __A07_NET_162,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4
     U74HC27 U7008(__A07_1__WGA_n, WT_n, __A07_1__WGA_n, WT_n, CYL_n, __A07_NET_170, GND, __A07_NET_174, __A07_1__WGA_n, WT_n, EDOP_n, __A07_NET_171, CYR_n, VCC, SIM_RST, SIM_CLK);
     U74HC04 U7009(__A07_NET_171, WG5G_n, __A07_NET_170, WG3G_n, __A07_NET_174, WEDOPG_n, GND, __A07_1__MWZG, WZG_n, __A07_1__MWLG, WLG_n, __A07_1__MWAG, WAG_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b0, 1'b1) U7010(WG4G_n, __A07_NET_175, __A07_NET_171, __A07_NET_172, WT_n, WZ_n, GND, __A07_1__WSCG_n, XB5_n, __A07_NET_173, __A07_NET_172, __A07_NET_173, WZG_n, VCC, SIM_RST, SIM_CLK);

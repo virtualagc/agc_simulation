@@ -18,13 +18,13 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     output wire CI05_n;
     input wire CLG1G;
     input wire CLXC;
-    output wire CO06; //FPGA:wand
+    output wire CO06; //FPGA#wand
     input wire CQG;
     input wire CUG;
     input wire CZG;
     output wire G01;
     input wire G01ED;
-    inout wire G01_n; //FPGA:wand
+    inout wire G01_n; //FPGA#wand
     output wire G02;
     input wire G02ED;
     output wire G03;
@@ -35,9 +35,9 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     input wire G06_n;
     input wire G07_n;
     input wire G2LSG_n;
-    inout wire L01_n; //FPGA:wand
-    inout wire L02_n; //FPGA:wand
-    inout wire L04_n; //FPGA:wand
+    inout wire L01_n; //FPGA#wand
+    inout wire L02_n; //FPGA#wand
+    inout wire L04_n; //FPGA#wand
     input wire L2GDG_n;
     input wire MCRO_n;
     input wire MDT01;
@@ -54,10 +54,10 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     input wire RBLG_n;
     input wire RCG_n;
     input wire RGG_n;
-    inout wire RL01_n; //FPGA:wand
-    inout wire RL02_n; //FPGA:wand
-    inout wire RL03_n; //FPGA:wand
-    inout wire RL04_n; //FPGA:wand
+    inout wire RL01_n; //FPGA#wand
+    inout wire RL02_n; //FPGA#wand
+    inout wire RL03_n; //FPGA#wand
+    inout wire RL04_n; //FPGA#wand
     input wire RLG_n;
     input wire RQG_n;
     input wire RULOG_n;
@@ -111,7 +111,7 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     wire __A08_1___B1_n;
     wire __A08_1___B2_n;
     wire __A08_1___CI_INTERNAL;
-    wire __A08_1___G2_n; //FPGA:wand
+    wire __A08_1___G2_n; //FPGA#wand
     wire __A08_1___GEM1;
     wire __A08_1___GEM2;
     wire __A08_1___MWL1;
@@ -122,8 +122,8 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     wire __A08_1___RL_OUT_2;
     wire __A08_1___WL1;
     wire __A08_1___WL2;
-    wire __A08_1___Z1_n; //FPGA:wand
-    wire __A08_1___Z2_n; //FPGA:wand
+    wire __A08_1___Z1_n; //FPGA#wand
+    wire __A08_1___Z2_n; //FPGA#wand
     wire __A08_2__X1;
     wire __A08_2__X1_n;
     wire __A08_2__X2;
@@ -138,12 +138,12 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     wire __A08_2___B2_n;
     wire __A08_2___CI_IN;
     wire __A08_2___CI_INTERNAL;
-    wire __A08_2___CO_IN; //FPGA:wand
-    wire __A08_2___G1_n; //FPGA:wand
-    wire __A08_2___G2_n; //FPGA:wand
+    wire __A08_2___CO_IN; //FPGA#wand
+    wire __A08_2___G1_n; //FPGA#wand
+    wire __A08_2___G2_n; //FPGA#wand
     wire __A08_2___GEM1;
     wire __A08_2___GEM2;
-    wire __A08_2___L1_n; //FPGA:wand
+    wire __A08_2___L1_n; //FPGA#wand
     wire __A08_2___MWL1;
     wire __A08_2___MWL2;
     wire __A08_2___Q1_n;
@@ -156,8 +156,8 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     wire __A08_2___WL2;
     wire __A08_2___XUY1;
     wire __A08_2___XUY2;
-    wire __A08_2___Z1_n; //FPGA:wand
-    wire __A08_2___Z2_n; //FPGA:wand
+    wire __A08_2___Z1_n; //FPGA#wand
+    wire __A08_2___Z2_n; //FPGA#wand
     wire __A08_NET_137;
     wire __A08_NET_138;
     wire __A08_NET_139;
@@ -335,13 +335,13 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     U74HC27 U8004( ,  , SUMA01_n, SUMB01_n, RULOG_n, __A08_NET_187, GND, __A08_NET_191, __A08_2___XUY1, XUY01_n, CI01_n,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC04 U8005(CI01_n, __A08_NET_206, G01_n, __A08_1___GEM1, RL01_n, __A08_1___WL1, GND, WL01_n, __A08_1___WL1, __A08_1___MWL1, RL01_n, __A08_NET_157, __A08_1___CI_INTERNAL, VCC, SIM_RST, SIM_CLK);
     U74HC02 U8006(SUMB01_n, __A08_NET_207, __A08_NET_206, __A08_NET_190, WAG_n, WL01_n, GND, WL03_n, WALSG_n, __A08_NET_192, __A08_1___A1_n, CAG, __A08_NET_188, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U8007(__A08_NET_191, __A08_2___CO_IN, __A08_NET_185, RL01_n, __A08_NET_198, L01_n, GND, __A08_1___Z1_n, __A08_NET_221, RL01_n, __A08_NET_222, RL01_n, __A08_NET_220, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U8007(__A08_NET_191, __A08_2___CO_IN, __A08_NET_185, RL01_n, __A08_NET_198, L01_n, GND, __A08_1___Z1_n, __A08_NET_221, RL01_n, __A08_NET_222, RL01_n, __A08_NET_220, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U8008(__A08_NET_186, RAG_n, __A08_1___A1_n, __A08_NET_189, WLG_n, WL01_n, GND, __A08_2___G2_n, G2LSG_n, __A08_NET_196, L01_n, CLG1G, __A08_NET_197, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U8009( ,  ,  , __A08_NET_194, WQG_n, WL01_n, GND, __A08_NET_194, __A08_NET_193, __A08_1___Q1_n, __A08_1___Q1_n, CQG, __A08_NET_193, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U8010(__A08_NET_195, RQG_n, __A08_1___Q1_n, __A08_NET_224, WZG_n, WL01_n, GND, __A08_NET_224, __A08_NET_223, __A08_NET_221, __A08_1___Z1_n, CZG, __A08_NET_223, VCC, SIM_RST, SIM_CLK);
     U74HC27 U8011(__A08_1___RL_OUT_1, __A08_NET_195, MDT01, RB1, R15, __A08_NET_220, GND, __A08_NET_227, __A08_NET_225, __A08_NET_226, __A08_NET_212, __A08_NET_222, __A08_NET_219, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U8012(__A08_NET_219, RZG_n, __A08_1___Z1_n, __A08_NET_228, WBG_n, WL01_n, GND, __A08_NET_228, __A08_NET_229, __A08_1___B1_n, __A08_1___B1_n, CBG, __A08_NET_229, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U8013(__A08_NET_170, __A08_2___CO_IN, __A08_NET_227, RL01_n, __A08_NET_211, G01_n, GND, G01_n, __A08_NET_210, RL02_n, __A08_NET_137, L02_n, __A08_NET_147, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U8013(__A08_NET_170, __A08_2___CO_IN, __A08_NET_227, RL01_n, __A08_NET_211, G01_n, GND, G01_n, __A08_NET_210, RL02_n, __A08_NET_137, L02_n, __A08_NET_147, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U8014(__A08_NET_225, RBLG_n, __A08_1___B1_n, __A08_NET_226, __A08_NET_229, RCG_n, GND, WL16_n, WG3G_n, __A08_NET_216, WL02_n, WG4G_n, __A08_NET_215, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b1) U8015(__A08_NET_190, __A08_NET_192, __A08_NET_187, __A08_NET_186, CH01, __A08_NET_185, GND, __A08_NET_198, __A08_NET_189, __A08_NET_196, __A08_NET_197, __A08_1___A1_n, __A08_NET_188, VCC, SIM_RST, SIM_CLK);
     U74HC02 U8016(__A08_NET_214, L2GDG_n, MCRO_n, __A08_NET_213, WG1G_n, WL01_n, GND, G01_n, CGG, G01, RGG_n, G01_n, __A08_NET_212, VCC, SIM_RST, SIM_CLK);
@@ -356,7 +356,7 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     U74HC02 U8025(__A08_NET_142, RAG_n, __A08_1___A2_n, __A08_NET_175, WLG_n, WL02_n, GND, G05_n, G2LSG_n, __A08_NET_176, L02_n, CLG1G, __A08_NET_177, VCC, SIM_RST, SIM_CLK);
     U74HC27 U8026(RLG_n, L02_n, __A08_1___RL_OUT_2, __A08_NET_143, __A08_NET_149, __A08_NET_148, GND, __A08_NET_138, MDT02, R1C, RB2, __A08_1___RL_OUT_2, GND, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U8027(__A08_NET_179, WQG_n, WL02_n, __A08_1___Q2_n, __A08_NET_179, __A08_NET_178, GND, __A08_1___Q2_n, CQG, __A08_NET_178, RQG_n, __A08_1___Q2_n, __A08_NET_143, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U8028(__A08_NET_148, RL02_n, __A08_NET_145, __A08_1___Z2_n, __A08_NET_138, RL02_n, GND, RL02_n, __A08_NET_180, __A08_1___G2_n, __A08_NET_162, __A08_1___G2_n, __A08_NET_169, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U8028(__A08_NET_148, RL02_n, __A08_NET_145, __A08_1___Z2_n, __A08_NET_138, RL02_n, GND, RL02_n, __A08_NET_180, __A08_1___G2_n, __A08_NET_162, __A08_1___G2_n, __A08_NET_169, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U8029(__A08_NET_144, WZG_n, WL02_n, __A08_NET_145, __A08_NET_144, __A08_NET_146, GND, __A08_1___Z2_n, CZG, __A08_NET_146, RZG_n, __A08_1___Z2_n, __A08_NET_149, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U8030(__A08_NET_183, WBG_n, WL02_n, __A08_1___B2_n, __A08_NET_183, __A08_NET_184, GND, __A08_1___B2_n, CBG, __A08_NET_184, RBLG_n, __A08_1___B2_n, __A08_NET_182, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U8031(__A08_NET_182, __A08_NET_181, __A08_NET_168, __A08_NET_167, G02, __A08_NET_169, GND, __A08_NET_263, GND, XUY06_n, __A08_2___XUY2, __A08_NET_180, __A08_NET_161, VCC, SIM_RST, SIM_CLK);
@@ -369,7 +369,7 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     U74HC27 U8038( ,  , SUMA03_n, SUMB03_n, RULOG_n, __A08_NET_280, GND, __A08_NET_284, XUY05_n, __A08_2___XUY1, __A08_2___CI_IN,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC04 U8039(__A08_2___CI_IN, __A08_NET_300, __A08_2___G1_n, __A08_2___GEM1, RL03_n, __A08_2___WL1, GND, WL03_n, __A08_2___WL1, __A08_2___MWL1, RL03_n, __A08_NET_250, __A08_2___CI_INTERNAL, VCC, SIM_RST, SIM_CLK);
     U74HC02 U8040(SUMB03_n, __A08_NET_299, __A08_NET_300, __A08_NET_283, WAG_n, WL03_n, GND, WL05_n, WALSG_n, __A08_NET_285, __A08_2___A1_n, CAG, __A08_NET_281, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U8041(__A08_NET_284, CO06, __A08_NET_279, RL03_n, __A08_NET_291, __A08_2___L1_n, GND, __A08_2___Z1_n, __A08_NET_314, RL03_n, __A08_NET_315, RL03_n, __A08_NET_313, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U8041(__A08_NET_284, CO06, __A08_NET_279, RL03_n, __A08_NET_291, __A08_2___L1_n, GND, __A08_2___Z1_n, __A08_NET_314, RL03_n, __A08_NET_315, RL03_n, __A08_NET_313, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC27 #(1'b1, 1'b0, 1'b1) U8042(__A08_NET_283, __A08_NET_285, __A08_NET_280, __A08_NET_278, CH03, __A08_NET_279, GND, __A08_NET_291, __A08_NET_282, __A08_NET_289, __A08_NET_290, __A08_2___A1_n, __A08_NET_281, VCC, SIM_RST, SIM_CLK);
     U74HC02 U8043(__A08_NET_278, RAG_n, __A08_2___A1_n, __A08_NET_282, WLG_n, WL03_n, GND, G06_n, G2LSG_n, __A08_NET_289, __A08_2___L1_n, CLG1G, __A08_NET_290, VCC, SIM_RST, SIM_CLK);
     U74HC27 U8044( ,  ,  ,  ,  ,  , GND, __A08_2___RL_OUT_1, RLG_n, __A08_2___L1_n, GND,  ,  , VCC, SIM_RST, SIM_CLK);
@@ -378,7 +378,7 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U8047(__A08_NET_312, RZG_n, __A08_2___Z1_n, __A08_NET_321, WBG_n, WL03_n, GND, __A08_NET_321, __A08_NET_322, __A08_2___B1_n, __A08_2___B1_n, CBG, __A08_NET_322, VCC, SIM_RST, SIM_CLK);
     U74HC02 U8048(__A08_NET_319, RBLG_n, __A08_2___B1_n, __A08_NET_320, __A08_NET_322, RCG_n, GND, WL02_n, WG3G_n, __A08_NET_309, WL04_n, WG4G_n, __A08_NET_308, VCC, SIM_RST, SIM_CLK);
     U74HC27 U8049(__A08_2___RL_OUT_1, __A08_NET_288, MDT03, R1C, R15, __A08_NET_313, GND, __A08_NET_318, __A08_NET_319, __A08_NET_320, __A08_NET_305, __A08_NET_315, __A08_NET_312, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U8050(__A08_NET_263, CO06, __A08_NET_318, RL03_n, __A08_NET_304, __A08_2___G1_n, GND, __A08_2___G1_n, __A08_NET_303, RL04_n, __A08_NET_230, L04_n, __A08_NET_240, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U8050(__A08_NET_263, CO06, __A08_NET_318, RL03_n, __A08_NET_304, __A08_2___G1_n, GND, __A08_2___G1_n, __A08_NET_303, RL04_n, __A08_NET_230, L04_n, __A08_NET_240, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 U8051(__A08_NET_307, L2GDG_n, L02_n, __A08_NET_306, WG1G_n, WL03_n, GND, __A08_2___G1_n, CGG, G03, RGG_n, __A08_2___G1_n, __A08_NET_305, VCC, SIM_RST, SIM_CLK);
     U74HC4002 #(1'b1, 1'b0) U8052(__A08_NET_304, G03ED, SA03, __A08_NET_309, __A08_NET_308,  , GND,  , G04ED, SA04, __A08_NET_257, __A08_NET_256, __A08_NET_255, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b0) U8053(__A08_NET_307, __A08_NET_306,  ,  ,  ,  , GND,  ,  ,  ,  , __A08_NET_303, G03, VCC, SIM_RST, SIM_CLK);
@@ -391,7 +391,7 @@ module four_bit_1(VCC, GND, SIM_RST, SIM_CLK, A2XG_n, CAG, CBG, CGG, CLG1G, CLXC
     U74HC02 U8060(__A08_NET_235, RAG_n, __A08_2___A2_n, __A08_NET_268, WLG_n, WL04_n, GND, G07_n, G2LSG_n, __A08_NET_269, L04_n, CLG1G, __A08_NET_270, VCC, SIM_RST, SIM_CLK);
     U74HC27 U8061(RLG_n, L04_n, __A08_2___RL_OUT_2, __A08_NET_236, __A08_NET_242, __A08_NET_241, GND, __A08_NET_231, MDT04, R1C, R15, __A08_2___RL_OUT_2, GND, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U8062(__A08_NET_272, WQG_n, WL04_n, __A08_2___Q2_n, __A08_NET_272, __A08_NET_271, GND, __A08_2___Q2_n, CQG, __A08_NET_271, RQG_n, __A08_2___Q2_n, __A08_NET_236, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U8063(__A08_NET_241, RL04_n, __A08_NET_238, __A08_2___Z2_n, __A08_NET_231, RL04_n, GND, RL04_n, __A08_NET_273, __A08_2___G2_n, __A08_NET_255, __A08_2___G2_n, __A08_NET_262, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U8063(__A08_NET_241, RL04_n, __A08_NET_238, __A08_2___Z2_n, __A08_NET_231, RL04_n, GND, RL04_n, __A08_NET_273, __A08_2___G2_n, __A08_NET_255, __A08_2___G2_n, __A08_NET_262, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U8064(__A08_NET_237, WZG_n, WL04_n, __A08_NET_238, __A08_NET_237, __A08_NET_239, GND, __A08_2___Z2_n, CZG, __A08_NET_239, RZG_n, __A08_2___Z2_n, __A08_NET_242, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U8065(__A08_NET_276, WBG_n, WL04_n, __A08_2___B2_n, __A08_NET_276, __A08_NET_277, GND, __A08_2___B2_n, CBG, __A08_NET_277, RBLG_n, __A08_2___B2_n, __A08_NET_275, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U8066(__A08_NET_275, __A08_NET_274, __A08_NET_261, __A08_NET_260, G04, __A08_NET_262, GND,  ,  ,  ,  , __A08_NET_273, __A08_NET_254, VCC, SIM_RST, SIM_CLK);

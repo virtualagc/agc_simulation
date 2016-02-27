@@ -31,6 +31,7 @@ class Component(object):
         self.type = comp.find('libsource').attrib['part']
         self.initial_values = {}
         self.pins = []
+        self.fpga_flags = []
         
         # Look for initial values for all of the parts of this component
         self.load_initial_values(comp)
@@ -50,6 +51,8 @@ class Component(object):
                 if f.attrib['name'] == 'Initial':
                     self.initial_values[part_unit] = "1'b" + f.text
                     break
+                elif f.attrib['name'].startswith('FPGA#'):
+                    self.fpga_flags.append(f.attrib['name'] + ':' + f.text)
     
     def load_pin_types(self, libparts):
         # Look up this component's part in the netlist's part library. It might
@@ -106,8 +109,12 @@ class Component(object):
                 # Otherwise we'll just let everything default to 0.
                 iv_string = ' '
 
+            comment_list = self.fpga_flags
             if open_drains:
-                comment = ' //OD:' + ','.join(str(p) for p in open_drains)
+                comment_list.append('FPGA#OD:' + ','.join(str(p) for p in open_drains))
+
+            if comment_list:
+                comment = ' //' + ';'.join(comment_list)
             else:
                 comment = ''
 
@@ -168,6 +175,7 @@ class VerilogGenerator(object):
             input_connected = False
             output_connected = False
             open_drain_connected = False
+            tristate_connected = False
             not_connected = False
             for node in net.iter('node'):
                 # Attach this net to all of its pins
@@ -182,8 +190,10 @@ class VerilogGenerator(object):
                     break
                 elif pin_type == 'output':
                     output_connected = True
-                elif pin_type in ['openCol', '3state']:
+                elif pin_type == 'openCol':
                     open_drain_connected = True
+                elif pin_type == '3state':
+                    tristate_connected = True
                 elif pin_type == 'input':
                     input_connected = True
                 
@@ -195,7 +205,7 @@ class VerilogGenerator(object):
                 self.components[ref].pins[pin_num-1].net = net_name
             
             if not not_connected:
-                self.net_types[net_name] = (external_signal, input_connected, output_connected, open_drain_connected)
+                self.net_types[net_name] = (external_signal, input_connected, output_connected, open_drain_connected, tristate_connected)
 
     def generate_file(self, filename):
         # Dump verilog to the given filename
@@ -231,13 +241,15 @@ class VerilogGenerator(object):
                     # For non-internal wires, write out the I/O type
                     if net_type[1] and net_type[3]:
                         io_type = 'inout '
-                    elif net_type[2] or net_type[3]:
+                    elif net_type[2] or net_type[3] or net_type[4]:
                         io_type = 'output '
                     else:
                         io_type = 'input '
 
                 if net_type[3]:
-                    comment = ' //FPGA:wand'
+                    comment = ' //FPGA#wand'
+                elif net_type[4]:
+                    comment = ' //FPGA#wor'
                 else:
                     comment = ''
 

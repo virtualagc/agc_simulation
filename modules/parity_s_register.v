@@ -39,14 +39,14 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     output wire GEQZRO_n;
     output wire GINH;
     input wire GOJAM;
-    inout wire INHPLS; //FPGA:wand
+    inout wire INHPLS; //FPGA#wand
     input wire MONPAR;
     input wire OCTAD2;
     input wire PHS4_n;
     input wire RAD;
     output wire RADRG;
     output wire RADRZ;
-    inout wire RELPLS; //FPGA:wand
+    inout wire RELPLS; //FPGA#wand
     output wire S01;
     output wire S01_n;
     output wire S02;
@@ -103,7 +103,7 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     wire __A12_1__G02_n;
     wire __A12_1__G03_n;
     wire __A12_1__GEMP;
-    wire __A12_1__GNZRO; //FPGA:wand
+    wire __A12_1__GNZRO; //FPGA#wand
     wire __A12_1__MGP_n;
     wire __A12_1__MPAL;
     wire __A12_1__MSP;
@@ -117,7 +117,7 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     wire __A12_1__PA12_n;
     wire __A12_1__PA15;
     wire __A12_1__PA15_n;
-    wire __A12_1__PALE; //FPGA:wand
+    wire __A12_1__PALE; //FPGA#wand
     wire __A12_1__PB09;
     wire __A12_1__PB09_n;
     wire __A12_1__PB15;
@@ -257,7 +257,7 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     U74HC27 U12013(__A12_NET_140, G14, __A12_NET_140, __A12_NET_131, G16, __A12_NET_128, GND, __A12_NET_198, __A12_NET_133, __A12_NET_132, __A12_NET_114, __A12_NET_129, __A12_NET_139, VCC, SIM_RST, SIM_CLK);
     U74HC4002 #(1'b0, 1'b1) U12014(__A12_1__PA15, __A12_NET_134, __A12_NET_130, __A12_NET_129, __A12_NET_128,  , GND,  , EXTPLS, RELPLS, INHPLS, __A12_NET_118, __A12_NET_119, VCC, SIM_RST, SIM_CLK);
     U74HC02 U12015(__A12_NET_197, __A12_NET_113, G15, __A12_NET_110, TSUDO_n, __A12_1__T7PHS4_n, GND, __A12_1__G02_n, G03, __A12_NET_192, G02, __A12_1__G03_n, __A12_NET_191, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U12016(__A12_NET_198, __A12_1__GNZRO, __A12_NET_197, __A12_1__GNZRO, __A12_NET_193, RELPLS, GND, RELPLS, __A12_NET_192, INHPLS, __A12_NET_194, INHPLS, __A12_NET_191, VCC, SIM_RST, SIM_CLK); //OD:2,4,6,8,10,12
+    U74LVC07 U12016(__A12_NET_198, __A12_1__GNZRO, __A12_NET_197, __A12_1__GNZRO, __A12_NET_193, RELPLS, GND, RELPLS, __A12_NET_192, INHPLS, __A12_NET_194, INHPLS, __A12_NET_191, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12
     U74HC04 U12017(__A12_1__GNZRO, __A12_NET_109, __A12_NET_182, __A12_NET_112, __A12_NET_110, __A12_NET_111, GND, GEQZRO_n, __A12_NET_108, __A12_NET_116, RAD, __A12_1__PB09_n, __A12_1__PB09, VCC, SIM_RST, SIM_CLK);
     U74HC27 U12018(__A12_NET_112, __A12_NET_109, __A12_NET_109, __A12_NET_111, __A12_1__G01A_n, __A12_NET_193, GND, __A12_NET_194, __A12_NET_109, G01, __A12_NET_111, EXTPLS, __A12_NET_111, VCC, SIM_RST, SIM_CLK);
     U74HC4002 U12019(__A12_NET_108, __A12_NET_109, G02, G01, G03,  , GND,  , __A12_NET_151, __A12_NET_150, __A12_NET_149, __A12_NET_165, __A12_1__PB09, VCC, SIM_RST, SIM_CLK);
@@ -268,7 +268,7 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     U74HC04 U12024(__A12_1__PB15, __A12_1__PB15_n, __A12_1__PC15, __A12_1__PC15_n, __A12_1__PC15, __A12_1__MGP_n, GND, __A12_1__GEMP, __A12_1__PC15_n, __A12_1__MSP, __A12_NET_143, __A12_1__MPAL, __A12_1__PALE, VCC, SIM_RST, SIM_CLK);
     U74HC02 U12025(__A12_1__PC15, __A12_NET_166, __A12_NET_168, __A12_NET_142, CGG, __A12_NET_143, GND, __A12_1__PC15, __A12_NET_142, __A12_NET_141, __A12_1__PC15_n, __A12_NET_143, __A12_NET_146, VCC, SIM_RST, SIM_CLK);
     U74HC27 U12026(TPARG_n, n8XP5, T07_n, PHS4_n, FUTEXT, __A12_1__T7PHS4, GND, __A12_NET_243, XB0_n, T02_n, __A12_NET_241, __A12_NET_147, __A12_NET_146, VCC, SIM_RST, SIM_CLK);
-    U74LVC07 U12027(__A12_NET_148, __A12_1__PALE, __A12_NET_147, __A12_1__PALE,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //OD:2,4
+    U74LVC07 U12027(__A12_NET_148, __A12_1__PALE, __A12_NET_147, __A12_1__PALE,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U12028(G01ED, WEDOPG_n, WL08_n, __A12_NET_233, WL08_n, WSG_n, GND, __A12_NET_233, __A12_NET_232, __A12_NET_231, __A12_NET_231, CSG, __A12_NET_232, VCC, SIM_RST, SIM_CLK);
     U74HC04 U12029(__A12_NET_231, S08, __A12_NET_232, S08_n, __A12_NET_226, S09, GND, S09_n, __A12_NET_225, S10, __A12_NET_229, S10_n, __A12_NET_228, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U12030(G02ED, WEDOPG_n, WL09_n, __A12_NET_227, WL09_n, WSG_n, GND, __A12_NET_227, __A12_NET_225, __A12_NET_226, __A12_NET_226, CSG, __A12_NET_225, VCC, SIM_RST, SIM_CLK);

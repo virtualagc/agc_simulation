@@ -18,6 +18,7 @@ module_args = {}
 module_names = {}
 module_contents = {}
 wands = set()
+wors = set()
 
 for m in modules:
     with open(m, 'r') as f:
@@ -33,7 +34,7 @@ for m in modules:
         module_args[module_number] = module_header.group(2)
 
         # Read the module's output wires
-        module_outputs = re.findall('output wire (.*?);( //FPGA:wand)?', s)
+        module_outputs = re.findall('output wire (.*?);(?: //FPGA#(wand|wor))?', s)
         for o in module_outputs:
             if o[0] in inputs:
                 # If this module output is already in the set of AGC inputs, then it's an intermodule signal.
@@ -44,11 +45,13 @@ for m in modules:
                 # Otherwise, if it's not an internal wire, add it to the outputs set
                 outputs.add(o[0])
 
-            if o[1] != '':
+            if o[1] == 'wand':
                 wands.add(o[0])
+            elif o[1] == 'wor':
+                wors.add(o[0])
 
         # Read in the module's input wires
-        module_inputs = re.findall('(input|inout) wire (.*?);( //FPGA:wand)?', s)
+        module_inputs = re.findall('(input|inout) wire (.*?);(?: //FPGA#(wand|wor))?', s)
         for i in module_inputs:
             if (i[1] not in outputs) and (i[1] not in internals) and i[0] == 'input':
                 # If this input isn't another module's output, or an intermodule signal, add it to the AGC inputs set
@@ -63,38 +66,54 @@ for m in modules:
                 if i[1] in inputs:
                     inputs.remove(i[1])
 
-            if i[2] != '':
+            if i[2] == 'wand':
                 wands.add(i[1])
+            elif i[2] == 'wor':
+                wors.add(i[1])
 
         if args.fpga:
-            module_internals = re.findall('^\s*wire (.*?);( //FPGA:wand)?', s, re.MULTILINE)
+            module_internals = re.findall('^\s*wire (.*?);(?: //FPGA#(wand|wor))?', s, re.MULTILINE)
             for n in module_internals:
                 internals.add(n[0])
 
-                if n[1] != '':
+                if n[1] == 'wand':
                     wands.add(n[0])
+                elif n[1] == 'wor':
+                    wors.add(n[0])
 
             module_body = ''
             lines = s.split('\n')
             for line in lines:
                 if (line and (not 'wire' in line) and (not 'timescale' in line) and 
-                        (not 'module' in line) and (not 'pullup' in line) and
+                        (not 'module' in line) and (not 'pull' in line) and
                         (not 'default_nettype' in line)):
-                    parts = re.match('(.*?)(U\d+)\((.*?)\); //OD:([\d,]+)', line)
+                    # Look for lines that have a codegen comment
+                    parts = re.match('(.*?)(U\d+)\((.*?)\); //(.*)', line)
                     if parts is not None:
                         prefix = parts.group(1)
                         part_num = parts.group(2)
                         part_pins = parts.group(3).split(', ')
-                        od_pins = [int(pin) for pin in parts.group(4).split(',')]
+                        codegen_flags = parts.group(4).split(';')
 
-                        for od_pin in od_pins:
-                            signal_name = part_pins[od_pin-1]
-                            proxy_name = signal_name + '_' + part_num + '_' + str(od_pin)
-                            part_pins[od_pin-1] = proxy_name
+                        for flag in codegen_flags:
+                            (flag_name, flag_value) = flag.split(':')
+                            if flag_name == 'FPGA#OD':
+                                od_pins = [int(pin) for pin in flag_value.split(',')]
+                                for od_pin in od_pins:
+                                    signal_name = part_pins[od_pin-1]
+                                    proxy_name = signal_name + '_' + part_num + '_' + str(od_pin)
+                                    part_pins[od_pin-1] = proxy_name
 
-                            internals.add(proxy_name)
+                                    internals.add(proxy_name)
 
-                            module_body += '    assign ' + signal_name + ' = ' + proxy_name + ';\n'
+                                    module_body += '    assign ' + signal_name + ' = ' + proxy_name + ';\n'
+                            elif flag_name in ['FPGA#inputs', 'FPGA#outputs']:
+                                new_pins = flag_value.split(',')
+                                part_pins.extend(new_pins)
+                                if flag_name == 'FPGA#inputs':
+                                    inputs |= set(new_pins)
+                                else:
+                                    outputs |= set(new_pins)
                         module_body += prefix + part_num + '(' + ', '.join(part_pins) + ');\n'
                     else:
                         module_body += line + '\n'
@@ -135,12 +154,16 @@ with open(args.filename, 'w') as f:
     for o in sorted_outputs:
         if args.fpga and o in wands:
             f.write('    output wand %s;\n' % o)
+        elif args.fpga and o in wors:
+            f.write('    output wor %s;\n' % o)
         else:
             f.write('    output wire %s;\n' % o)
 
     for n in sorted_internals:
         if args.fpga and n in wands:
             f.write('    wand %s;\n' % n)
+        elif args.fpga and n in wors:
+            f.write('    wor %s;\n' % n)
         else:
             f.write('    wire %s;\n' % n)
 
