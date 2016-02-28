@@ -1,12 +1,13 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module memory_timing_addressing(VCC, GND, SIM_RST, SIM_CLK, GOJAM, STRT2, PHS2_n, PHS3_n, PHS4_n, T01, T01_n, T02_n, T03, T03_n, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T10, T10_n, T11, T12_n, T12A, S01, S01_n, S02, S02_n, S03, S03_n, S04, S04_n, S05, S05_n, S06, S06_n, S07, S07_n, S08, S08_n, S09, S09_n, S10_n, S11, S12, EB9, EB10, EB11_n, CHINC, DV3764, GOJ1, INOUT, MP1, TCSAJ3, SCAD, TIMR, MAMU, MNHSBF, STBE, STBF, SBF, STRGAT, TPARG_n, XB0_n, XB1_n, XB2_n, XB3_n, XB4_n, XB5_n, XB6_n, XB7_n, XT0_n, XT1_n, XT2_n, XT3_n, XT4_n, XT5_n, XT6_n, YB0_n, YT0_n, SETAB, SETCD, RESETA, RESETB, RESETC, RESETD, IL01, IL02, IL03, IL04, IL05, IL06, IL07);
+module memory_timing_addressing(VCC, GND, SIM_RST, SIM_CLK, GOJAM, STRT2, PHS2_n, PHS3_n, PHS4_n, T01, T01_n, T02_n, T03, T03_n, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T10, T10_n, T11, T12_n, T12A, S01, S01_n, S02, S02_n, S03, S03_n, S04, S04_n, S05, S05_n, S06, S06_n, S07, S07_n, S08, S08_n, S09, S09_n, S10_n, S11, S12, EB9, EB10, EB11_n, CHINC, DV3764, GOJ1, INOUT, MP1, TCSAJ3, SCAD, TIMR, MAMU, MNHSBF, STBE, STBF, SBF, STRGAT, TPARG_n, XB0_n, XB1_n, XB2_n, XB3_n, XB4_n, XB5_n, XB6_n, XB7_n, XT0_n, XT1_n, XT2_n, XT3_n, XT4_n, XT5_n, XT6_n, YB0_n, YT0_n, SETAB, SETCD, RESETA, RESETB, RESETC, RESETD, CLROPE, IL01, IL02, IL03, IL04, IL05, IL06, IL07);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
     input wire SIM_CLK;
     input wire CHINC;
+    output wire CLROPE;
     input wire DV3764;
     input wire EB10;
     input wire EB11_n;
@@ -104,7 +105,6 @@ module memory_timing_addressing(VCC, GND, SIM_RST, SIM_CLK, GOJAM, STRT2, PHS2_n
     wire __A14_1__CLEARB;
     wire __A14_1__CLEARC;
     wire __A14_1__CLEARD;
-    wire __A14_1__CLROPE;
     wire __A14_1__ERAS; //FPGA#wand
     wire __A14_1__ERAS_n;
     wire __A14_1__FNERAS_n;
@@ -366,5 +366,5 @@ module memory_timing_addressing(VCC, GND, SIM_RST, SIM_CLK, GOJAM, STRT2, PHS2_n
     U74HC4002 U14057(__A14_NET_300, __A14_NET_290, __A14_NET_295, __A14_NET_297, __A14_NET_296,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC04 U14058(S01_n, __A14_2__IL01_n, S02, IL02, S02_n, __A14_2__IL02_n, GND, IL03, S03, __A14_2__IL03_n, S03_n, IL04, S04, VCC, SIM_RST, SIM_CLK);
     U74HC04 U14059(S04_n, __A14_2__IL04_n, S05, IL05, S05_n, __A14_2__IL05_n, GND, IL06, S06, __A14_2__IL06_n, S06_n, IL07, S07, VCC, SIM_RST, SIM_CLK);
-    U74HC02 U14060(__A14_1__CLROPE, STRT2, __A14_NET_262,  ,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
+    U74HC02 U14060(CLROPE, STRT2, __A14_NET_262,  ,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
 endmodule

@@ -143,6 +143,6 @@ module main;
         #5000 SIM_RST = 0;
         #50000 STRT1 = 1;
         #5000 STRT1 = 0;
-        #400000 $finish;
+        #40000000 $finish;
     end
 endmodule

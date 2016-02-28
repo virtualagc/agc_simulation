@@ -37,7 +37,7 @@ all: test_agc test_fpga
 
 test_agc: $(COMMON_SOURCES) $(AUTOGEN_FILES) agc.v test_agc.v $(ROM)
 	cp $(ROM) roms/rom.v
-	iverilog -o $@ $(COMMON_SOURCES) agc.v test_agc.v
+	iverilog -o $@ $(COMMON_SOURCES) $(AUTOGEN_FILES) agc.v test_agc.v
 
 test_fpga: $(COMMON_SOURCES) de0_nano/fpga_agc.v test_agc.v $(ROM)
 	cp $(ROM) roms/rom.v
