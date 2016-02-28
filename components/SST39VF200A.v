@@ -24,7 +24,7 @@ module SST39VF200A(A15, A14, A13, A12, A11, A10, A9, A8, NC1, NC2, WE_n, NC3, NC
     reg [1:0] dclk = 2'b10;
     reg [1:0] state = DESELECTED;
     reg [31:0] cmd;
-    reg [5:0] ctr;
+    reg [4:0] ctr;
     reg [15:0] sensed_word;
     reg cmd_complete = 1'b0;
 
@@ -120,7 +120,7 @@ module SST39VF200A(A15, A14, A13, A12, A11, A10, A9, A8, NC1, NC2, WE_n, NC3, NC
             if (CE_n == 1'b0) begin
                 EPCS_CSN <= 1'b0;
                 state <= SET;
-                cmd = 32'h037e0000 + addr;
+                cmd = 32'h037e0000 + {14'h0, addr, 1'b0};
                 ctr <= 5'd31;
                 cmd_complete <= 1'b0;
             end
@@ -129,26 +129,26 @@ module SST39VF200A(A15, A14, A13, A12, A11, A10, A9, A8, NC1, NC2, WE_n, NC3, NC
             dclk = dclk+2'b1;
             if (dclk == 2'b0) begin
                 EPCS_ASDI <= cmd[ctr];
-                if (ctr == 8'd0) begin
+                if (ctr == 5'd0) begin
                     cmd_complete <= 1'b1;
                 end else begin
-                    ctr <= ctr - 8'd1;
+                    ctr <= ctr - 5'd1;
                 end
             end
             
-            if (dclk == 2'b10 && cmd_complete == 8'b1) begin
+            if (dclk == 2'b10 && cmd_complete == 1'b1) begin
                 state <= RESET;
-                ctr <= 8'd15;
+                ctr <= 5'd15;
             end
         end
         RESET: begin
             dclk = dclk+1'b1;
             if (dclk == 2'b10) begin
                 sensed_word[ctr] = EPCS_DATA;
-                if (ctr == 8'b0) begin
+                if (ctr == 5'b0) begin
                     state <= HOLD;
                 end
-                ctr = ctr - 1'b1;
+                ctr = ctr - 5'b1;
             end
         end
         HOLD: begin
