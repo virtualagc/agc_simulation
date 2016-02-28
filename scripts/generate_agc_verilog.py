@@ -4,11 +4,15 @@ import os
 import re
 import traceback
 import argparse
+from collections import namedtuple
 
 try:
     from tkinter import *
 except:
     from Tkinter import *
+
+# Tuple that captures all of the possible net configurations
+NetType = namedtuple('NetType', ['external', 'input_connected', 'output_connected', 'open_drain_connected', 'tristate_connected'])
 
 # Simple class representing a pin on a component
 class Pin(object):
@@ -33,25 +37,26 @@ class Component(object):
         self.pins = []
         self.fpga_flags = []
         
-        # Look for initial values for all of the parts of this component
-        self.load_initial_values(comp)
+        # Look for codegen flags that have been set for this component
+        self.process_codegen_fields(comp)
         
         # Build up a list of pins and their types
         if not self.load_pin_types(libparts):
             raise RuntimeError('Unable to load pin types for %s' % self.ref)
     
-    def load_initial_values(self, comp):
+    def process_codegen_fields(self, comp):
         for part in comp.iterfind('.//part'):
             part_unit = part.attrib['unit']
             # Unless otherwise specified, assume everything starts at 0
             self.initial_values[part_unit] = "1'b0"
 
-            # Look for the initial condition field
             for f in part.iterfind('.//field'):
                 if f.attrib['name'] == 'Initial':
+                    # This part has an initial condition, capture it
                     self.initial_values[part_unit] = "1'b" + f.text
                     break
                 elif f.attrib['name'].startswith('FPGA#'):
+                    # Stash away all of the FPGA-related codegen flags
                     self.fpga_flags.append(f.attrib['name'] + ':' + f.text)
     
     def load_pin_types(self, libparts):
@@ -81,6 +86,7 @@ class Component(object):
         pin_names = []
         open_drains = []
 
+        # Build up a list of pin names and note any pins that are open-drain or tristate
         for pin in self.pins:
             if pin.type in ['openCol', '3state'] and pin.net is not None:
                 open_drains.append(pin.number)
@@ -89,6 +95,7 @@ class Component(object):
 
         type_name = self.type
         if self.ref[0] == 'R':
+            # Resistors (currently) always manifest as pullups or pulldowns.
             if 'VCC' in pin_names:
                 return 'pullup %s(%s);' % (self.ref, pin_names[0] if pin_names[0] != 'VCC' else pin_names[1])
             elif 'GND' in pin_names:
@@ -109,11 +116,16 @@ class Component(object):
                 # Otherwise we'll just let everything default to 0.
                 iv_string = ' '
 
+            # Any FPGA codegen flags we have will be emitted as comments for the backplane generator to deal with
             comment_list = self.fpga_flags
+
+            # If we have any open-drain or tristate pins, we also need to leave an FPGA codegen flag for the
+            # backplane generator about which ones those are
             if open_drains:
                 comment_list.append('FPGA#OD:' + ','.join(str(p) for p in open_drains))
 
             if comment_list:
+                # Build up the final comment containing all codegen flags, separated by semicolons
                 comment = ' //' + ';'.join(comment_list)
             else:
                 comment = ''
@@ -205,7 +217,7 @@ class VerilogGenerator(object):
                 self.components[ref].pins[pin_num-1].net = net_name
             
             if not not_connected:
-                self.net_types[net_name] = (external_signal, input_connected, output_connected, open_drain_connected, tristate_connected)
+                self.net_types[net_name] = NetType(external_signal, input_connected, output_connected, open_drain_connected, tristate_connected)
 
     def generate_file(self, filename):
         # Dump verilog to the given filename
@@ -237,18 +249,20 @@ class VerilogGenerator(object):
                     continue
                 f.write('    ')
                 io_type = ''
-                if net_type[0]:
+                if net_type.external:
                     # For non-internal wires, write out the I/O type
-                    if net_type[1] and net_type[3]:
+                    if net_type.input_connected and (net_type.open_drain_connected or net_type.tristate_connected):
                         io_type = 'inout '
-                    elif net_type[2] or net_type[3] or net_type[4]:
+                    elif net_type.output_connected or net_type.open_drain_connected or net_type.tristate_connected:
                         io_type = 'output '
                     else:
                         io_type = 'input '
 
-                if net_type[3]:
+                if net_type.open_drain_connected:
+                    # Open drains become wands on the FPGA
                     comment = ' //FPGA#wand'
-                elif net_type[4]:
+                elif net_type.tristate_connected:
+                    # Tristates become wors on the FPGA
                     comment = ' //FPGA#wor'
                 else:
                     comment = ''

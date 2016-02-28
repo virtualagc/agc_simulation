@@ -45,6 +45,7 @@ for m in modules:
                 # Otherwise, if it's not an internal wire, add it to the outputs set
                 outputs.add(o[0])
 
+            # If the wire needs to be wand or wor, mark it so
             if o[1] == 'wand':
                 wands.add(o[0])
             elif o[1] == 'wor':
@@ -72,15 +73,18 @@ for m in modules:
                 wors.add(i[1])
 
         if args.fpga:
+            # Capture internal signals
             module_internals = re.findall('^\s*wire (.*?);(?: //FPGA#(wand|wor))?', s, re.MULTILINE)
             for n in module_internals:
                 internals.add(n[0])
 
+                # If the wire needs to be wand or wor, mark it so
                 if n[1] == 'wand':
                     wands.add(n[0])
                 elif n[1] == 'wor':
                     wors.add(n[0])
 
+            # Capture all lines in the module that are necessary for a combined FPGA image
             module_body = ''
             lines = s.split('\n')
             for line in lines:
@@ -95,19 +99,27 @@ for m in modules:
                         part_pins = parts.group(3).split(', ')
                         codegen_flags = parts.group(4).split(';')
 
+                        # Process all of the codegen flags
                         for flag in codegen_flags:
                             (flag_name, flag_value) = flag.split(':')
                             if flag_name == 'FPGA#OD':
+                                # This component has open-drain or tristate outputs, and therefore requires proxy wires.
+                                # Determine which pins need to be proxied
                                 od_pins = [int(pin) for pin in flag_value.split(',')]
                                 for od_pin in od_pins:
+                                    # Build up a name for the proxy wire from the component name and pin number
                                     signal_name = part_pins[od_pin-1]
                                     proxy_name = signal_name + '_' + part_num + '_' + str(od_pin)
+                                    # Attach the proxy wire, rather than the original net, to the OD pin on the component
                                     part_pins[od_pin-1] = proxy_name
 
+                                    # All proxy wires are going to be internal, so add them to internals
                                     internals.add(proxy_name)
 
+                                    # Add an assigment statement that makes the original net follow the value of the proxy wire
                                     module_body += '    assign ' + signal_name + ' = ' + proxy_name + ';\n'
                             elif flag_name in ['FPGA#inputs', 'FPGA#outputs']:
+                                # This component has extra I/O when synthesized for an FPGA
                                 new_pins = flag_value.split(',')
                                 part_pins.extend(new_pins)
                                 if flag_name == 'FPGA#inputs':

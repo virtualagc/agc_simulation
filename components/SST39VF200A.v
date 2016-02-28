@@ -11,23 +11,37 @@ module SST39VF200A(A15, A14, A13, A12, A11, A10, A9, A8, NC1, NC2, WE_n, NC3, NC
     input wire SIM_CLK;
 
 `ifdef TARGET_FPGA
+    // FPGA-only EPCS IO
     input wire EPCS_DATA;
     output reg EPCS_CSN = 1'b1;
     output wire EPCS_DCLK;
     output reg EPCS_ASDI = 1'b0;
 
+    // EPCS controller state machine states
     localparam DESELECTED=2'd0;
     localparam SET=2'd1;
     localparam RESET=2'd2;
     localparam HOLD=2'd3;
 
+    // Clock register, used to divide SIM_CLK by 4
     reg [1:0] dclk = 2'b10;
+
+    // Current state
     reg [1:0] state = DESELECTED;
+
+    // Command to be sent to EPCS
     reg [31:0] cmd;
+
+    // Index into command or read
     reg [4:0] ctr;
+
+    // Word read from EPCS
     reg [15:0] sensed_word;
+
+    // Completion marker for end of command cycle
     reg cmd_complete = 1'b0;
 
+    // The clock going out to the EPCS is the top bit of our clock reg
     assign EPCS_DCLK = dclk[1];
 `endif
 
@@ -115,54 +129,89 @@ module SST39VF200A(A15, A14, A13, A12, A11, A10, A9, A8, NC1, NC2, WE_n, NC3, NC
     begin
         case(state)
         DESELECTED: begin
+            // When the chip is deselected, assert EPCS_DCLK high and EPCS_CSN
+            // high
             dclk <= 2'b10;
             EPCS_CSN <= 1'b1;
             if (CE_n == 1'b0) begin
+                // If the flash chip enable goes low, select the EPCS and
+                // transition to the SET state
                 EPCS_CSN <= 1'b0;
                 state <= SET;
+
+                // Determine the command that needs to be sent. The
+                // 'Read Bytes' opcode is 0x03, and the AGC code is stored
+                // starting at address 0x7e0000 in the EPCS. The latched
+                // address needs to be shifted up one, since it is addressing
+                // 16-bit words and the EPCS data is 8 bits wide.
                 cmd = 32'h037e0000 + {14'h0, addr, 1'b0};
                 ctr <= 5'd31;
                 cmd_complete <= 1'b0;
             end
         end
         SET: begin
+            // Step the clock
             dclk = dclk+2'b1;
             if (dclk == 2'b0) begin
+                // If we've just taken a falling edge on the clock, transition
+                // ASDI to the next bit of the command
                 EPCS_ASDI <= cmd[ctr];
                 if (ctr == 5'd0) begin
+                    // If we hit the end of the command, set the command
+                    // completion bit. This is necessary because we need to
+                    // remain in the SET state until the next rising edge
+                    // (when the EPCS will latch the last command bit).
+                    // Subsequent rising edges are when we need to read in
+                    // data.
                     cmd_complete <= 1'b1;
                 end else begin
+                    // Otherwise, move on to the next bit of the command
                     ctr <= ctr - 5'd1;
                 end
             end
             
             if (dclk == 2'b10 && cmd_complete == 1'b1) begin
+                // If the command is done and we've sent out the final rising
+                // edge, transition to RESET where we will read in the word
                 state <= RESET;
                 ctr <= 5'd15;
             end
         end
         RESET: begin
+            // Step the clock
             dclk = dclk+1'b1;
             if (dclk == 2'b10) begin
+                // On rising edge, incoming data is valid. Latch the current
+                // value into the sensed word
                 sensed_word[ctr] = EPCS_DATA;
                 if (ctr == 5'b0) begin
+                    // If we've gotten the last bit of data, proceed to the
+                    // HOLD state
                     state <= HOLD;
                 end
+                // Move on to the next bit
                 ctr = ctr - 5'b1;
             end
         end
         HOLD: begin
+            // We're done talking to the EPCS -- assert EPCS_DCLK and EPCS_CSN
+            // high again
             dclk <= 2'b10;
             EPCS_CSN <= 1'b1;
             if (CE_n == 1'b1) begin
+                // Wait for the flash chip to become deselected before
+                // transitioning back to the DESELECTED state
                 state <= DESELECTED;
             end
         end
         endcase
 
         if (OE_n == 1'b0) begin
+            // During any state, if OE_n goes low, show the currently sensed
+            // data word
             data = sensed_word;
         end else begin
+            // Otherwise, just assert 0
             data = 15'b0;
         end
     end
