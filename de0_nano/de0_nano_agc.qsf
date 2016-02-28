@@ -79,6 +79,7 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
 set_global_assignment -name PARALLEL_SYNTHESIS OFF
+set_global_assignment -name VERILOG_FILE ../components/SST39VF200A.v
 set_global_assignment -name VERILOG_FILE ../components/U74LVC07.v
 set_global_assignment -name VERILOG_FILE ../components/U74HC4002.v
 set_global_assignment -name VERILOG_FILE ../components/U74HC27.v
@@ -94,4 +95,15 @@ set_global_assignment -name VERILOG_FILE de0_nano_agc.v
 set_global_assignment -name QIP_FILE pll.qip
 set_global_assignment -name SDC_FILE de0_nano_agc.sdc
 set_global_assignment -name CDF_FILE output_files/de0_nano_agc.cdf
+set_location_assignment PIN_C1 -to EPCS_ASDI
+set_location_assignment PIN_D2 -to EPCS_CSN
+set_location_assignment PIN_H2 -to EPCS_DATA
+set_location_assignment PIN_H1 -to EPCS_DCLK
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DATA1_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_FLASH_NCE_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DCLK_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_location_assignment PIN_D3 -to SNOOP1
+set_location_assignment PIN_C3 -to SNOOP2
+set_location_assignment PIN_J15 -to KEY0
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
