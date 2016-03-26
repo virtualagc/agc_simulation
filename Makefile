@@ -14,7 +14,9 @@ MODULES = scaler\
 	  parity_s_register\
 	  memory_timing_addressing\
 	  rupt_service\
-	  fixed_erasable_memory
+	  fixed_erasable_memory\
+	  counter_cell_i\
+	  counter_cell_ii
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
