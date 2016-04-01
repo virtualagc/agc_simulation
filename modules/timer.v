@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, STRT2, GOJ1, WL15_n, WL15, WL16_n, WL16, PHS2_n, PHS4, PHS3_n, GOJAM, PHS4_n, CT_n, RT_n, TT_n, WT_n, P04_n, T12A, FS01_n, T01_n, T01, T02_n, T02, T03_n, T03, T04_n, T04, T05_n, T05, T06_n, T06, T07_n, T07, T08_n, T08, T09_n, T09, T10_n, T10, T11_n, T11, T12_n, T12, TIMR, OVF_n, UNF_n, MGOJAM, SB2_n, MT02, MT01, MT04, MT03, MT06, MT05, MT08, MT07, MT10, MT09, MT12, MT11);
+module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP, SBY, GOJ1, WL15, WL15_n, WL16, WL16_n, GOJAM, PHS2_n, PHS3_n, PHS4, PHS4_n, CT, CT_n, RT_n, WT_n, TT_n, P02, P02_n, P03, P03_n, P04_n, SB0_n, SB1_n, SB2_n, FS01, FS01_n, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, T12A, TIMR, OVF_n, UNF_n, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
@@ -9,8 +9,9 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     input wire ALGA;
     wire CLK;
     input wire CLOCK;
-    wire CT;
+    output wire CT;
     output wire CT_n;
+    output wire FS01;
     output wire FS01_n;
     input wire GOJ1;
     output wire GOJAM;
@@ -35,10 +36,10 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     output wire OVF_n;
     wire P01;
     wire P01_n;
-    wire P02;
-    wire P02_n;
-    wire P03;
-    wire P03_n;
+    output wire P02;
+    output wire P02_n;
+    output wire P03;
+    output wire P03_n;
     wire P04;
     output wire P04_n;
     wire P05;
@@ -51,6 +52,8 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     wire Q2A;
     wire RT;
     output wire RT_n;
+    output wire SB0_n;
+    output wire SB1_n;
     output wire SB2_n;
     input wire SBY;
     wire STOP;
@@ -122,11 +125,8 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     wire __A02_2__F01B;
     wire __A02_2__F01C;
     wire __A02_2__F01D;
-    wire __A02_2__FS01;
     wire __A02_2__SB0;
-    wire __A02_2__SB0_n;
     wire __A02_2__SB1;
-    wire __A02_2__SB1_n;
     wire __A02_2__SB2;
     wire __A02_2__SB4;
     wire __A02_2__T12DC_n;
@@ -219,13 +219,13 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2014(__A02_NET_154, __A02_NET_155, STOP_n, P03_n, P03, __A02_NET_162, GND, __A02_1__RINGA_n, P03, __A02_NET_161, P03_n, __A02_1__RINGB_n, __A02_NET_160, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2015(P04, __A02_NET_161, P04_n, P04_n, P04, __A02_NET_160, GND, __A02_1__RINGB_n, P04, __A02_NET_165, P04_n, __A02_1__RINGA_n, __A02_NET_163, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2016(P05, __A02_NET_165, P05_n, P05_n, P05, __A02_NET_163, GND, __A02_NET_152, GOJ1, __A02_NET_153, __A02_1__EVNSET_n, __A02_NET_147, __A02_NET_149, VCC, SIM_RST, SIM_CLK);
-    U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2017(__A02_2__F01D, FS01_n, __A02_2__F01B, FS01_n, __A02_2__F01B, __A02_2__FS01, GND, FS01_n, __A02_2__F01A, __A02_2__FS01, __A02_2__F01A, __A02_2__FS01, __A02_2__F01C, VCC, SIM_RST, SIM_CLK);
+    U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2017(__A02_2__F01D, FS01_n, __A02_2__F01B, FS01_n, __A02_2__F01B, FS01, GND, FS01_n, __A02_2__F01A, FS01, __A02_2__F01A, FS01, __A02_2__F01C, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U2018(__A02_2__F01D, P01_n, __A02_2__F01B, P01_n, __A02_2__F01C, __A02_2__F01A, GND,  ,  ,  ,  , __A02_2__F01B, __A02_2__F01A, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b1, 1'b0) U2019(SBY, ALGA, STRT1, STRT2, __A02_NET_153, __A02_NET_151, GND, __A02_NET_146, __A02_2__T12DC_n, __A02_NET_141, __A02_1__EVNSET_n, __A02_NET_150, MSTRTP, VCC, SIM_RST, SIM_CLK);
     U74LVC07 U2020(__A02_NET_150, __A02_NET_152, __A02_NET_151, __A02_NET_152,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4
     U74HC04 #(1'b1, 1'b0, 1'b1, 1'b0, 1'b1, 1'b0) U2021(__A02_NET_152, __A02_NET_147, MSTP, __A02_NET_141, GOJAM_n, GOJAM, GND, MGOJAM, GOJAM, STOP, STOP_n, MSTPIT_n, STOP, VCC, SIM_RST, SIM_CLK);
-    U74HC02 U2022(__A02_NET_142, __A02_1__EVNSET_n, MSTP, GOJAM_n, STRT2, STOPA, GND, STOPA, __A02_NET_145, STOP_n, STRT2, __A02_NET_158, __A02_NET_159, VCC, SIM_RST, SIM_CLK);
-    U74HC02 #(1'b0, 1'b1, 1'b0, 1'b1) U2023(__A02_NET_143, __A02_NET_148, STOPA, STOPA, __A02_NET_143, __A02_NET_149, GND, __A02_NET_146, __A02_NET_145, __A02_NET_144, __A02_NET_144, __A02_NET_142, __A02_NET_145, VCC, SIM_RST, SIM_CLK);
+    U74HC02 U2022(__A02_NET_142, __A02_1__EVNSET_n, MSTP, GOJAM_n, STRT2, STOPA, GND, STOPA, __A02_NET_144, STOP_n, STRT2, __A02_NET_158, __A02_NET_159, VCC, SIM_RST, SIM_CLK);
+    U74HC02 #(1'b0, 1'b1, 1'b0, 1'b1) U2023(__A02_NET_143, __A02_NET_148, STOPA, STOPA, __A02_NET_143, __A02_NET_149, GND, __A02_NET_146, __A02_NET_144, __A02_NET_145, __A02_NET_145, __A02_NET_142, __A02_NET_144, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b0) U2024(__A02_3__T12SET, GOJAM, __A02_3__T01DC_n, __A02_NET_193, GOJAM, __A02_NET_190, GND, __A02_NET_193, __A02_3__T02DC_n, __A02_NET_192, GOJAM, __A02_2__T12DC_n, __A02_NET_191, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b0, 1'b1) U2025(__A02_NET_191, __A02_2__T12DC_n, __A02_NET_190, __A02_NET_181, __A02_2__T12DC_n, __A02_1__ODDSET_n, GND, __A02_2__T12DC_n, __A02_1__EVNSET_n, T12, __A02_NET_181, __A02_NET_190, __A02_3__T01DC_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b0, 1'b1, 1'b0) U2026(__A02_NET_180, __A02_3__T01DC_n, __A02_1__EVNSET_n, T01, __A02_3__T01DC_n, __A02_1__ODDSET_n, GND, __A02_NET_180, __A02_NET_193, __A02_3__T02DC_n, __A02_3__T02DC_n, __A02_1__ODDSET_n, __A02_NET_185, VCC, SIM_RST, SIM_CLK);
@@ -247,6 +247,6 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, MSTRTP, MSTP, SBY, ALGA, STRT1, 
     U74HC04 #(1'b1, 1'b0, 1'b1, 1'b0, 1'b1, 1'b0) U2042(T07, T07_n, T07_n, MT07, T08, T08_n, GND, MT08, T08_n, T09_n, T09, MT09, T09_n, VCC, SIM_RST, SIM_CLK);
     U74HC04 #(1'b1, 1'b0, 1'b1, 1'b0, 1'b1, 1'b0) U2043(T10, T10_n, T10_n, MT10, T11, T11_n, GND, MT11, T11_n, T12_n, T12, MT12, T12_n, VCC, SIM_RST, SIM_CLK);
     U74HC27 U2044(WL15_n, WL16, __A02_1__OVFSTB_n, WL15, WL16_n, __A02_3__UNF, GND,  ,  ,  ,  , __A02_3__OVF, __A02_1__OVFSTB_n, VCC, SIM_RST, SIM_CLK);
-    U74HC04 U2045(__A02_3__OVF, OVF_n, __A02_3__UNF, UNF_n, __A02_2__SB0, __A02_2__SB0_n, GND, __A02_2__SB1_n, __A02_2__SB1, SB2_n, __A02_2__SB2, T12A, T12_n, VCC, SIM_RST, SIM_CLK);
+    U74HC04 U2045(__A02_3__OVF, OVF_n, __A02_3__UNF, UNF_n, __A02_2__SB0, SB0_n, GND, SB1_n, __A02_2__SB1, SB2_n, __A02_2__SB2, T12A, T12_n, VCC, SIM_RST, SIM_CLK);
     U74HC4002 U2046(__A02_NET_158, P04, P05_n, __A02_NET_155, STOP_n,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
 endmodule

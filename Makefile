@@ -12,6 +12,7 @@ MODULES = scaler\
 	  four_bit_3\
 	  four_bit_4\
 	  parity_s_register\
+	  alarms\
 	  memory_timing_addressing\
 	  rupt_service\
 	  fixed_erasable_memory\
