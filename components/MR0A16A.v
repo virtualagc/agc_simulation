@@ -119,7 +119,7 @@ module MR0A16A (A0, A1, A2, A3, A4, E_n, DQL0, DQL1, DQL2, DQL3, VDD1, VSS1, DQL
     initial begin
         for (i = 0; i < 2048; i = i + 1)
         begin
-            ram[i] = 16'b0;
+            ram[i] = 16'b1;
         end
     end
 
