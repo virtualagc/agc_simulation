@@ -49,7 +49,7 @@ FPGA_SOURCES = $(COMMON_SOURCES)\
 HARDWARE_DIR=~/agc_hardware/
 
 .phony: all
-all: test_agc roms/$(ROM).hex
+all: test_agc de0_nano/fpga_agc.v roms/$(ROM).hex
 
 roms/rom.v: roms/$(ROM).v
 	cp roms/$(ROM).v roms/rom.v
