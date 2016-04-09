@@ -158,13 +158,19 @@ class VerilogGenerator(object):
         # Trailing slashes mean negated signals
         name = re.sub('/$', '_n', net.attrib['name'])
         # Otherwise, they're path seperators for a local symbol
+
         name = name.replace('/','__')
         if name.startswith('Net-'):
-            return '__' + self.module_name + '_NET_' + net.attrib['code']
-        else:
-            if name[0].isdigit():
-                name = 'n' + name
-            return name
+            name = '__' + self.module_name + '_NET_' + net.attrib['code']
+
+        if name[0].isdigit():
+            name = 'n' + name
+
+        # Replace + and - with p and m
+        name = name.replace('+','p')
+        name = name.replace('-','m')
+
+        return name
     
     def load_components(self, components):
         # Build up the list of components
