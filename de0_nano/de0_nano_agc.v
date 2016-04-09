@@ -174,8 +174,8 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT0
     // Make a 51.2MHz system clock for propagating state, and a 2.048MHz clock
     // that serves as the AGC's clock source
     wire CLOCK;
-    wire SYS_CLK;
-    pll agc_clock(OSC_50, SYS_CLK, CLOCK);
+    wire SIM_CLK;
+    pll agc_clock(OSC_50, SIM_CLK, CLOCK);
      
     wire STRT2;
     assign STRT2 = ~KEY0;
