@@ -16,6 +16,7 @@ MODULES = scaler\
 	  memory_timing_addressing\
 	  rupt_service\
 	  fixed_erasable_memory\
+	  inout_i\
 	  inout_ii\
 	  inout_iv\
 	  counter_cell_i\
