@@ -1,4 +1,4 @@
-ROM=validation
+ROM=colossus237
 
 MODULES = scaler\
 	  timer\
@@ -18,6 +18,7 @@ MODULES = scaler\
 	  fixed_erasable_memory\
 	  inout_i\
 	  inout_ii\
+	  inout_iii\
 	  inout_iv\
 	  counter_cell_i\
 	  counter_cell_ii

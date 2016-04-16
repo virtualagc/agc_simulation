@@ -44,14 +44,9 @@ module main;
     reg CH11 = 0;
     reg CH12 = 0;
     reg CH13 = 0;
-    reg CH1301 = 0;
-    reg CH1302 = 0;
-    reg CH1303 = 0;
-    reg CH1304 = 0;
     reg CH1307 = 0;
     reg CH1309 = 0;
     reg CH1310 = 0;
-    reg CH1311 = 0;
     reg CH1316 = 0;
     reg CH14 = 0;
     reg CH1411 = 0;
@@ -59,10 +54,6 @@ module main;
     reg CH1413 = 0;
     reg CH1414 = 0;
     reg CH1416 = 0;
-    reg CH1501 = 0;
-    reg CH1502 = 0;
-    reg CH1503 = 0;
-    reg CH1504 = 0;
     reg CH16 = 0;
     reg CH3312 = 0;
     reg CHWL01_n = 1;
@@ -96,6 +87,7 @@ module main;
     reg GATEZ_n = 1; //input
     reg GCAPCL = 0; //input
     reg GTONE = 0;
+    reg GTRST_n = 1;
     reg GTSET = 0;
     reg GTSET_n = 1;
     reg GUIREL = 0; //input
@@ -111,12 +103,13 @@ module main;
     reg IN3216 = 0; //input
     reg IN3301 = 0; //input
     reg ISSTOR = 0; //input
-    reg KYRPT1 = 0;
-    reg KYRPT2 = 0;
     reg LEMATT = 0; //input
     reg LFTOFF = 0; //input
+    reg LRIN0 = 0; //input
+    reg LRIN1 = 0; //input
     reg LRRLSC = 0; //input
     reg LVDAGD = 0; //input
+    reg MAINRS = 0; //input
     reg MAMU = 0; //monitor input
     reg MANmP = 0; //input
     reg MANmR = 0; //input
@@ -124,6 +117,7 @@ module main;
     reg MANpP = 0; //input
     reg MANpR = 0; //input
     reg MANpY = 0; //input
+    reg MARK = 0; //input
     reg MDT01 = 0; //monitor input
     reg MDT02 = 0; //monitor input
     reg MDT03 = 0; //monitor input
@@ -140,7 +134,11 @@ module main;
     reg MDT14 = 0; //monitor input
     reg MDT15 = 0; //monitor input
     reg MDT16 = 0; //monitor input
-    reg MKRPT = 0;
+    reg MKEY1 = 0; //input
+    reg MKEY2 = 0; //input
+    reg MKEY3 = 0; //input
+    reg MKEY4 = 0; //input
+    reg MKEY5 = 0; //input
     reg MLDCH = 0; //monitor input
     reg MLOAD = 0; //monitor input
     reg MNHNC = 0; //monitor input
@@ -156,11 +154,19 @@ module main;
     reg MONWBK = 0; //monitor input
     reg MRDCH = 0; //monitor input
     reg MREAD = 0; //monitor input
+    reg MRKREJ = 0; //input
+    reg MRKRST = 0; //input
     reg MSTP = 0; //monitor input
     reg MSTRT = 0; //monitor input
     reg MTCSAI = 0; //monitor input
+    reg NAVRST = 0; //input
     reg NHALGA = 0; //monitor input
     reg NHVFAL = 0; //input
+    reg NKEY1 = 0; //input
+    reg NKEY2 = 0; //input
+    reg NKEY3 = 0; //input
+    reg NKEY4 = 0; //input
+    reg NKEY5 = 0; //input
     reg OPCDFL = 0; //input
     reg OPMSW2 = 0; //input
     reg OPMSW3 = 0; //input
@@ -174,19 +180,18 @@ module main;
     reg PIPYP = 0;
     reg PIPZM = 0;
     reg PIPZP = 0;
-    reg RADRPT = 0;
     reg RCH13_n = 1;
     reg RCH14_n = 1;
     reg RCH33_n = 1;
     reg RCHAT_n = 1;
     reg RCHBT_n = 1;
-    reg RNRADM = 0;
-    reg RNRADP = 0;
     reg ROLGOF = 0; //input
+    reg RRIN0 = 0; //input
+    reg RRIN1 = 0; //input
     reg RRPONA = 0; //input
     reg RRRLSC = 0; //input
     reg S4BSAB = 0; //input
-    reg SBY = 0;
+    reg SBYBUT = 0; //input
     reg SCAFAL = 0;
     reg SHAFTD = 0;
     reg SHAFTM = 0;
@@ -196,14 +201,11 @@ module main;
     reg SIGNZ = 0; //input
     reg SMSEPR = 0; //input
     reg SPSRDY = 0; //input
-    reg STNDBY_n = 1;
-    reg STRPRS = 0;
+    reg STRPRS = 0; //input
     reg STRT2 = 0;
     reg T6ON_n = 1;
     reg TEMPIN = 0; //input
     reg TEMPIN_n = 1;
-    reg TMPOUT = 0;
-    reg TPOR_n = 1;
     reg TRANmX = 0; //input
     reg TRANmY = 0; //input
     reg TRANmZ = 0; //input
@@ -252,7 +254,7 @@ module main;
     
     fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, ALGA, C24A, C25A, C26A, C27A, C30A, C37P, C40P, C41P, C42P, C43P, C44P, CA2_n, CA3_n, CAD1, CAD2, CAD3, CAD4, CAD5, CAD6, CDUSTB_n, CH01, CH02, CH03, CH04, CH05, CH06, CH07, CH08, CH09, CH10, CH11, CH12, CH13, CH14, CH16, CHINC, CHINC_n, CLOCK, DINC, DINC_n, DLKPLS, E5, E6, E7_n, EPCS_DATA, FETCH0, FETCH0_n, FETCH1, HNDRPT, INCSET_n, INKL, INKL_n, INOTLD, KYRPT1, KYRPT2, MAMU, MCDU, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MINC, MKRPT, MNHRPT, MNHSBF, MONPAR, MONPCH, MONWBK, MON_n, MSTP, MSTRTP, MTCSAI, OVNHRP, PCDU, PIPPLS_n, RADRPT, RCHAT_n, RCHBT_n, SBY, SHANC_n, SHIFT, SHIFT_n, STFET1_n, STORE1_n, STRT1, STRT2, UPRUPT, ZOUT_n, EPCS_ASDI, EPCS_DCLK, EPCS_CSN, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
 `else
-    agc AGC(VCC, GND, SIM_RST, SIM_CLK, ALTEST, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CCH13, CCH14, CDUFAL, CDUSTB_n, CDUXD, CDUXM, CDUXP, CDUYD, CDUYM, CDUYP, CDUZD, CDUZM, CDUZP, CH01, CH02, CH03, CH04, CH05, CH06, CH07, CH0705, CH0706, CH0707, CH08, CH09, CH10, CH11, CH12, CH13, CH1301, CH1302, CH1303, CH1304, CH1307, CH1309, CH1310, CH1311, CH1316, CH14, CH1411, CH1412, CH1413, CH1414, CH1416, CH1501, CH1502, CH1503, CH1504, CH16, CH3312, CHWL01_n, CHWL02_n, CHWL03_n, CHWL04_n, CHWL05_n, CHWL06_n, CHWL07_n, CHWL08_n, CHWL09_n, CHWL10_n, CHWL11_n, CHWL12_n, CHWL13_n, CHWL14_n, CHWL16_n, CLOCK, CTLSAT, DBLTEST, DLKPLS, E5, E6, E7_n, FLASH, FLASH_n, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GTONE, GTSET, GTSET_n, GUIREL, HNDRPT, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, KYRPT1, KYRPT2, LEMATT, LFTOFF, LRRLSC, LVDAGD, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKRPT, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MSTP, MSTRT, MTCSAI, NHALGA, NHVFAL, OPCDFL, OPMSW2, OPMSW3, OVNHRP, PCHGOF, PIPAFL, PIPPLS_n, PIPXM, PIPXP, PIPYM, PIPYP, PIPZM, PIPZP, RADRPT, RCH13_n, RCH14_n, RCH33_n, RCHAT_n, RCHBT_n, RNRADM, RNRADP, ROLGOF, RRPONA, RRRLSC, S4BSAB, SBY, SCAFAL, SHAFTD, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STNDBY_n, STRPRS, STRT2, T6ON_n, TEMPIN, TEMPIN_n, TPOR_n, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, TRUND, ULLTHR, UPL0, UPL1, UPRUPT, VFAIL, WCH13_n, WCH14_n, XLNK0, XLNK1, ZEROP, n2FSFAL, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
+    agc AGC(VCC, GND, SIM_RST, SIM_CLK, ALTEST, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CCH13, CCH14, CDUFAL, CDUSTB_n, CDUXD, CDUXM, CDUXP, CDUYD, CDUYM, CDUYP, CDUZD, CDUZM, CDUZP, CH01, CH02, CH03, CH04, CH05, CH06, CH07, CH0705, CH0706, CH0707, CH08, CH09, CH10, CH11, CH12, CH13, CH1307, CH1309, CH1310, CH1316, CH14, CH1411, CH1412, CH1413, CH1414, CH1416, CH16, CH3312, CHWL01_n, CHWL02_n, CHWL03_n, CHWL04_n, CHWL05_n, CHWL06_n, CHWL07_n, CHWL08_n, CHWL09_n, CHWL10_n, CHWL11_n, CHWL12_n, CHWL13_n, CHWL14_n, CHWL16_n, CLOCK, CTLSAT, DBLTEST, DLKPLS, E5, E6, E7_n, FLASH, FLASH_n, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GTONE, GTRST_n, GTSET, GTSET_n, GUIREL, HNDRPT, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, OVNHRP, PCHGOF, PIPAFL, PIPPLS_n, PIPXM, PIPXP, PIPYM, PIPYP, PIPZM, PIPZP, RCH13_n, RCH14_n, RCH33_n, RCHAT_n, RCHBT_n, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTD, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, T6ON_n, TEMPIN, TEMPIN_n, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, TRUND, ULLTHR, UPL0, UPL1, UPRUPT, VFAIL, WCH13_n, WCH14_n, XLNK0, XLNK1, ZEROP, n2FSFAL, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
 `endif
 
 
