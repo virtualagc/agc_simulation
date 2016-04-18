@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module scaler(VCC, GND, SIM_RST, SIM_CLK, FS01_n, RCHAT_n, RCHBT_n, F04A, F04B, FS05_n, F05A_n, F05B_n, F06B, FS07A, FS07_n, F07A, F07B, F07B_n, F08B, FS09, FS09_n, F09A, F09B, F09B_n, FS10, F10A, F10A_n, F10B, F12B, FS13, FS14, F14B, F17A, F17B);
+module scaler(VCC, GND, SIM_RST, SIM_CLK, FS01_n, RCHAT_n, RCHBT_n, F04A, F04B, FS05_n, F05A_n, F05B_n, F06B, FS07A, FS07_n, F07A, F07B, F07B_n, F08B, FS09, FS09_n, F09A, F09B, F09B_n, FS10, F10A, F10A_n, F10B, F12B, FS13, FS14, F14B, F17A, F17B, F18A, F18B);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
@@ -25,6 +25,8 @@ module scaler(VCC, GND, SIM_RST, SIM_CLK, FS01_n, RCHAT_n, RCHBT_n, F04A, F04B, 
     output wire F14B;
     output wire F17A;
     output wire F17B;
+    output wire F18A;
+    output wire F18B;
     input wire FS01_n;
     output wire FS05_n;
     output wire FS07A;
@@ -114,8 +116,6 @@ module scaler(VCC, GND, SIM_RST, SIM_CLK, FS01_n, RCHAT_n, RCHBT_n, F04A, F04B, 
     wire __A01_2__CHBT12;
     wire __A01_2__CHBT13;
     wire __A01_2__CHBT14;
-    wire __A01_2__F18A;
-    wire __A01_2__F18B;
     wire __A01_2__F19A;
     wire __A01_2__F19B;
     wire __A01_2__F20A;
@@ -276,10 +276,10 @@ module scaler(VCC, GND, SIM_RST, SIM_CLK, FS01_n, RCHAT_n, RCHBT_n, F04A, F04B, 
     U74HC02 U1029(__A01_1__CHAT01, RCHAT_n, __A01_1__scaler_s6__FS_n, __A01_1__CHAT02, RCHAT_n, __A01_1__scaler_s7__FS_n, GND, RCHAT_n, __A01_1__scaler_s8__FS_n, __A01_1__CHAT03, RCHAT_n, __A01_1__scaler_s9__FS_n, __A01_1__CHAT04, VCC, SIM_RST, SIM_CLK);
     U74HC02 U1030(__A01_1__CHAT05, RCHAT_n, __A01_1__scaler_s10__FS_n, __A01_1__CHAT06, RCHAT_n, __A01_1__scaler_s11__FS_n, GND, RCHAT_n, __A01_1__scaler_s12__FS_n, __A01_1__CHAT07, RCHAT_n, __A01_1__scaler_s13__FS_n, __A01_1__CHAT08, VCC, SIM_RST, SIM_CLK);
     U74HC02 U1031(__A01_1__CHAT09, RCHAT_n, __A01_1__scaler_s14__FS_n, __A01_1__CHAT10, __A01_NET_143, __A01_1__scaler_s15__FS_n, GND, RCHAT_n, __A01_1__scaler_s16__FS_n, __A01_1__CHAT11, RCHAT_n, __A01_1__scaler_s17__FS_n, __A01_1__CHAT12, VCC, SIM_RST, SIM_CLK);
-    U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U1032(__A01_2__F18A, __A01_2__scaler_s18__FS_n, __A01_NET_210, __A01_2__F18B, __A01_NET_209, __A01_2__FS18, GND, __A01_NET_210, __A01_2__FS18, __A01_2__scaler_s18__FS_n, __A01_2__scaler_s18__FS_n, __A01_NET_209, __A01_2__FS18, VCC, SIM_RST, SIM_CLK);
-    U74HC27 U1033(__A01_2__F18A, F17A, __A01_NET_210, F17A, __A01_2__F18B, __A01_NET_209, GND, __A01_NET_212, __A01_2__F19A, __A01_2__F18A, __A01_NET_211, __A01_NET_210, __A01_NET_209, VCC, SIM_RST, SIM_CLK);
+    U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U1032(F18A, __A01_2__scaler_s18__FS_n, __A01_NET_210, F18B, __A01_NET_209, __A01_2__FS18, GND, __A01_NET_210, __A01_2__FS18, __A01_2__scaler_s18__FS_n, __A01_2__scaler_s18__FS_n, __A01_NET_209, __A01_2__FS18, VCC, SIM_RST, SIM_CLK);
+    U74HC27 U1033(F18A, F17A, __A01_NET_210, F17A, F18B, __A01_NET_209, GND, __A01_NET_212, __A01_2__F19A, F18A, __A01_NET_211, __A01_NET_210, __A01_NET_209, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U1034(__A01_2__F19A, __A01_2__scaler_s19__FS_n, __A01_NET_212, __A01_2__F19B, __A01_NET_211, __A01_2__FS19, GND, __A01_NET_212, __A01_2__FS19, __A01_2__scaler_s19__FS_n, __A01_2__scaler_s19__FS_n, __A01_NET_211, __A01_2__FS19, VCC, SIM_RST, SIM_CLK);
-    U74HC27 U1035(__A01_NET_212, __A01_2__F18A, __A01_2__F20A, __A01_2__F19A, __A01_NET_213, __A01_NET_214, GND, __A01_NET_213, __A01_NET_214, __A01_2__F19A, __A01_2__F20B, __A01_NET_211, __A01_2__F19B, VCC, SIM_RST, SIM_CLK);
+    U74HC27 U1035(__A01_NET_212, F18A, __A01_2__F20A, __A01_2__F19A, __A01_NET_213, __A01_NET_214, GND, __A01_NET_213, __A01_NET_214, __A01_2__F19A, __A01_2__F20B, __A01_NET_211, __A01_2__F19B, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U1036(__A01_2__F20A, __A01_2__scaler_s20__FS_n, __A01_NET_214, __A01_2__F20B, __A01_NET_213, __A01_2__FS20, GND, __A01_NET_214, __A01_2__FS20, __A01_2__scaler_s20__FS_n, __A01_2__scaler_s20__FS_n, __A01_NET_213, __A01_2__FS20, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U1037(__A01_2__F21A, __A01_2__scaler_s21__FS_n, __A01_NET_216, __A01_2__F21B, __A01_NET_215, __A01_2__FS21, GND, __A01_NET_216, __A01_2__FS21, __A01_2__scaler_s21__FS_n, __A01_2__scaler_s21__FS_n, __A01_NET_215, __A01_2__FS21, VCC, SIM_RST, SIM_CLK);
     U74HC27 U1038(__A01_2__F21A, __A01_2__F20A, __A01_NET_216, __A01_2__F20A, __A01_2__F21B, __A01_NET_215, GND, __A01_NET_218, __A01_2__F22A, __A01_2__F21A, __A01_NET_217, __A01_NET_216, __A01_NET_215, VCC, SIM_RST, SIM_CLK);

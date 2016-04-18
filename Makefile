@@ -22,7 +22,8 @@ MODULES = scaler\
 	  inout_iv\
 	  counter_cell_i\
 	  counter_cell_ii\
-	  inout_v
+	  inout_v\
+	  inout_vi
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
