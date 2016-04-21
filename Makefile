@@ -23,7 +23,8 @@ MODULES = scaler\
 	  counter_cell_i\
 	  counter_cell_ii\
 	  inout_v\
-	  inout_vi
+	  inout_vi\
+	  inout_vii
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
@@ -51,7 +52,7 @@ FPGA_SOURCES = $(COMMON_SOURCES)\
 	       de0_nano/fpga_agc.v\
 	       test_agc.v
 
-HARDWARE_DIR=~/agc_hardware/
+HARDWARE_DIR=~/agc/agc_hardware/
 
 .phony: all
 all: test_agc de0_nano/fpga_agc.v roms/$(ROM).hex

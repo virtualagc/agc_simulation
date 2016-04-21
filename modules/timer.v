@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP, SBY, GOJ1, WL15, WL15_n, WL16, WL16_n, GOJAM, STOP, PHS2_n, PHS3_n, PHS4, PHS4_n, CT, CT_n, RT_n, WT_n, TT_n, P02, P02_n, P03, P03_n, P04_n, SB0_n, SB1_n, SB2, SB2_n, FS01, FS01_n, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, T12A, TIMR, OVF_n, UNF_n, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
+module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP, SBY, GOJ1, WL15, WL15_n, WL16, WL16_n, GOJAM, STOP, PHS2_n, PHS3_n, PHS4, PHS4_n, CT, CT_n, RT_n, WT_n, TT_n, P02, P02_n, P03, P03_n, P04_n, SB0_n, SB1_n, SB2, SB2_n, SB4, FS01, FS01_n, F01A, F01B, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, T12A, TIMR, OVF_n, UNF_n, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
@@ -11,6 +11,8 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP
     input wire CLOCK;
     output wire CT;
     output wire CT_n;
+    output wire F01A;
+    output wire F01B;
     output wire FS01;
     output wire FS01_n;
     input wire GOJ1;
@@ -56,6 +58,7 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP
     output wire SB1_n;
     output wire SB2;
     output wire SB2_n;
+    output wire SB4;
     input wire SBY;
     output wire STOP;
     wire STOPA;
@@ -122,13 +125,10 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP
     wire __A02_1__ovfstb_r5;
     wire __A02_1__ovfstb_r6;
     wire __A02_2__EDSET;
-    wire __A02_2__F01A;
-    wire __A02_2__F01B;
     wire __A02_2__F01C;
     wire __A02_2__F01D;
     wire __A02_2__SB0;
     wire __A02_2__SB1;
-    wire __A02_2__SB4;
     wire __A02_2__T12DC_n;
     wire __A02_3__OVF;
     wire __A02_3__T01DC_n;
@@ -206,7 +206,7 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2001(__A02_1__cdiv_1__D, __A02_1__cdiv_1__FS_n, __A02_1__cdiv_1__B, __A02_1__cdiv_1__FS_n, __A02_1__cdiv_1__B, __A02_1__cdiv_1__FS, GND, __A02_1__cdiv_1__FS_n, __A02_1__cdiv_1__A, __A02_1__cdiv_1__FS, __A02_1__cdiv_1__A, __A02_1__cdiv_1__FS, PHS2, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U2002(__A02_1__cdiv_1__D, CLOCK, __A02_1__cdiv_1__B, CLOCK, PHS2, __A02_1__cdiv_1__A, GND, __A02_2__EDSET, P02, P03_n, P04, __A02_1__cdiv_1__B, __A02_1__cdiv_1__A, VCC, SIM_RST, SIM_CLK);
     U74HC04 #(1'b1, 1'b0, 1'b0, 1'b1, 1'b0, 1'b1) U2003(__A02_1__cdiv_1__D, __A02_1__cdiv_2__F, PHS2, PHS2_n, PHS4, PHS4_n, GND, __A02_NET_127, __A02_1__cdiv_1__B, CT, __A02_NET_127, CT_n, CT, VCC, SIM_RST, SIM_CLK);
-    U74HC02 U2004(PHS4, __A02_1__cdiv_2__F, __A02_1__cdiv_1__A, __A02_1__oddset, STOP, __A02_1__RINGA_n, GND, P02_n, P04, __A02_2__SB4, P01, __A02_NET_154, __A02_NET_155, VCC, SIM_RST, SIM_CLK);
+    U74HC02 U2004(PHS4, __A02_1__cdiv_2__F, __A02_1__cdiv_1__A, __A02_1__oddset, STOP, __A02_1__RINGA_n, GND, P02_n, P04, SB4, P01, __A02_NET_154, __A02_NET_155, VCC, SIM_RST, SIM_CLK);
     U74HC04 #(1'b0, 1'b0, 1'b0, 1'b0, 1'b1, 1'b1) U2005(__A02_1__cdiv_1__FS_n, WT, WT, WT_n, WT, TT_n, GND, __A02_1__ovfstb_r5, __A02_1__ovfstb_r4, __A02_1__ovfstb_r6, __A02_1__ovfstb_r5, __A02_1__OVFSTB_n, __A02_1__ovfstb_r2, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2006(__A02_1__cdiv_2__D, __A02_1__cdiv_2__FS_n, __A02_1__cdiv_2__B, __A02_1__cdiv_2__FS_n, __A02_1__cdiv_2__B, __A02_1__cdiv_2__FS, GND, __A02_1__cdiv_2__FS_n, __A02_1__cdiv_2__A, __A02_1__cdiv_2__FS, __A02_1__cdiv_2__A, __A02_1__cdiv_2__FS, __A02_1__cdiv_2__C, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U2007(__A02_1__cdiv_2__D, __A02_1__cdiv_2__F, __A02_1__cdiv_2__B, __A02_1__cdiv_2__F, __A02_1__cdiv_2__C, __A02_1__cdiv_2__A, GND, P03, __A02_2__EDSET, __A02_NET_168, P03_n, __A02_1__cdiv_2__B, __A02_1__cdiv_2__A, VCC, SIM_RST, SIM_CLK);
@@ -219,8 +219,8 @@ module timer(VCC, GND, SIM_RST, SIM_CLK, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2014(__A02_NET_154, __A02_NET_155, STOP_n, P03_n, P03, __A02_NET_162, GND, __A02_1__RINGA_n, P03, __A02_NET_161, P03_n, __A02_1__RINGB_n, __A02_NET_160, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2015(P04, __A02_NET_161, P04_n, P04_n, P04, __A02_NET_160, GND, __A02_1__RINGB_n, P04, __A02_NET_165, P04_n, __A02_1__RINGA_n, __A02_NET_163, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2016(P05, __A02_NET_165, P05_n, P05_n, P05, __A02_NET_163, GND, __A02_NET_152, GOJ1, __A02_NET_153, __A02_1__EVNSET_n, __A02_NET_147, __A02_NET_149, VCC, SIM_RST, SIM_CLK);
-    U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2017(__A02_2__F01D, FS01_n, __A02_2__F01B, FS01_n, __A02_2__F01B, FS01, GND, FS01_n, __A02_2__F01A, FS01, __A02_2__F01A, FS01, __A02_2__F01C, VCC, SIM_RST, SIM_CLK);
-    U74HC27 #(1'b0, 1'b1, 1'b0) U2018(__A02_2__F01D, P01_n, __A02_2__F01B, P01_n, __A02_2__F01C, __A02_2__F01A, GND,  ,  ,  ,  , __A02_2__F01B, __A02_2__F01A, VCC, SIM_RST, SIM_CLK);
+    U74HC02 #(1'b0, 1'b1, 1'b0, 1'b0) U2017(__A02_2__F01D, FS01_n, F01B, FS01_n, F01B, FS01, GND, FS01_n, F01A, FS01, F01A, FS01, __A02_2__F01C, VCC, SIM_RST, SIM_CLK);
+    U74HC27 #(1'b0, 1'b1, 1'b0) U2018(__A02_2__F01D, P01_n, F01B, P01_n, __A02_2__F01C, F01A, GND,  ,  ,  ,  , F01B, F01A, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b1, 1'b0) U2019(SBY, ALGA, STRT1, STRT2, __A02_NET_153, __A02_NET_151, GND, __A02_NET_146, __A02_2__T12DC_n, __A02_NET_141, __A02_1__EVNSET_n, __A02_NET_150, MSTRTP, VCC, SIM_RST, SIM_CLK);
     U74LVC07 U2020(__A02_NET_150, __A02_NET_152, __A02_NET_151, __A02_NET_152,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4
     U74HC04 #(1'b1, 1'b0, 1'b1, 1'b0, 1'b1, 1'b0) U2021(__A02_NET_152, __A02_NET_147, MSTP, __A02_NET_141, GOJAM_n, GOJAM, GND, MGOJAM, GOJAM, STOP, STOP_n, MSTPIT_n, STOP, VCC, SIM_RST, SIM_CLK);
