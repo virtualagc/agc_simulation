@@ -22,7 +22,7 @@ module main;
     reg CDUZM = 0; //input
     reg CDUZP = 0; //input
     reg CLOCK = 0;
-    reg CTLSAT; //input
+    reg CTLSAT = 0; //input
     reg DBLTEST = 0; //monitor input
     reg DKBSNC = 0; //input
     reg DKEND = 0; //input
@@ -112,7 +112,7 @@ module main;
     reg OPCDFL = 0; //input
     reg OPMSW2 = 0; //input
     reg OPMSW3 = 0; //input
-    reg PCHGOF; //input
+    reg PCHGOF = 0; //input
     reg PIPAXm = 0; //input
     reg PIPAXp = 0; //input
     reg PIPAYm = 0; //input
@@ -192,6 +192,6 @@ module main;
         #5000 SIM_RST = 0;
         #50000 MSTRT = 1;
         #5000 MSTRT = 0;
-        #50000000 $finish;
+        #200000000 $finish;
     end
 endmodule
