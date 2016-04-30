@@ -159,7 +159,6 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT0
     reg SMSEPR = 0; //input
     reg SPSRDY = 0; //input
     reg STRPRS = 0; //input
-    reg STRT2 = 0;
     reg TEMPIN = 0; //input
     reg TRANmX = 0; //input
     reg TRANmY = 0; //input
