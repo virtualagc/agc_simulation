@@ -1,31 +1,13 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, SNOOP1, SNOOP2);
+module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MAINRS, MKEY1, MKEY2, MKEY2, MKEY3, MKEY4, MKEY5, COMACT, KYRLS, OPEROR, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, TMPCAU, UPLACT, VNFLSH);
     input wire OSC_50;
     input wire EPCS_DATA;
     input wire KEY0;
     output wire EPCS_CSN;
     output wire EPCS_DCLK;
     output wire EPCS_ASDI;
-    output wire MT01;
-    output wire MT02;
-    output wire MT03;
-    output wire MT04;
-    output wire MT05;
-    output wire MT06;
-    output wire MT07;
-    output wire MT08;
-    output wire MT09;
-    output wire MT10;
-    output wire MT11;
-    output wire MT12;
-     
-    output wire SNOOP1;
-    output wire SNOOP2;
-    
-    assign SNOOP1 = EPCS_DCLK;
-    assign SNOOP2 = EPCS_ASDI;
 
     reg VCC = 1;
     reg GND = 0;
@@ -46,7 +28,7 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT0
     reg CDUZM = 0; //input
     reg CDUZP = 0; //input
     reg CTLSAT = 0; //input
-    reg DBLTEST = 0; //monitor input
+    reg DBLTST = 0; //monitor input
     reg DKBSNC = 0; //input
     reg DKEND = 0; //input
     reg DKSTRT = 0; //input
@@ -75,7 +57,7 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT0
     reg LRIN1 = 0; //input
     reg LRRLSC = 0; //input
     reg LVDAGD = 0; //input
-    reg MAINRS = 0; //input
+    input wire MAINRS = 0; //input
     reg MAMU = 0; //monitor input
     reg MANmP = 0; //input
     reg MANmR = 0; //input
@@ -100,11 +82,11 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT0
     reg MDT14 = 0; //monitor input
     reg MDT15 = 0; //monitor input
     reg MDT16 = 0; //monitor input
-    reg MKEY1 = 0; //input
-    reg MKEY2 = 0; //input
-    reg MKEY3 = 0; //input
-    reg MKEY4 = 0; //input
-    reg MKEY5 = 0; //input
+    input wire MKEY1 = 0; //input
+    input wire MKEY2 = 0; //input
+    input wire MKEY3 = 0; //input
+    input wire MKEY4 = 0; //input
+    input wire MKEY5 = 0; //input
     reg MLDCH = 0; //monitor input
     reg MLOAD = 0; //monitor input
     reg MNHNC = 0; //monitor input
@@ -178,8 +160,40 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT0
     reg XLNK1 = 0; //input
     reg ZEROP = 0; //input
     reg n2FSFAL = 0;
-
+    output wire COMACT; //output
+    output wire KYRLS; //output
     wire MGOJAM;
+    wire MT01;
+    wire MT02;
+    wire MT03;
+    wire MT04;
+    wire MT05;
+    wire MT06;
+    wire MT07;
+    wire MT08;
+    wire MT09;
+    wire MT10;
+    wire MT11;
+    wire MT12;
+    output wire OPEROR; //output
+    output wire RLYB01; //output
+    output wire RLYB02; //output
+    output wire RLYB03; //output
+    output wire RLYB04; //output
+    output wire RLYB05; //output
+    output wire RLYB06; //output
+    output wire RLYB07; //output
+    output wire RLYB08; //output
+    output wire RLYB09; //output
+    output wire RLYB10; //output
+    output wire RLYB11; //output
+    output wire RYWD12; //output
+    output wire RYWD13; //output
+    output wire RYWD14; //output
+    output wire RYWD16; //output
+    output wire TMPCAU; //output
+    output wire UPLACT; //output
+    output wire VNFLSH; //output
 
     // Make a 51.2MHz system clock for propagating state, and a 2.048MHz clock
     // that serves as the AGC's clock source
@@ -190,6 +204,6 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, MT0
     wire STRT2;
     assign STRT2 = ~KEY0;
      
-    fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, EPCS_DATA, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, EPCS_ASDI, EPCS_CSN, EPCS_DCLK, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
+    fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, EPCS_DATA, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, COMACT, EPCS_ASDI, EPCS_CSN, EPCS_DCLK, KYRLS, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, OPEROR, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, TMPCAU, UPLACT, VNFLSH);
 
 endmodule
