@@ -14,7 +14,7 @@
 		</bit0>
 	</sof_data>
 	<hex_block>
-		<hex_filename>../roms/colossus237.hex</hex_filename>
+		<hex_filename>../roms/comanche055.hex</hex_filename>
 		<hex_addressing>relative</hex_addressing>
 		<hex_offset>8257536</hex_offset>
 	</hex_block>
