@@ -15,12 +15,12 @@ module main;
     reg BMGZP = 0; //input
     reg CAURST = 0; //input
     reg CDUFAL = 0; //input
-    reg CDUXM = 0; //input
-    reg CDUXP = 0; //input
-    reg CDUYM = 0; //input
-    reg CDUYP = 0; //input
-    reg CDUZM = 0; //input
-    reg CDUZP = 0; //input
+    wire CDUXM; //input
+    wire CDUXP; //input
+    wire CDUYM; //input
+    wire CDUYP; //input
+    wire CDUZM; //input
+    wire CDUZP; //input
     reg CLOCK = 0;
     reg CTLSAT = 0; //input
     reg DBLTST = 0; //monitor input
@@ -114,12 +114,12 @@ module main;
     reg OPMSW2 = 0; //input
     reg OPMSW3 = 0; //input
     reg PCHGOF = 0; //input
-    reg PIPAXm = 0; //input
-    reg PIPAXp = 0; //input
-    reg PIPAYm = 0; //input
-    reg PIPAYp = 0; //input
-    reg PIPAZm = 0; //input
-    reg PIPAZp = 0; //input
+    wire PIPAXm; //input
+    wire PIPAXp; //input
+    wire PIPAYm; //input
+    wire PIPAYp; //input
+    wire PIPAZm; //input
+    wire PIPAZp; //input
     reg ROLGOF = 0; //input
     reg RRIN0 = 0; //input
     reg RRIN1 = 0; //input
@@ -156,6 +156,12 @@ module main;
     reg XLNK1 = 0; //input
     reg ZEROP = 0; //input
     reg n2FSFAL = 0;
+    wire CDUXDP; //output
+    wire CDUXDM; //output
+    wire CDUYDP; //output
+    wire CDUYDM; //output
+    wire CDUZDP; //output
+    wire CDUZDM; //output
     wire COMACT; //output
     wire KYRLS; //output
     wire MGOJAM; //monitor output
@@ -172,6 +178,8 @@ module main;
     wire MT11; //monitor output
     wire MT12; //monitor output
     wire OPEROR; //output
+    wire PIPASW; //output
+    wire PIPDAT; //output
     wire RESTRT; //output
     wire RLYB01; //output
     wire RLYB02; //output
@@ -193,6 +201,23 @@ module main;
     wire UPLACT; //output
     wire VNFLSH; //output
 
+    // PIPA spoofing -- simulate 3-3 moding on PIPA inputs, synced with PIPDAT
+    // and counting on PIPASW
+    reg [2:0] moding_counter = 3'b0;
+    always @(posedge PIPASW) begin
+        moding_counter = moding_counter + 3'b1;
+        if (moding_counter == 3'd6) begin
+            moding_counter = 3'b0;
+        end
+    end
+    
+    assign PIPAXm = PIPDAT && (moding_counter >= 3'd3);
+    assign PIPAYm = PIPDAT && (moding_counter >= 3'd3);
+    assign PIPAZm = PIPDAT && (moding_counter >= 3'd3);
+    assign PIPAXp = PIPDAT && (moding_counter < 3'd3);
+    assign PIPAYp = PIPDAT && (moding_counter < 3'd3);
+    assign PIPAZp = PIPDAT && (moding_counter < 3'd3);
+
     always #244.140625 CLOCK = !CLOCK;
 
 `ifdef TARGET_FPGA
@@ -205,7 +230,7 @@ module main;
     
     fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, ALGA, C24A, C25A, C26A, C27A, C30A, C37P, C40P, C41P, C42P, C43P, C44P, CA2_n, CA3_n, CAD1, CAD2, CAD3, CAD4, CAD5, CAD6, CDUSTB_n, CH01, CH02, CH03, CH04, CH05, CH06, CH07, CH08, CH09, CH10, CH11, CH12, CH13, CH14, CH16, CHINC, CHINC_n, CLOCK, DINC, DINC_n, DLKPLS, E5, E6, E7_n, EPCS_DATA, FETCH0, FETCH0_n, FETCH1, HNDRPT, INCSET_n, INKL, INKL_n, INOTLD, KYRPT1, KYRPT2, MAMU, MCDU, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MINC, MKRPT, MNHRPT, MNHSBF, MONPAR, MONPCH, MONWBK, MON_n, MSTP, MSTRTP, MTCSAI, OVNHRP, PCDU, PIPPLS_n, RADRPT, RCHAT_n, RCHBT_n, SBY, SHANC_n, SHIFT, SHIFT_n, STFET1_n, STORE1_n, STRT1, STRT2, UPRUPT, ZOUT_n, EPCS_ASDI, EPCS_DCLK, EPCS_CSN, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
 `else
-    agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, COMACT, KYRLS, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, OPEROR, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
+    agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, CDUXDM, CDUXDP, CDUYDM, CDUYDP, CDUZDM, CDUZDP, COMACT, KYRLS, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, OPEROR, PIPASW, PIPDAT, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
 `endif
 
 

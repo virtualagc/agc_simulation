@@ -1,4 +1,4 @@
-ROM=colossus237
+ROM=luminary099
 
 MODULES = scaler\
 	  timer\
@@ -52,7 +52,7 @@ FPGA_SOURCES = $(COMMON_SOURCES)\
 	       de0_nano/fpga_agc.v\
 	       test_agc.v
 
-HARDWARE_DIR=~/agc/agc_hardware/
+HARDWARE_DIR=~/agc_hardware/
 
 .phony: all
 all: test_agc de0_nano/fpga_agc.v roms/$(ROM).hex
