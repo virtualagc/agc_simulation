@@ -15,12 +15,12 @@ module main;
     reg BMGZP = 0; //input
     reg CAURST = 0; //input
     reg CDUFAL = 0; //input
-    wire CDUXM; //input
-    wire CDUXP; //input
-    wire CDUYM; //input
-    wire CDUYP; //input
-    wire CDUZM; //input
-    wire CDUZP; //input
+    reg CDUXM = 0; //input
+    reg CDUXP = 0; //input
+    reg CDUYM = 0; //input
+    reg CDUYP = 0; //input
+    reg CDUZM = 0; //input
+    reg CDUZP = 0; //input
     reg CLOCK = 0;
     reg CTLSAT = 0; //input
     reg DBLTST = 0; //monitor input

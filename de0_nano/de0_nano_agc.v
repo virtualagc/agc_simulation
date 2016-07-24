@@ -43,7 +43,7 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     reg HOLFUN = 0; //input
     reg IMUCAG = 0; //input
     reg IMUFAL = 0; //input
-    reg IMUOPR = 0; //input
+    reg IMUOPR = 1; //input
     reg IN3008 = 0; //input
     reg IN3212 = 0; //input
     reg IN3213 = 0; //input
@@ -119,12 +119,12 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     reg OPMSW2 = 0; //input
     reg OPMSW3 = 0; //input
     reg PCHGOF = 0; //input
-    reg PIPAXm = 0; //input
-    reg PIPAXp = 0; //input
-    reg PIPAYm = 0; //input
-    reg PIPAYp = 0; //input
-    reg PIPAZm = 0; //input
-    reg PIPAZp = 0; //input
+    wire PIPAXm; //input
+    wire PIPAXp; //input
+    wire PIPAYm; //input
+    wire PIPAYp; //input
+    wire PIPAZm; //input
+    wire PIPAZp; //input
     reg ROLGOF = 0; //input
     reg RRIN0 = 0; //input
     reg RRIN1 = 0; //input
@@ -160,6 +160,12 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     reg XLNK1 = 0; //input
     reg ZEROP = 0; //input
     reg n2FSFAL = 0;
+    wire CDUXDP; //output
+    wire CDUXDM; //output
+    wire CDUYDP; //output
+    wire CDUYDM; //output
+    wire CDUZDP; //output
+    wire CDUZDM; //output
     output wire COMACT; //output
     output wire KYRLS; //output
     wire MGOJAM;
@@ -176,6 +182,8 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     wire MT11;
     wire MT12;
     output wire OPEROR; //output
+	 wire PIPASW; //output
+	 wire PIPDAT; //output
     output wire RESTRT; //output
     output wire RLYB01; //output
     output wire RLYB02; //output
@@ -196,7 +204,7 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     output wire TMPCAU; //output
     output wire UPLACT; //output
     output wire VNFLSH; //output
-	 
+	 	 
 	 input wire PROCEED; //input
 	 assign IN3214 = PROCEED;
 	 assign SBYBUT = PROCEED;
@@ -206,10 +214,29 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     wire CLOCK;
     wire SIM_CLK;
     pll agc_clock(OSC_50, SIM_CLK, CLOCK);
-     
+    
+    // Allow STRT2 to be injected via the KEY0 button 
     wire STRT2;
     assign STRT2 = ~KEY0;
+	 
+    // PIPA spoofing -- simulate 3-3 moding on PIPA inputs, synced with PIPDAT
+    // and counting on PIPASW
+	 reg [2:0] moding_counter = 3'b0;
+	 always @(posedge PIPASW) begin
+		moding_counter = moding_counter + 3'b1;
+		if (moding_counter == 3'd6) begin
+			moding_counter = 3'b0;
+		end
+	 end
+	 
+	 assign PIPAXm = PIPDAT && (moding_counter >= 3'd3);
+	 assign PIPAYm = PIPDAT && (moding_counter >= 3'd3);
+	 assign PIPAZm = PIPDAT && (moding_counter >= 3'd3);
+	 assign PIPAXp = PIPDAT && (moding_counter < 3'd3);
+	 assign PIPAYp = PIPDAT && (moding_counter < 3'd3);
+	 assign PIPAZp = PIPDAT && (moding_counter < 3'd3);
+
      
-    fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, EPCS_DATA, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, COMACT, EPCS_ASDI, EPCS_CSN, EPCS_DCLK, KYRLS, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, OPEROR, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
+    fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, EPCS_DATA, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, CDUXDM, CDUXDP, CDUYDM, CDUYDP, CDUZDM, CDUZDP, COMACT, EPCS_ASDI, EPCS_CSN, EPCS_DCLK, KYRLS, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, OPEROR, PIPASW, PIPDAT, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
 
 endmodule
