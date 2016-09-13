@@ -1,15 +1,15 @@
 [*]
-[*] GTKWave Analyzer v3.3.72 (w)1999-2016 BSI
-[*] Sun Sep 11 01:23:57 2016
+[*] GTKWave Analyzer v3.3.76 (w)1999-2016 BSI
+[*] Tue Sep 13 06:06:00 2016
 [*]
 [dumpfile] "/home/mstewart/agc_simulation/dump.lxt"
-[dumpfile_mtime] "Sun Sep 11 00:22:26 2016"
-[dumpfile_size] 38977539
+[dumpfile_mtime] "Tue Sep 13 03:39:57 2016"
+[dumpfile_size] 76929159
 [savefile] "/home/mstewart/agc_simulation/agc.gtkw"
-[timestart] 278130000
+[timestart] 0
 [size] 1920 894
 [pos] -1 -1
-*-23.000000 369287192 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-33.000000 28310300000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] main.
 [treeopen] main.AGC.
 [treeopen] main.AGC.A03.U3017.
@@ -44,13 +44,13 @@
 [treeopen] main.AGC.A21.U21054.
 [treeopen] main.AGC.A21.U21059.
 [treeopen] main.AGC.B01.U31013.
-[sst_width] 203
-[signals_width] 167
+[sst_width] 205
+[signals_width] 266
 [sst_expanded] 1
 [sst_vpaned_height] 370
 @c02084
 [color] 6
-^1 /tmp/../home/mstewart/agc_simulation/timepulses.txt
+^1 /home/mstewart/agc_simulation/timepulses.txt
 +{Timepulse} #{Timepulses} main.AGC.T01[0] main.AGC.T02[0] main.AGC.T03[0] main.AGC.T04[0] main.AGC.T05[0] main.AGC.T06[0] main.AGC.T07[0] main.AGC.T08[0] main.AGC.T09[0] main.AGC.T10[0] main.AGC.T11[0] main.AGC.T12[0]
 @28
 main.AGC.T01[0]
@@ -65,6 +65,43 @@ main.AGC.T09[0]
 main.AGC.T10[0]
 main.AGC.T11[0]
 main.AGC.T12[0]
+@1401200
+-group_end
+@10c00022
+[color] 5
+[transaction_args] ""
+^<1 /home/mstewart/agc_simulation/scripts/instruction_trans_decoder.py
+#{<Vector>} main.AGC.MINC[0] main.AGC.DINC[0] main.AGC.PINC[0] main.AGC.INKL[0] main.AGC.T07[0] main.AGC.T01[0] main.AGC.TSUDO_n[0] main.AGC.G16[0] main.AGC.G15[0] main.AGC.G14[0] main.AGC.G13[0] main.AGC.G12[0] main.AGC.G11[0] main.AGC.G10[0] main.AGC.G09[0] main.AGC.G08[0] main.AGC.G07[0] main.AGC.G06[0] main.AGC.G05[0] main.AGC.G04[0] main.AGC.G03[0] main.AGC.G02[0] main.AGC.G01[0] main.AGC.FUTEXT[0] main.AGC.A04.__A04_1__STG3[0] main.AGC.A04.__A04_1__STG2[0] main.AGC.A04.__A04_1__STG1[0] main.AGC.A03.__A03_1__WSQG_n[0] main.AGC.GOJAM[0]
+@28
+main.AGC.GOJAM[0]
+main.AGC.A03.__A03_1__WSQG_n[0]
+main.AGC.A04.__A04_1__STG1[0]
+main.AGC.A04.__A04_1__STG2[0]
+main.AGC.A04.__A04_1__STG3[0]
+main.AGC.FUTEXT[0]
+main.AGC.G01[0]
+main.AGC.G02[0]
+main.AGC.G03[0]
+main.AGC.G04[0]
+main.AGC.G05[0]
+main.AGC.G06[0]
+main.AGC.G07[0]
+main.AGC.G08[0]
+main.AGC.G09[0]
+main.AGC.G10[0]
+main.AGC.G11[0]
+main.AGC.G12[0]
+main.AGC.G13[0]
+main.AGC.G14[0]
+main.AGC.G15[0]
+main.AGC.G16[0]
+main.AGC.TSUDO_n[0]
+main.AGC.T01[0]
+main.AGC.T07[0]
+main.AGC.INKL[0]
+main.AGC.PINC[0]
+main.AGC.DINC[0]
+main.AGC.MINC[0]
 @1401200
 -group_end
 @c00070
@@ -302,7 +339,7 @@ main.AGC.SA14[0]
 main.AGC.SA16[0]
 @1401200
 -group_end
-@28
-main.AGC.GOJAM[0]
+@29
+main.AGC.DV1376[0]
 [pattern_trace] 1
 [pattern_trace] 0

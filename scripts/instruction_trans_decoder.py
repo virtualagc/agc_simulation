@@ -103,15 +103,22 @@ def decode_instruction(opcode, ext):
 
     return '???'
 
+dump_lines = []
 while True:
     time = 0
     staged_inst = None
     instruction_starting = False
     inkl_inst = None
-    while True:
-        line = sys.stdin.readline()
-        if not line:
-            continue
+
+    # Buffer up all the lines we need. Going on the fly is too slow
+    line = sys.stdin.readline()
+    if not line:
+        continue
+    if not line.startswith('$comment data_end'):
+        dump_lines.append(line)
+        continue
+
+    for line in dump_lines:
         if line.startswith('$'):
             if line.startswith('$var wire'):
                 toks = line.split()
@@ -122,8 +129,6 @@ while True:
             elif line.startswith('$dumpvars'):
                 print('$name Instruction')
                 print('#0')
-            elif line.startswith('$comment data_end'):
-                break
 
             continue
 
@@ -140,7 +145,7 @@ while True:
             time = int(line[1:])
             continue
         
-        state = int(line[0]) if line[0] != 'x' else 0
+        state = int(line[0]) if line[0] not in 'zx' else 0
         sig_num = int(line[1:])
         sig_name = signal_names[sig_num]
         signals[sig_name] = state
@@ -172,3 +177,4 @@ while True:
 
     print('$finish')
     sys.stdout.flush()
+    dump_lines = []
