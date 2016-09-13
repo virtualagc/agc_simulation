@@ -159,7 +159,7 @@ while True:
             staged_inst = 'GOJAM'
             instruction_starting = True
         elif sig_name == 'T07' and state == 0:
-            if signals['TSUDO_n'] == 0:
+            if signals['TSUDO_n'] == 0 or signals['IC2'] == 1:
                 # G should be ready by now, we don't expect G to change during this time
                 G = 0
                 for i in range(1,16):
