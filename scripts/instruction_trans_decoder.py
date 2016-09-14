@@ -113,7 +113,7 @@ while True:
     # Buffer up all the lines we need. Going on the fly is too slow
     line = sys.stdin.readline()
     if not line:
-        continue
+        break
     if not line.startswith('$comment data_end'):
         dump_lines.append(line)
         continue
