@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS4_n, T01, T01_n, T02_n, T03_n, T04_n, T05_n, T06_n, T07_n, T08_n, T09_n, T10_n, T11_n, T12_n, SQ0_n, SQ1_n, SQ2_n, QC0_n, QC1_n, QC2_n, QC3_n, SQEXT, SQEXT_n, SQR10, SQR10_n, SQR12_n, STRTFC, WL16_n, WL15_n, WL14_n, WL13_n, WL12_n, WL11_n, WL10_n, WL09_n, WL08_n, WL07_n, WL06_n, WL05_n, WL04_n, WL03_n, WL02_n, WL01_n, OVF_n, UNF_n, SUMA16_n, SUMB16_n, EXST0_n, EXST1_n, ST1, ST2, RSTSTG, TMZ_n, TOV_n, TSGN_n, TSGU_n, TPZG_n, DVST, GEQZRO_n, TRSM, NDR100_n, INKL, L15_n, TL15, XT1_n, XB7_n, MTCSAI, MP0_n, MP1, MP3A, MP3_n, IC12, IC13, IC15, IC15_n, TS0_n, RSM3, RSM3_n, STORE1_n, n7XP14, T12USE_n, ST0_n, ST1_n, STD2, ST3_n, BR1, BR1_n, BR2, BR2_n, BRDIF_n, BR12B_n, BR1B2_n, BR1B2B, BR1B2B_n, DIVSTG, KRPT, INOUT, INOUT_n, DIV_n, DV1, DV1_n, DV1376, DV1376_n, DV376_n, DV3764, DV4, DV4_n, L16_n, PRINC, RAND0, READ0, ROR0, RUPT0, RUPT1, RXOR0, RXOR0_n, WAND0, WOR0, B15X, CI_n, R15, R1C_n, RA_n, RB_n, RB1_n, RB2, RC_n, RSC_n, RRPA, WCH_n, WG_n, WL_n, WY_n, n8PP4, n1XP10, n2XP3, n2XP5, n3XP2, n3XP7, n4XP5, n4XP11, n5XP4, n5XP11, n5XP28, n6XP5, n7XP19, n8XP5, n8XP6, n9XP1, MP0T10);
+module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS4_n, T01, T01_n, T02_n, T03_n, T04_n, T05_n, T06_n, T07_n, T08_n, T09_n, T10_n, T11_n, T12_n, SQ0_n, SQ1_n, SQ2_n, QC0_n, QC1_n, QC2_n, QC3_n, SQEXT, SQEXT_n, SQR10, SQR10_n, SQR12_n, STRTFC, WL16_n, WL15_n, WL14_n, WL13_n, WL12_n, WL11_n, WL10_n, WL09_n, WL08_n, WL07_n, WL06_n, WL05_n, WL04_n, WL03_n, WL02_n, WL01_n, OVF_n, UNF_n, SUMA16_n, SUMB16_n, EXST0_n, EXST1_n, ST1, ST2, RSTSTG, TMZ_n, TOV_n, TSGN_n, TSGU_n, TPZG_n, DVST, GEQZRO_n, TRSM, NDR100_n, INKL, L15_n, TL15, XT1_n, XB7_n, MTCSAI, MP0_n, MP1, MP3A, MP3_n, IC12, IC13, IC15, IC15_n, TS0_n, RSM3, RSM3_n, STORE1_n, n7XP14, T12USE_n, ST0_n, ST1_n, STD2, ST3_n, BR1, BR1_n, BR2, BR2_n, BRDIF_n, BR12B_n, BR1B2_n, BR1B2B, BR1B2B_n, DIVSTG, KRPT, INOUT, INOUT_n, DIV_n, DV1, DV1_n, DV1376, DV1376_n, DV376_n, DV3764, DV4, DV4_n, L16_n, PRINC, RAND0, READ0, ROR0, RUPT0, RUPT1, RXOR0, RXOR0_n, WAND0, WOR0, B15X, CI_n, R15, R1C_n, RA_n, RB_n, RB1_n, RB2, RC_n, RSC_n, RRPA, WCH_n, WG_n, WL_n, WY_n, n8PP4, n1XP10, n2XP3, n2XP5, n3XP2, n3XP7, n4XP5, n4XP11, n5XP4, n5XP11, n5XP28, n6XP5, n7XP19, n8XP5, n8XP6, n9XP1, MP0T10, MST1, MST2, MST3, MBR1, MBR2, MRSC, MWCH);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
@@ -42,12 +42,19 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     output wire KRPT;
     input wire L15_n;
     output wire L16_n; //FPGA#wand
+    output wire MBR1;
+    output wire MBR2;
     output wire MP0T10;
     input wire MP0_n;
     input wire MP1;
     input wire MP3A;
     input wire MP3_n;
+    output wire MRSC;
+    output wire MST1;
+    output wire MST2;
+    output wire MST3;
     input wire MTCSAI;
+    output wire MWCH;
     input wire NDR100_n;
     input wire OVF_n;
     input wire PHS2_n;
@@ -147,11 +154,6 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     wire __A04_1__DV0_n;
     wire __A04_1__DV376;
     wire __A04_1__DVST_n;
-    wire __A04_1__MBR1;
-    wire __A04_1__MBR2;
-    wire __A04_1__MST1;
-    wire __A04_1__MST2;
-    wire __A04_1__MST3;
     wire __A04_1__SGUM; //FPGA#wand
     wire __A04_1__ST1376_n;
     wire __A04_1__ST376;
@@ -165,8 +167,6 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     wire __A04_2__BR12B;
     wire __A04_2__BR1B2;
     wire __A04_2__BRXP3;
-    wire __A04_2__MRSC;
-    wire __A04_2__MWCH;
     wire __A04_2__READ0_n;
     wire __A04_2__RUPT0_n;
     wire __A04_2__RUPT1_n;
@@ -335,7 +335,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     U74HC27 #(1'b1, 1'b1, 1'b0) U4004(ST1, __A04_NET_246, __A04_1__STG1, __A04_1__STG3, __A04_1__STG2, __A04_NET_232, GND, __A04_NET_255, __A04_1__STG2, __A04_1__STG3, __A04_NET_236, __A04_NET_249, __A04_NET_248, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4005(__A04_NET_248, __A04_NET_251, T01, __A04_NET_246, __A04_1__DVST_n, __A04_1__STG3, GND, __A04_NET_268, __A04_NET_251, __A04_NET_242, __A04_NET_248, __A04_NET_268, __A04_NET_247, VCC, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b0, 1'b1, 1'b0) U4006(__A04_NET_236, __A04_NET_242, __A04_1__STG1, __A04_1__STG1, __A04_NET_236, __A04_NET_247, GND, ST2, __A04_NET_231, __A04_NET_230, __A04_1__DVST_n, __A04_NET_236, __A04_NET_235, VCC, SIM_RST, SIM_CLK);
-    U74HC04 U4007(__A04_NET_236, __A04_1__MST1, __A04_NET_260, __A04_1__MST2, __A04_NET_270, __A04_1__MST3, GND, __A04_1__MBR1, __A04_NET_217, __A04_1__MBR2, __A04_NET_213, __A04_1__DVST_n, DVST, VCC, SIM_RST, SIM_CLK);
+    U74HC04 U4007(__A04_NET_236, MST1, __A04_NET_260, MST2, __A04_NET_270, MST3, GND, MBR1, __A04_NET_217, MBR2, __A04_NET_213, __A04_1__DVST_n, DVST, VCC, SIM_RST, SIM_CLK);
     U74HC04 #(1'b0, 1'b1, 1'b1, 1'b1, 1'b0, 1'b0) U4008(__A04_NET_232, ST0_n, __A04_NET_255, ST1_n, __A04_NET_264, ST3_n, GND, __A04_1__ST4_n, __A04_NET_253, __A04_1__ST376_n, __A04_1__ST376, DV1376_n, DV1376, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b1, 1'b0, 1'b0) U4009(__A04_NET_235, MTCSAI, __A04_NET_239, GOJAM, T01, __A04_NET_234, GND, __A04_NET_264, __A04_1__STG3, __A04_NET_260, __A04_NET_236, __A04_NET_233, __A04_NET_234, VCC, SIM_RST, SIM_CLK);
     U74HC4002 U4010(__A04_NET_231, __A04_1__TRSM_n, XT1_n, XB7_n, NDR100_n,  , GND,  , __A04_NET_257, STRTFC, T01, RSTSTG, __A04_NET_262, VCC, SIM_RST, SIM_CLK);
@@ -386,7 +386,7 @@ module stage_branch(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS2_n, PHS3_n, PHS4, PHS
     U74HC27 U4055(T09_n, BR1, T09_n, MP0_n, BR1_n, __A04_NET_296, GND, __A04_NET_298, MP0_n, T09_n, BRDIF_n, __A04_NET_322, MP0_n, VCC, SIM_RST, SIM_CLK);
     U74HC02 U4056(KRPT, T09_n, __A04_2__RUPT1_n, MP0T10, T10_n, MP0_n, GND, __A04_NET_319, T02_n, __A04_NET_317, STORE1_n, T09_n, __A04_NET_305, VCC, SIM_RST, SIM_CLK);
     U74HC27 U4057(BR1_n, MP0_n, n1XP10, n8XP5, __A04_NET_314, __A04_NET_318, GND,  ,  ,  ,  , __A04_NET_310, T11_n, VCC, SIM_RST, SIM_CLK);
-    U74HC04 #(1'b0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0) U4058(RSC_n, __A04_2__MRSC, __A04_NET_310, __A04_NET_308, TRSM, __A04_1__TRSM_n, GND, __A04_2__MWCH, WCH_n,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
+    U74HC04 #(1'b0, 1'b1, 1'b0, 1'b0, 1'b0, 1'b0) U4058(RSC_n, MRSC, __A04_NET_310, __A04_NET_308, TRSM, __A04_1__TRSM_n, GND, MWCH, WCH_n,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b1) U4059( ,  , __A04_NET_325, B15X, n7XP19, __A04_NET_324, GND, __A04_NET_326, n8XP5, __A04_NET_322, __A04_NET_296,  ,  , VCC, SIM_RST, SIM_CLK);
     U74HC02 U4060(__A04_NET_315, n2XP5, n1XP10, __A04_NET_297, __A04_NET_299, __A04_NET_298, GND, n1XP10, MP0T10, __A04_NET_291, __A04_NET_293, __A04_NET_310, __A04_NET_292, VCC, SIM_RST, SIM_CLK);
     U74LVC07 U4061(__A04_NET_324, WY_n, __A04_NET_326, WY_n, __A04_NET_320, WL_n, GND, RC_n, __A04_NET_323, RB_n, __A04_NET_295, CI_n, __A04_NET_297, VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4,6,8,10,12

@@ -103,7 +103,7 @@ module main;
     reg MSTRT = 0; //monitor input
     reg MTCSAI = 0; //monitor input
     reg NAVRST = 0; //input
-    reg NHALGA = 0; //monitor input
+    reg NHALGA = 1; //monitor input
     reg NHVFAL = 0; //input
     reg NKEY1 = 0; //input
     reg NKEY2 = 0; //input
@@ -164,7 +164,42 @@ module main;
     wire CDUZDM; //output
     wire COMACT; //output
     wire KYRLS; //output
+    wire MBR1; //monitor output
+    wire MBR2; //monitor output
+    wire MCTRAL_n; //monitor output
     wire MGOJAM; //monitor output
+    wire MGP_n; //monitor output
+    wire MIIP; //monitor output
+    wire MINHL; //monitor output
+    wire MINKL; //monitor output
+    wire MNISQ; //monitor output
+    wire MON800; //monitor output
+    wire MONWT; //monitor output
+    wire MOSCAL_n; //monitor output
+    wire MPAL_n; //monitor output
+    wire MPIPAL_n; //monitor output
+    wire MRAG; //monitor output
+    wire MRCH; //monitor output
+    wire MREQIN; //monitor output
+    wire MRGG; //monitor output
+    wire MRLG; //monitor output
+    wire MRPTAL_n; //monitor output
+    wire MRSC; //monitor output
+    wire MRULOG; //monitor output
+    wire MSCAFL_n; //monitor output
+    wire MSCDBL_n; //monitor output
+    wire MSP; //monitor output
+    wire MSQ10; //monitor output
+    wire MSQ11; //monitor output
+    wire MSQ12; //monitor output
+    wire MSQ13; //monitor output
+    wire MSQ14; //monitor output
+    wire MSQ16; //monitor output
+    wire MSQEXT; //monitor output
+    wire MST1; //monitor output
+    wire MST2; //monitor output
+    wire MST3; //monitor output
+    wire MSTPIT_n; //monitor output
     wire MT01; //monitor output
     wire MT02; //monitor output
     wire MT03; //monitor output
@@ -177,6 +212,39 @@ module main;
     wire MT10; //monitor output
     wire MT11; //monitor output
     wire MT12; //monitor output
+    wire MTCAL_n; //monitor output
+    wire MTCSA_n; //monitor output
+    wire MVFAIL_n; //monitor output
+    wire MWAG; //monitor output
+    wire MWARNF_n; //monitor output
+    wire MWATCH_n; //monitor output
+    wire MWBBEG; //monitor output
+    wire MWBG; //monitor output
+    wire MWCH; //monitor output
+    wire MWEBG; //monitor output
+    wire MWFBG; //monitor output
+    wire MWG; //monitor output
+    wire MWL01; //monitor output
+    wire MWL02; //monitor output
+    wire MWL03; //monitor output
+    wire MWL04; //monitor output
+    wire MWL05; //monitor output
+    wire MWL06; //monitor output
+    wire MWL07; //monitor output
+    wire MWL08; //monitor output
+    wire MWL09; //monitor output
+    wire MWL10; //monitor output
+    wire MWL11; //monitor output
+    wire MWL12; //monitor output
+    wire MWL13; //monitor output
+    wire MWL14; //monitor output
+    wire MWL15; //monitor output
+    wire MWL16; //monitor output
+    wire MWLG; //monitor output
+    wire MWQG; //monitor output
+    wire MWSG; //monitor output
+    wire MWYG; //monitor output
+    wire MWZG; //monitor output
     wire OPEROR; //output
     wire PIPASW; //output
     wire PIPDAT; //output
@@ -230,7 +298,7 @@ module main;
     
     fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, ALGA, C24A, C25A, C26A, C27A, C30A, C37P, C40P, C41P, C42P, C43P, C44P, CA2_n, CA3_n, CAD1, CAD2, CAD3, CAD4, CAD5, CAD6, CDUSTB_n, CH01, CH02, CH03, CH04, CH05, CH06, CH07, CH08, CH09, CH10, CH11, CH12, CH13, CH14, CH16, CHINC, CHINC_n, CLOCK, DINC, DINC_n, DLKPLS, E5, E6, E7_n, EPCS_DATA, FETCH0, FETCH0_n, FETCH1, HNDRPT, INCSET_n, INKL, INKL_n, INOTLD, KYRPT1, KYRPT2, MAMU, MCDU, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MINC, MKRPT, MNHRPT, MNHSBF, MONPAR, MONPCH, MONWBK, MON_n, MSTP, MSTRTP, MTCSAI, OVNHRP, PCDU, PIPPLS_n, RADRPT, RCHAT_n, RCHBT_n, SBY, SHANC_n, SHIFT, SHIFT_n, STFET1_n, STORE1_n, STRT1, STRT2, UPRUPT, ZOUT_n, EPCS_ASDI, EPCS_DCLK, EPCS_CSN, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12);
 `else
-    agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, CDUXDM, CDUXDP, CDUYDM, CDUYDP, CDUZDM, CDUZDP, COMACT, KYRLS, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, OPEROR, PIPASW, PIPDAT, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
+    agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, CDUXDM, CDUXDP, CDUYDM, CDUYDP, CDUZDM, CDUZDP, COMACT, KYRLS, MBR1, MBR2, MCTRAL_n, MGOJAM, MGP_n, MIIP, MINHL, MINKL, MNISQ, MON800, MONWT, MOSCAL_n, MPAL_n, MPIPAL_n, MRAG, MRCH, MREQIN, MRGG, MRLG, MRPTAL_n, MRSC, MRULOG, MSCAFL_n, MSCDBL_n, MSP, MSQ10, MSQ11, MSQ12, MSQ13, MSQ14, MSQ16, MSQEXT, MST1, MST2, MST3, MSTPIT_n, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, MTCAL_n, MTCSA_n, MVFAIL_n, MWAG, MWARNF_n, MWATCH_n, MWBBEG, MWBG, MWCH, MWEBG, MWFBG, MWG, MWL01, MWL02, MWL03, MWL04, MWL05, MWL06, MWL07, MWL08, MWL09, MWL10, MWL11, MWL12, MWL13, MWL14, MWL15, MWL16, MWLG, MWQG, MWSG, MWYG, MWZG, OPEROR, PIPASW, PIPDAT, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
 `endif
 
 
@@ -238,8 +306,6 @@ module main;
         $dumpfile("dump.lxt");
         $dumpvars(0, main);
         #5000 SIM_RST = 0;
-        #50000 MSTRT = 1;
-        #5000 MSTRT = 0;
-        #20000000 $finish;
+        #40000000 $finish;
     end
 endmodule

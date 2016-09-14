@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n, T12A, TPARG_n, TSUDO_n, FUTEXT, CGG, CSG, WEDOPG_n, WSG_n, G01, G02, G03, G04, G05, G06, G07, G08, G09, G10, G11, G12, G13, G14, G15, G16, WL01_n, WL02_n, WL03_n, WL04_n, WL05_n, WL06_n, WL07_n, WL08_n, WL09_n, WL10_n, WL11_n, WL12_n, WL13_n, WL14_n, SUMA16_n, SUMB16_n, RAD, SAP, SCAD, OCTAD2, n8XP5, MONPAR, XB0_n, XB1_n, XB2_n, XB3_n, CYL_n, CYR_n, EDOP_n, GINH, SR_n, EXTPLS, INHPLS, RELPLS, G01ED, G02ED, G03ED, G04ED, G05ED, G06ED, G07ED, GEQZRO_n, RADRG, RADRZ, S01, S01_n, S02, S02_n, S03, S03_n, S04, S04_n, S05, S05_n, S06, S06_n, S07, S07_n, S08, S08_n, S09, S09_n, S10, S10_n, S11, S11_n, S12, S12_n, GEMP, G16SW_n, PC15_n, PALE);
+module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n, T12A, TPARG_n, TSUDO_n, FUTEXT, CGG, CSG, WEDOPG_n, WSG_n, G01, G02, G03, G04, G05, G06, G07, G08, G09, G10, G11, G12, G13, G14, G15, G16, WL01_n, WL02_n, WL03_n, WL04_n, WL05_n, WL06_n, WL07_n, WL08_n, WL09_n, WL10_n, WL11_n, WL12_n, WL13_n, WL14_n, SUMA16_n, SUMB16_n, RAD, SAP, SCAD, OCTAD2, n8XP5, MONPAR, XB0_n, XB1_n, XB2_n, XB3_n, CYL_n, CYR_n, EDOP_n, GINH, SR_n, EXTPLS, INHPLS, RELPLS, G01ED, G02ED, G03ED, G04ED, G05ED, G06ED, G07ED, GEQZRO_n, RADRG, RADRZ, S01, S01_n, S02, S02_n, S03, S03_n, S04, S04_n, S05, S05_n, S06, S06_n, S07, S07_n, S08, S08_n, S09, S09_n, S10, S10_n, S11, S11_n, S12, S12_n, GEMP, G16SW_n, PC15_n, PALE, MGP_n, MSP, MPAL_n);
     input wire VCC;
     input wire GND;
     input wire SIM_RST;
@@ -42,7 +42,10 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     output wire GINH;
     input wire GOJAM;
     inout wire INHPLS; //FPGA#wand
+    output wire MGP_n;
     input wire MONPAR;
+    output wire MPAL_n;
+    output wire MSP;
     input wire OCTAD2;
     inout wire PALE; //FPGA#wand
     output wire PC15_n;
@@ -110,9 +113,6 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     wire __A12_1__G03_n;
     wire __A12_1__G16A_n;
     wire __A12_1__GNZRO; //FPGA#wand
-    wire __A12_1__MGP_n;
-    wire __A12_1__MPAL;
-    wire __A12_1__MSP;
     wire __A12_1__PA03;
     wire __A12_1__PA03_n;
     wire __A12_1__PA06;
@@ -271,7 +271,7 @@ module parity_s_register(VCC, GND, SIM_RST, SIM_CLK, GOJAM, PHS4_n, T02_n, T07_n
     U74HC27 U12021(__A12_1__PA03, __A12_1__PA06, __A12_1__PA03, __A12_1__PA06_n, __A12_1__PA09_n, __A12_NET_154, GND, __A12_NET_153, __A12_1__PA03_n, __A12_1__PA06, __A12_1__PA09_n, __A12_NET_155, __A12_1__PA09, VCC, SIM_RST, SIM_CLK);
     U74HC27 #(1'b0, 1'b1, 1'b0) U12022(__A12_1__PA03_n, __A12_1__PA06_n, __A12_NET_145, MONPAR, SAP, __A12_NET_146, GND, __A12_NET_144, SCAD, __A12_NET_147, GOJAM, __A12_NET_163, __A12_1__PA09, VCC, SIM_RST, SIM_CLK);
     U74HC02 U12023(__A12_NET_158, __A12_1__PA12_n, __A12_1__PA15_n, __A12_1__PB15, __A12_NET_152, __A12_NET_158, GND, __A12_1__PB09_n, __A12_1__PB15, __A12_NET_170, __A12_1__PB09, __A12_1__PB15_n, __A12_NET_171, VCC, SIM_RST, SIM_CLK);
-    U74HC04 U12024(__A12_1__PB15, __A12_1__PB15_n, __A12_1__PC15, PC15_n, __A12_1__PC15, __A12_1__MGP_n, GND, GEMP, PC15_n, __A12_1__MSP, __A12_NET_146, __A12_1__MPAL, PALE, VCC, SIM_RST, SIM_CLK);
+    U74HC04 U12024(__A12_1__PB15, __A12_1__PB15_n, __A12_1__PC15, PC15_n, __A12_1__PC15, MGP_n, GND, GEMP, PC15_n, MSP, __A12_NET_146, MPAL_n, PALE, VCC, SIM_RST, SIM_CLK);
     U74HC02 U12025(__A12_1__PC15, __A12_NET_170, __A12_NET_171, __A12_NET_145, CGG, __A12_NET_146, GND, __A12_1__PC15, __A12_NET_145, __A12_NET_147, PC15_n, __A12_NET_146, __A12_NET_150, VCC, SIM_RST, SIM_CLK);
     U74HC27 U12026(TPARG_n, n8XP5, T07_n, PHS4_n, FUTEXT, __A12_1__T7PHS4, GND, __A12_NET_243, XB0_n, T02_n, __A12_NET_245, __A12_NET_151, __A12_NET_150, VCC, SIM_RST, SIM_CLK);
     U74LVC07 U12027(__A12_NET_144, PALE, __A12_NET_151, PALE,  ,  , GND,  ,  ,  ,  ,  ,  , VCC, SIM_RST, SIM_CLK); //FPGA#OD:2,4
