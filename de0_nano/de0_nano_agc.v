@@ -28,11 +28,11 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     reg CDUZM = 0; //input
     reg CDUZP = 0; //input
     reg CTLSAT = 0; //input
-    reg DBLTST = 0; //monitor input
+    wire DBLTST; //monitor input
     reg DKBSNC = 0; //input
     reg DKEND = 0; //input
     reg DKSTRT = 0; //input
-    reg DOSCAL = 0; //input
+    wire DOSCAL; //monitor input
     reg FLTOUT = 0;
     reg FREFUN = 0; //input
     reg GATEX_n = 1; //input
@@ -58,7 +58,7 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     reg LRRLSC = 0; //input
     reg LVDAGD = 0; //input
     input wire MAINRS; //input
-    reg MAMU = 0; //monitor input
+    wire MAMU; //monitor input
     reg MANmP = 0; //input
     reg MANmR = 0; //input
     reg MANmY = 0; //input
@@ -66,49 +66,49 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     reg MANpR = 0; //input
     reg MANpY = 0; //input
     reg MARK = 0; //input
-    reg MDT01 = 0; //monitor input
-    reg MDT02 = 0; //monitor input
-    reg MDT03 = 0; //monitor input
-    reg MDT04 = 0; //monitor input
-    reg MDT05 = 0; //monitor input
-    reg MDT06 = 0; //monitor input
-    reg MDT07 = 0; //monitor input
-    reg MDT08 = 0; //monitor input
-    reg MDT09 = 0; //monitor input
-    reg MDT10 = 0; //monitor input
-    reg MDT11 = 0; //monitor input
-    reg MDT12 = 0; //monitor input
-    reg MDT13 = 0; //monitor input
-    reg MDT14 = 0; //monitor input
-    reg MDT15 = 0; //monitor input
-    reg MDT16 = 0; //monitor input
+    wire MDT01; //monitor input
+    wire MDT02; //monitor input
+    wire MDT03; //monitor input
+    wire MDT04; //monitor input
+    wire MDT05; //monitor input
+    wire MDT06; //monitor input
+    wire MDT07; //monitor input
+    wire MDT08; //monitor input
+    wire MDT09; //monitor input
+    wire MDT10; //monitor input
+    wire MDT11; //monitor input
+    wire MDT12; //monitor input
+    wire MDT13; //monitor input
+    wire MDT14; //monitor input
+    wire MDT15; //monitor input
+    wire MDT16; //monitor input
     input wire MKEY1; //input
     input wire MKEY2; //input
     input wire MKEY3; //input
     input wire MKEY4; //input
     input wire MKEY5; //input
-    reg MLDCH = 0; //monitor input
-    reg MLOAD = 0; //monitor input
-    reg MNHNC = 0; //monitor input
-    reg MNHRPT = 0; //monitor input
-    reg MNHSBF = 0; //monitor input
+    wire MLDCH; //monitor input
+    wire MLOAD; //monitor input
+    wire MNHNC; //monitor input
+    wire MNHRPT; //monitor input
+    wire MNHSBF; //monitor input
     reg MNIMmP = 0; //input
     reg MNIMmR = 0; //input
     reg MNIMmY = 0; //input
     reg MNIMpP = 0; //input
     reg MNIMpR = 0; //input
     reg MNIMpY = 0; //input
-    reg MONPAR = 0; //monitor input
-    reg MONWBK = 0; //monitor input
-    reg MRDCH = 0; //monitor input
-    reg MREAD = 0; //monitor input
+    wire MONPAR; //monitor input
+    wire MONWBK; //monitor input
+    wire MRDCH; //monitor input
+    wire MREAD; //monitor input
     reg MRKREJ = 0; //input
     reg MRKRST = 0; //input
-    reg MSTP = 0; //monitor input
-    reg MSTRT = 0; //monitor input
-    reg MTCSAI = 0; //monitor input
+    wire MSTP; //monitor input
+    wire MSTRT; //monitor input
+    wire MTCSAI; //monitor input
     reg NAVRST = 0; //input
-    reg NHALGA = 0; //monitor input
+    wire NHALGA; //monitor input
     reg NHVFAL = 0; //input
     reg NKEY1 = 0; //input
     reg NKEY2 = 0; //input
@@ -168,22 +168,90 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     wire CDUZDM; //output
     output wire COMACT; //output
     output wire KYRLS; //output
-    wire MGOJAM;
-    wire MT01;
-    wire MT02;
-    wire MT03;
-    wire MT04;
-    wire MT05;
-    wire MT06;
-    wire MT07;
-    wire MT08;
-    wire MT09;
-    wire MT10;
-    wire MT11;
-    wire MT12;
+    wire MBR1; //monitor output
+    wire MBR2; //monitor output
+    wire MCTRAL_n; //monitor output
+    wire MGOJAM; //monitor output
+    wire MGP_n; //monitor output
+    wire MIIP; //monitor output
+    wire MINHL; //monitor output
+    wire MINKL; //monitor output
+    wire MNISQ; //monitor output
+    wire MON800; //monitor output
+    wire MONWT; //monitor output
+    wire MOSCAL_n; //monitor output
+    wire MPAL_n; //monitor output
+    wire MPIPAL_n; //monitor output
+    wire MRAG; //monitor output
+    wire MRCH; //monitor output
+    wire MREQIN; //monitor output
+    wire MRGG; //monitor output
+    wire MRLG; //monitor output
+    wire MRPTAL_n; //monitor output
+    wire MRSC; //monitor output
+    wire MRULOG; //monitor output
+    wire MSCAFL_n; //monitor output
+    wire MSCDBL_n; //monitor output
+    wire MSP; //monitor output
+    wire MSQ10; //monitor output
+    wire MSQ11; //monitor output
+    wire MSQ12; //monitor output
+    wire MSQ13; //monitor output
+    wire MSQ14; //monitor output
+    wire MSQ16; //monitor output
+    wire MSQEXT; //monitor output
+    wire MST1; //monitor output
+    wire MST2; //monitor output
+    wire MST3; //monitor output
+    wire MSTPIT_n; //monitor output
+    wire MT01; //monitor output
+    wire MT02; //monitor output
+    wire MT03; //monitor output
+    wire MT04; //monitor output
+    wire MT05; //monitor output
+    wire MT06; //monitor output
+    wire MT07; //monitor output
+    wire MT08; //monitor output
+    wire MT09; //monitor output
+    wire MT10; //monitor output
+    wire MT11; //monitor output
+    wire MT12; //monitor output
+    wire MTCAL_n; //monitor output
+    wire MTCSA_n; //monitor output
+    wire MVFAIL_n; //monitor output
+    wire MWAG; //monitor output
+    wire MWARNF_n; //monitor output
+    wire MWATCH_n; //monitor output
+    wire MWBBEG; //monitor output
+    wire MWBG; //monitor output
+    wire MWCH; //monitor output
+    wire MWEBG; //monitor output
+    wire MWFBG; //monitor output
+    wire MWG; //monitor output
+    wire MWL01; //monitor output
+    wire MWL02; //monitor output
+    wire MWL03; //monitor output
+    wire MWL04; //monitor output
+    wire MWL05; //monitor output
+    wire MWL06; //monitor output
+    wire MWL07; //monitor output
+    wire MWL08; //monitor output
+    wire MWL09; //monitor output
+    wire MWL10; //monitor output
+    wire MWL11; //monitor output
+    wire MWL12; //monitor output
+    wire MWL13; //monitor output
+    wire MWL14; //monitor output
+    wire MWL15; //monitor output
+    wire MWL16; //monitor output
+    wire MWLG; //monitor output
+    wire MWQG; //monitor output
+    wire MWSG; //monitor output
+    wire MWYG; //monitor output
+    wire MWZG; //monitor output
     output wire OPEROR; //output
-	 wire PIPASW; //output
-	 wire PIPDAT; //output
+    wire PIPASW; //output
+    wire PIPDAT; //output
     output wire RESTRT; //output
     output wire RLYB01; //output
     output wire RLYB02; //output
@@ -204,10 +272,10 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     output wire TMPCAU; //output
     output wire UPLACT; //output
     output wire VNFLSH; //output
-	 	 
-	 input wire PROCEED; //input
-	 assign IN3214 = PROCEED;
-	 assign SBYBUT = PROCEED;
+    
+    input wire PROCEED; //input
+    assign IN3214 = PROCEED;
+    assign SBYBUT = PROCEED;
 
     // Make a 51.2MHz system clock for propagating state, and a 2.048MHz clock
     // that serves as the AGC's clock source
@@ -218,25 +286,25 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     // Allow STRT2 to be injected via the KEY0 button 
     wire STRT2;
     assign STRT2 = ~KEY0;
-	 
+  
     // PIPA spoofing -- simulate 3-3 moding on PIPA inputs, synced with PIPDAT
     // and counting on PIPASW
-	 reg [2:0] moding_counter = 3'b0;
-	 always @(posedge PIPASW) begin
-		moding_counter = moding_counter + 3'b1;
-		if (moding_counter == 3'd6) begin
-			moding_counter = 3'b0;
-		end
-	 end
-	 
-	 assign PIPAXm = PIPDAT && (moding_counter >= 3'd3);
-	 assign PIPAYm = PIPDAT && (moding_counter >= 3'd3);
-	 assign PIPAZm = PIPDAT && (moding_counter >= 3'd3);
-	 assign PIPAXp = PIPDAT && (moding_counter < 3'd3);
-	 assign PIPAYp = PIPDAT && (moding_counter < 3'd3);
-	 assign PIPAZp = PIPDAT && (moding_counter < 3'd3);
+    reg [2:0] moding_counter = 3'b0;
+    always @(posedge PIPASW) begin
+        moding_counter = moding_counter + 3'b1;
+        if (moding_counter == 3'd6) begin
+            moding_counter = 3'b0;
+        end
+    end
+  
+    assign PIPAXm = PIPDAT && (moding_counter >= 3'd3);
+    assign PIPAYm = PIPDAT && (moding_counter >= 3'd3);
+    assign PIPAZm = PIPDAT && (moding_counter >= 3'd3);
+    assign PIPAXp = PIPDAT && (moding_counter < 3'd3);
+    assign PIPAYp = PIPDAT && (moding_counter < 3'd3);
+    assign PIPAZp = PIPDAT && (moding_counter < 3'd3);
 
-     
-    fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, EPCS_DATA, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, CDUXDM, CDUXDP, CDUYDM, CDUYDP, CDUZDM, CDUZDP, COMACT, EPCS_ASDI, EPCS_CSN, EPCS_DCLK, KYRLS, MGOJAM, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, OPEROR, PIPASW, PIPDAT, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
+    jtag_monitor Monitor(MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MONPAR, MREAD, MLOAD, MRDCH, MLDCH, MTCSAI, MONWBK, MNHRPT, MNHNC, MNHSBF, MAMU, NHALGA, DBLTST, DOSCAL);
+    fpga_agc AGC(VCC, GND, SIM_RST, SIM_CLK, BLKUPL_n, BMGXM, BMGXP, BMGYM, BMGYP, BMGZM, BMGZP, CAURST, CDUFAL, CDUXM, CDUXP, CDUYM, CDUYP, CDUZM, CDUZP, CLOCK, CTLSAT, DBLTST, DKBSNC, DKEND, DKSTRT, DOSCAL, EPCS_DATA, FLTOUT, FREFUN, GATEX_n, GATEY_n, GATEZ_n, GCAPCL, GUIREL, HOLFUN, IMUCAG, IMUFAL, IMUOPR, IN3008, IN3212, IN3213, IN3214, IN3216, IN3301, ISSTOR, LEMATT, LFTOFF, LRIN0, LRIN1, LRRLSC, LVDAGD, MAINRS, MAMU, MANmP, MANmR, MANmY, MANpP, MANpR, MANpY, MARK, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, MLDCH, MLOAD, MNHNC, MNHRPT, MNHSBF, MNIMmP, MNIMmR, MNIMmY, MNIMpP, MNIMpR, MNIMpY, MONPAR, MONWBK, MRDCH, MREAD, MRKREJ, MRKRST, MSTP, MSTRT, MTCSAI, NAVRST, NHALGA, NHVFAL, NKEY1, NKEY2, NKEY3, NKEY4, NKEY5, OPCDFL, OPMSW2, OPMSW3, PCHGOF, PIPAXm, PIPAXp, PIPAYm, PIPAYp, PIPAZm, PIPAZp, ROLGOF, RRIN0, RRIN1, RRPONA, RRRLSC, S4BSAB, SBYBUT, SCAFAL, SHAFTM, SHAFTP, SIGNX, SIGNY, SIGNZ, SMSEPR, SPSRDY, STRPRS, STRT2, TEMPIN, TRANmX, TRANmY, TRANmZ, TRANpX, TRANpY, TRANpZ, TRNM, TRNP, TRST10, TRST9, ULLTHR, UPL0, UPL1, VFAIL, XLNK0, XLNK1, ZEROP, n2FSFAL, CDUXDM, CDUXDP, CDUYDM, CDUYDP, CDUZDM, CDUZDP, COMACT, EPCS_ASDI, EPCS_CSN, EPCS_DCLK, KYRLS, MBR1, MBR2, MCTRAL_n, MGOJAM, MGP_n, MIIP, MINHL, MINKL, MNISQ, MON800, MONWT, MOSCAL_n, MPAL_n, MPIPAL_n, MRAG, MRCH, MREQIN, MRGG, MRLG, MRPTAL_n, MRSC, MRULOG, MSCAFL_n, MSCDBL_n, MSP, MSQ10, MSQ11, MSQ12, MSQ13, MSQ14, MSQ16, MSQEXT, MST1, MST2, MST3, MSTPIT_n, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, MTCAL_n, MTCSA_n, MVFAIL_n, MWAG, MWARNF_n, MWATCH_n, MWBBEG, MWBG, MWCH, MWEBG, MWFBG, MWG, MWL01, MWL02, MWL03, MWL04, MWL05, MWL06, MWL07, MWL08, MWL09, MWL10, MWL11, MWL12, MWL13, MWL14, MWL15, MWL16, MWLG, MWQG, MWSG, MWYG, MWZG, OPEROR, PIPASW, PIPDAT, RESTRT, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
 
 endmodule

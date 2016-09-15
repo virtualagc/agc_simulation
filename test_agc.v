@@ -27,7 +27,7 @@ module main;
     reg DKBSNC = 0; //input
     reg DKEND = 0; //input
     reg DKSTRT = 0; //input
-    reg DOSCAL = 0; //input
+    reg DOSCAL = 0; //monitor input
     reg FLTOUT = 0;
     reg FREFUN = 0; //input
     reg GATEX_n = 1; //input
