@@ -7,8 +7,8 @@
  <global>
   <pin name="tdi" direction="output" scope="external" />
   <pin name="tdo" direction="input" scope="external" />
-  <pin name="ir_in[3..0]" direction="output" scope="external" />
-  <pin name="ir_out[3..0]" direction="input" scope="external" />
+  <pin name="ir_in[4..0]" direction="output" scope="external" />
+  <pin name="ir_out[4..0]" direction="input" scope="external" />
   <pin name="virtual_state_cdr" direction="output" scope="external" />
   <pin name="virtual_state_sdr" direction="output" scope="external" />
   <pin name="virtual_state_e1dr" direction="output" scope="external" />

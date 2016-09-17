@@ -34,8 +34,8 @@ agreement for further details.
 	(port
 		(pt 0 120)
 		(input)
-		(text "ir_out[3..0]" (rect 0 0 42 12)(font "Arial" (font_size 8)))
-		(text "ir_out[3..0]" (rect 4 109 76 120)(font "Arial" (font_size 8)))
+		(text "ir_out[4..0]" (rect 0 0 43 12)(font "Arial" (font_size 8)))
+		(text "ir_out[4..0]" (rect 4 109 76 120)(font "Arial" (font_size 8)))
 		(line (pt 0 120)(pt 96 120)(line_width 3))
 	)
 	(port
@@ -48,8 +48,8 @@ agreement for further details.
 	(port
 		(pt 0 104)
 		(output)
-		(text "ir_in[3..0]" (rect 0 0 36 12)(font "Arial" (font_size 8)))
-		(text "ir_in[3..0]" (rect 4 93 70 104)(font "Arial" (font_size 8)))
+		(text "ir_in[4..0]" (rect 0 0 37 12)(font "Arial" (font_size 8)))
+		(text "ir_in[4..0]" (rect 4 93 70 104)(font "Arial" (font_size 8)))
 		(line (pt 0 104)(pt 96 104)(line_width 3))
 	)
 	(port

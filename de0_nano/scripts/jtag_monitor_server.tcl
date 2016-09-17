@@ -1,5 +1,28 @@
 global usb_blaster
 global device
+
+set INDEX 2
+
+set REG_CNTRL 0x02
+set REG_A     0x10
+set REG_L     0x11
+set REG_Q     0x12
+set REG_Z     0x13
+set REG_BB    0x14
+set REG_G     0x15
+set REG_SQ    0x16
+set REG_S     0x17
+set REG_B     0x18
+set REG_X     0x19
+set REG_Y     0x1A
+set REG_U     0x1B
+
+set CNTRL_STOP 0x0001
+set CNTRL_STEP 0x0004
+set CNTRL_INST 0x0008
+
+set cntrl_reg 0x0100
+
 foreach hardware_name [get_hardware_names] {
     if {[string match "USB-Blaster*" $hardware_name]} {
         set usb_blaster $hardware_name
@@ -15,6 +38,19 @@ foreach device_name [get_device_names -hardware_name $usb_blaster] {
 puts "Opening $usb_blaster $device"
 open_device -hardware_name $usb_blaster -device_name $device
 
+proc exchange_register {reg val} {
+    global INDEX
+    set cmd_val [format %04X $val]
+    device_lock -timeout 10000
+    device_virtual_ir_shift -instance_index $INDEX -ir_value $reg -no_captured_ir_value
+    set old_val [device_virtual_dr_shift -dr_value $cmd_val -instance_index $INDEX -length 16 -value_in_hex]
+    device_virtual_ir_shift -instance_index $INDEX -ir_value 0 -no_captured_ir_value
+    device_unlock
+    
+    set old_val_int [expr 0x$old_val]
+    return $old_val_int
+}
+
 proc accept {sock addr port} {
     global conn
     puts "Received connection from $addr:$port"
@@ -24,27 +60,79 @@ proc accept {sock addr port} {
     fileevent $sock readable [list process_command $sock]
 }
 
-set last_val 0
-
 proc process_command {sock} {
     global conn
-    global last_val
+    global global cntrl_reg
+    global CNTRL_STOP
+    global CNTRL_STEP
+    global CNTRL_INST
+    global REG_CNTRL
+    global REG_A
+    global REG_L
+    global REG_Q
+    global REG_Z
+    global REG_BB
+    global REG_G
+    global REG_SQ
+    global REG_S
+    global REG_B
+    global REG_X
+    global REG_Y
+    global REG_U
     if {[eof $sock] || [catch {gets $sock line}]} {
         close $sock
         puts "Connection closed."
         unset conn(addr,$sock)
     } else {
-        set data_len [string length $line]
-        if {$data_len != 0} {
-            set last_val [expr {!$last_val}]
-            set cmd_val [format %04X $last_val]
-            puts "Writing CNTRL = $cmd_val"
-            device_lock -timeout 10000
-            device_virtual_ir_shift -instance_index 2 -ir_value 2 -no_captured_ir_value
-            set read_val [device_virtual_dr_shift -dr_value $cmd_val -instance_index 2  -length 16 -value_in_hex]
-            device_virtual_ir_shift -instance_index 2 -ir_value 0 -no_captured_ir_value
-            device_unlock
-            puts $read_val
+        if {[string equal $line "stop"]} {
+            set cntrl_reg [expr {$cntrl_reg | $CNTRL_STOP}]
+            exchange_register $REG_CNTRL $cntrl_reg
+            puts $sock A
+        } elseif {[string equal $line "cont"]} {
+            set cntrl_reg [expr {$cntrl_reg & ~$CNTRL_STOP}]
+            exchange_register $REG_CNTRL $cntrl_reg
+            puts $sock A
+        } elseif {[string equal $line "step"]} {
+            set temp [expr {$cntrl_reg | $CNTRL_STEP}]
+            exchange_register $REG_CNTRL $temp
+            puts $sock A
+        } elseif {[string equal $line "inst"]} {
+            set cntrl_reg [expr {$cntrl_reg | $CNTRL_INST}]
+            exchange_register $REG_CNTRL $cntrl_reg
+            puts $sock A
+        } elseif {[string equal $line "mct"]} {
+            set cntrl_reg [expr {$cntrl_reg & ~$CNTRL_INST}]
+            exchange_register $REG_CNTRL $cntrl_reg
+            puts $sock A
+        } elseif {[string equal $line "a"]} {
+            set a_val [exchange_register $REG_A 0]
+            puts $sock [format %06o $a_val]
+        } elseif {[string equal $line "l"]} {
+            set l_val [exchange_register $REG_L 0]
+            puts $sock [format %06o $l_val]
+        } elseif {[string equal $line "q"]} {
+            set q_val [exchange_register $REG_Q 0]
+            puts $sock [format %06o $q_val]
+        } elseif {[string equal $line "z"]} {
+            set z_val [exchange_register $REG_Z 0]
+            puts $sock [format %06o $z_val]
+        } elseif {[string equal $line "bb"]} {
+            set bb_val [exchange_register $REG_BB 0]
+            puts $sock [format %06o $bb_val]
+        } elseif {[string equal $line "g"]} {
+            set g_val [exchange_register $REG_G 0]
+            puts $sock [format %06o $g_val]
+        } elseif {[string equal $line "sq"]} {
+            set sq_val [exchange_register $REG_SQ 0]
+            puts $sock [format %06o $sq_val]
+        } elseif {[string equal $line "s"]} {
+            set s_val [exchange_register $REG_S 0]
+            puts $sock [format %06o $s_val]
+        } elseif {[string equal $line "b"]} {
+            set b_val [exchange_register $REG_B 0]
+            puts $sock [format %06o $b_val]
+        } else {
+            puts $sock N
         }
     }
 }

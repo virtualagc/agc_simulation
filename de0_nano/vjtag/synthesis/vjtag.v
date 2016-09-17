@@ -6,8 +6,8 @@
 module vjtag (
 		output wire       tdi,                // jtag.tdi
 		input  wire       tdo,                //     .tdo
-		output wire [3:0] ir_in,              //     .ir_in
-		input  wire [3:0] ir_out,             //     .ir_out
+		output wire [4:0] ir_in,              //     .ir_in
+		input  wire [4:0] ir_out,             //     .ir_out
 		output wire       virtual_state_cdr,  //     .virtual_state_cdr
 		output wire       virtual_state_sdr,  //     .virtual_state_sdr
 		output wire       virtual_state_e1dr, //     .virtual_state_e1dr
@@ -22,7 +22,7 @@ module vjtag (
 	sld_virtual_jtag #(
 		.sld_auto_instance_index ("NO"),
 		.sld_instance_index      (2),
-		.sld_ir_width            (4)
+		.sld_ir_width            (5)
 	) virtual_jtag_0 (
 		.tdi                (tdi),                // jtag.tdi
 		.tdo                (tdo),                //     .tdo

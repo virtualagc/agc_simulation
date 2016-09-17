@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="vjtag" kind="system" version="15.1" fabric="QSYS">
  <!-- Format version 15.1 185 (Future versions may contain additional information.) -->
- <!-- 2016.09.16.18:25:09 -->
+ <!-- 2016.09.17.13:21:32 -->
  <!-- A collection of modules and connections -->
  <parameter name="clockCrossingAdapter">
   <type>com.altera.sopcmodel.ensemble.EClockAdapter</type>
@@ -53,7 +53,7 @@
  </parameter>
  <parameter name="generationId">
   <type>int</type>
-  <value>1474075508</value>
+  <value>1474143692</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>true</visible>
@@ -101,7 +101,7 @@
  </parameter>
  <parameter name="projectName">
   <type>java.lang.String</type>
-  <value></value>
+  <value>de0_nano_agc.qpf</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -189,7 +189,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="sld_ir_width">
    <type>int</type>
-   <value>4</value>
+   <value>5</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -272,13 +272,13 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>ir_in</name>
     <direction>Output</direction>
-    <width>4</width>
+    <width>5</width>
     <role>ir_in</role>
    </port>
    <port>
     <name>ir_out</name>
     <direction>Input</direction>
-    <width>4</width>
+    <width>5</width>
     <role>ir_out</role>
    </port>
    <port>
@@ -425,5 +425,5 @@ parameters are a RESULT of the module parameters. -->
   <version>15.1</version>
  </plugin>
  <reportVersion>15.1 185</reportVersion>
- <uniqueIdentifier>005056C000080000015735BF40A9</uniqueIdentifier>
+ <uniqueIdentifier>005056C000080000015739CFA5AD</uniqueIdentifier>
 </EnsembleReport>
