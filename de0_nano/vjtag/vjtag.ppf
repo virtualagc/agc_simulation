@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pinplan
+ variation_name="virtual_jtag_0"
+ megafunction_name="ALTERA_VIRTUAL_JTAG"
+ intended_family="Cyclone IV E"
+ specifies="all_ports">
+ <global>
+  <pin name="tdi" direction="output" scope="external" />
+  <pin name="tdo" direction="input" scope="external" />
+  <pin name="ir_in[3..0]" direction="output" scope="external" />
+  <pin name="ir_out[3..0]" direction="input" scope="external" />
+  <pin name="virtual_state_cdr" direction="output" scope="external" />
+  <pin name="virtual_state_sdr" direction="output" scope="external" />
+  <pin name="virtual_state_e1dr" direction="output" scope="external" />
+  <pin name="virtual_state_pdr" direction="output" scope="external" />
+  <pin name="virtual_state_e2dr" direction="output" scope="external" />
+  <pin name="virtual_state_udr" direction="output" scope="external" />
+  <pin name="virtual_state_cir" direction="output" scope="external" />
+  <pin name="virtual_state_uir" direction="output" scope="external" />
+  <pin name="tck" direction="output" scope="external" />
+ </global>
+</pinplan>

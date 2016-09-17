@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAURST, MAINRS, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, PROCEED, COMACT, KYRLS, RESTRT, OPEROR, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH);
+module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAURST, MAINRS, MKEY1, MKEY2, MKEY3, MKEY4, MKEY5, PROCEED, COMACT, KYRLS, RESTRT, OPEROR, RLYB01, RLYB02, RLYB03, RLYB04, RLYB05, RLYB06, RLYB07, RLYB08, RLYB09, RLYB10, RLYB11, RYWD12, RYWD13, RYWD14, RYWD16, SBYLIT, TMPCAU, UPLACT, VNFLSH, MT12);
     input wire OSC_50;
     input wire EPCS_DATA;
     input wire KEY0;
@@ -215,7 +215,7 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     wire MT09; //monitor output
     wire MT10; //monitor output
     wire MT11; //monitor output
-    wire MT12; //monitor output
+    output wire MT12; //monitor output
     wire MTCAL_n; //monitor output
     wire MTCSA_n; //monitor output
     wire MVFAIL_n; //monitor output
