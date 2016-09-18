@@ -2,8 +2,11 @@ global usb_blaster
 global device
 
 set INDEX 2
+set WRITE 0x8000
 
 set REG_CNTRL 0x02
+set REG_BRKBANK 0x03
+set REG_BRKADDR 0x04
 set REG_A     0x10
 set REG_L     0x11
 set REG_Q     0x12
@@ -20,8 +23,7 @@ set REG_U     0x1B
 set CNTRL_STOP 0x0001
 set CNTRL_STEP 0x0004
 set CNTRL_INST 0x0008
-
-set cntrl_reg 0x0100
+set CNTRL_BRKINST 0x0010
 
 foreach hardware_name [get_hardware_names] {
     if {[string match "USB-Blaster*" $hardware_name]} {
@@ -52,21 +54,46 @@ proc exchange_register {reg val} {
 }
 
 proc accept {sock addr port} {
+    global REG_CNTRL
     global conn
     puts "Received connection from $addr:$port"
     set conn(addr,$sock) [list $addr $port]
+    
+    exchange_register $REG_CNTRL 0x8100
     
     fconfigure $sock -buffering line
     fileevent $sock readable [list process_command $sock]
 }
 
+proc process_addr {sbank saddr} {
+    set bank [expr 0$sbank]
+    set addr [expr 0$saddr]
+    
+    set bb 0
+    if {$bank > 043} {
+        error "Bank too large!"
+    } elseif {$bank >= 040} {
+        set bb [expr {$bb | 0100}]
+        set bank [expr {$bank - 010}]
+    }
+    set bb [expr {$bb | ($bank << 10)}]
+    if {$bank != 0 && ($addr < 02000 || $addr > 03777)} {
+        error "Address is fixed-fixed or erasable, but got nonzero bank"
+    }
+    
+    return [list $bb $addr]
+}
+
 proc process_command {sock} {
     global conn
-    global global cntrl_reg
+    global WRITE
     global CNTRL_STOP
     global CNTRL_STEP
     global CNTRL_INST
+    global CNTRL_BRKINST
     global REG_CNTRL
+    global REG_BRKBANK
+    global REG_BRKADDR
     global REG_A
     global REG_L
     global REG_Q
@@ -85,23 +112,28 @@ proc process_command {sock} {
         unset conn(addr,$sock)
     } else {
         if {[string equal $line "stop"]} {
-            set cntrl_reg [expr {$cntrl_reg | $CNTRL_STOP}]
+            set cntrl_reg [exchange_register $REG_CNTRL 0]
+            set cntrl_reg [expr {$WRITE | $cntrl_reg | $CNTRL_STOP}]
             exchange_register $REG_CNTRL $cntrl_reg
             puts $sock A
         } elseif {[string equal $line "cont"]} {
-            set cntrl_reg [expr {$cntrl_reg & ~$CNTRL_STOP}]
+            set cntrl_reg [exchange_register $REG_CNTRL 0]
+            set cntrl_reg [expr {$WRITE | ($cntrl_reg & (~$CNTRL_STOP & 0x7FFF))}]
             exchange_register $REG_CNTRL $cntrl_reg
             puts $sock A
         } elseif {[string equal $line "step"]} {
-            set temp [expr {$cntrl_reg | $CNTRL_STEP}]
-            exchange_register $REG_CNTRL $temp
+            set cntrl_reg [exchange_register $REG_CNTRL 0]
+            set cntrl_reg [expr {$WRITE | $cntrl_reg | $CNTRL_STEP}]
+            exchange_register $REG_CNTRL $cntrl_reg
             puts $sock A
         } elseif {[string equal $line "inst"]} {
-            set cntrl_reg [expr {$cntrl_reg | $CNTRL_INST}]
+            set cntrl_reg [exchange_register $REG_CNTRL 0]
+            set cntrl_reg [expr {$WRITE | $cntrl_reg | $CNTRL_INST}]
             exchange_register $REG_CNTRL $cntrl_reg
             puts $sock A
         } elseif {[string equal $line "mct"]} {
-            set cntrl_reg [expr {$cntrl_reg & ~$CNTRL_INST}]
+            set cntrl_reg [exchange_register $REG_CNTRL 0]
+            set cntrl_reg [expr {$WRITE | ($cntrl_reg & (~$CNTRL_INST & 0x7FFF))}]
             exchange_register $REG_CNTRL $cntrl_reg
             puts $sock A
         } elseif {[string equal $line "a"]} {
@@ -131,6 +163,45 @@ proc process_command {sock} {
         } elseif {[string equal $line "b"]} {
             set b_val [exchange_register $REG_B 0]
             puts $sock [format %06o $b_val]
+        } elseif {[string match "break*" $line]} {
+            set words [regexp -inline -all -- {[^ ,]+} $line]
+            set num_words [llength $words]
+            if {$num_words >= 2 && $num_words <= 3} {
+                if {$num_words == 3} {
+                    set sbank [lindex $words 1]
+                    set saddr [lindex $words 2]
+                } else {
+                    set sbank "0"
+                    set saddr [lindex $words 1]
+                }
+                if {[catch {process_addr $sbank $saddr} faddr]} {
+                    puts $sock N
+                } else {
+                    # Disable instruction breakpoints while we fiddle...
+                    set cntrl_reg [exchange_register $REG_CNTRL 0]
+                    set cntrl_reg [expr {$WRITE | ($cntrl_reg & (~$CNTRL_BRKINST & 0x7FFF))}]
+                    exchange_register $REG_CNTRL $cntrl_reg
+                    
+                    # Set the break bank and address
+                    exchange_register $REG_BRKBANK [expr {$WRITE | [lindex $faddr 0]}]
+                    exchange_register $REG_BRKADDR [expr {$WRITE | [lindex $faddr 1]}]
+                    
+                    # Enable instruction breakpointing
+                    set cntrl_reg [expr {$WRITE | $cntrl_reg | $CNTRL_BRKINST}]
+                    exchange_register $REG_CNTRL $cntrl_reg
+                    
+                    puts $sock A
+                }
+            } elseif {$num_words == 1} {
+                # Disable instruction breakpointing
+                set cntrl_reg [exchange_register $REG_CNTRL 0]
+                set cntrl_reg [expr {$WRITE | ($cntrl_reg & (~$CNTRL_BRKINST & 0x7FFF))}]
+                exchange_register $REG_CNTRL $cntrl_reg
+                
+                puts $sock A
+            } else {
+                puts $sock N
+            }
         } else {
             puts $sock N
         }

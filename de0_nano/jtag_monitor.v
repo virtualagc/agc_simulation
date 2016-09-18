@@ -3,6 +3,8 @@
 
 `define BYPASS  5'o0
 `define CONTROL 5'o2
+`define BRKBANK 5'o3
+`define BRKADDR 5'o4
 `define REG_A   5'o20
 `define REG_L   5'o21
 `define REG_Q   5'o22
@@ -101,12 +103,14 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     wire [15:0] write_bus;
     assign write_bus = {MWL16, MWL15, MWL14, MWL13, MWL12, MWL11, MWL10, MWL09, MWL08, MWL07, MWL06, MWL05, MWL04, MWL03, MWL02, MWL01};
     wire [15:0] direct_sq;
-    assign direct_sq = {MSQ16, MSQ14, MSQ13, MSQ12, MSQ11, MSQ10, 9'b0, MSQEXT};
+    assign direct_sq = {MSQEXT, MSQ16, MSQ14, MSQ13, MSQ12, MSQ11, MSQ10, 9'b0};
     
     // JTAG Registers
     reg bypass_reg = 0;
     reg [15:0] tmp_reg;
     reg [15:0] cntrl_reg = 16'o0;
+    reg [15:0] break_bank = 16'o0;
+    reg [15:0] break_addr = 16'o0;
     reg [15:0] a_reg = 16'o0;
     reg [15:0] l_reg = 16'o0;
     reg [15:0] q_reg = 16'o0;
@@ -122,14 +126,15 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     // JTAG control wires
     wire step;
     wire step_type;
+    wire break_inst;
     
     // CONTROL register bits
     assign MSTP   = cntrl_reg[0]; // Bit 0 = MSTP
     assign MSTRT  = cntrl_reg[1]; // Bit 1 = MSTRT
     assign step   = cntrl_reg[2]; // Bit 2 = Single-step
     assign step_type = cntrl_reg[3]; // Bit 3 = Step type
+    assign break_inst = cntrl_reg[4]; // Bit 4 = Break on instruction
     assign NHALGA = cntrl_reg[8]; // Bit 8 = NHALGA
-    
 
     // Virtual JTAG implementation
     wire tck, tdi;
@@ -151,7 +156,19 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
         if (e1dr) begin
             case (ir_in)
                 `CONTROL: begin
-                              cntrl_reg <= tmp_reg;
+                              if (tmp_reg[15] == 1'b1) begin
+                                  cntrl_reg[14:0] <= tmp_reg[14:0];
+                              end
+                          end
+                `BRKBANK: begin
+                              if (tmp_reg[15] == 1'b1) begin
+                                  break_bank[14:0] <= tmp_reg[14:0];
+                              end
+                          end
+                `BRKADDR: begin
+                              if (tmp_reg[15] == 1'b1) begin
+                                  break_addr[14:0] <= tmp_reg[14:0];
+                              end
                           end
             endcase
         end else begin
@@ -168,6 +185,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
             end
         end
         
+        // Update registers
         if (MWAG) begin
             a_reg <= write_bus;
         end
@@ -201,8 +219,17 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
         if (MWBG) begin
             b_reg <= write_bus;
         end
-        if (MWCH && s_reg == 16'o7) begin
-            bb_reg[6:4] = write_bus[6:4];
+        if (MWCH && s_reg[8:0] == 9'o7) begin
+            bb_reg[6:4] <= write_bus[6:4];
+        end
+        
+        // Check breakpoints. Breakpoints in switched-erasable not yet supported.
+        if (break_inst && MNISQ && s_reg[11:0] == break_addr[11:0] && // S should always completely match what was requested
+                                  (s_reg[11:10] != 2'b01 || (s_reg[11:10] == 2'b01 &&  // If S is in the 2000..3777 range, our fixed bank must match
+                                    (bb_reg[14:13] == 2'b11 && bb_reg[14:4] == break_bank[14:4]) || // If the fixed bank is in the 30..37 range, the FEB applies
+                                    (bb_reg[14:13] != 2'b11 && bb_reg[14:10] == break_bank[14:10]))))  begin // Otherwise only use the FB bits
+            // We just loaded the breakpointed instruction. Issue MSTP.
+            cntrl_reg[0] = 1;
         end
     end
     
@@ -216,6 +243,8 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
             if (cdr) begin
                 case (ir_in)
                     `CONTROL: tmp_reg <= cntrl_reg;
+                    `BRKBANK: tmp_reg <= break_bank;
+                    `BRKADDR: tmp_reg <= break_addr;
                     `REG_A:   tmp_reg <= a_reg;
                     `REG_L:   tmp_reg <= l_reg;
                     `REG_Q:   tmp_reg <= q_reg;
