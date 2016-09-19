@@ -4,26 +4,32 @@ global device
 set INDEX 2
 set WRITE 0x8000
 
-set REG_CNTRL 0x02
-set REG_BRKBANK 0x03
-set REG_BRKADDR 0x04
-set REG_A     0x10
-set REG_L     0x11
-set REG_Q     0x12
-set REG_Z     0x13
-set REG_BB    0x14
-set REG_G     0x15
-set REG_SQ    0x16
-set REG_S     0x17
-set REG_B     0x18
-set REG_X     0x19
-set REG_Y     0x1A
-set REG_U     0x1B
+set REG_CNTRL 002
+set REG_BRKBANK 003
+set REG_BRKADDR 004
+set REG_RWBANK  005
+set REG_RWADDR  006
+set REG_RWCHAN  007
+set REG_RWDATA  010
+set REG_A     020
+set REG_L     021
+set REG_Q     022
+set REG_Z     023
+set REG_BB    024
+set REG_G     025
+set REG_SQ    026
+set REG_S     027
+set REG_B     030
+set REG_X     031
+set REG_Y     032
+set REG_U     033
 
 set CNTRL_STOP 0x0001
 set CNTRL_STEP 0x0004
 set CNTRL_INST 0x0008
 set CNTRL_BRKINST 0x0010
+set CNTRL_FETCH 0x0020
+set CNTRL_STORE 0x0040
 
 foreach hardware_name [get_hardware_names] {
     if {[string match "USB-Blaster*" $hardware_name]} {
@@ -91,9 +97,14 @@ proc process_command {sock} {
     global CNTRL_STEP
     global CNTRL_INST
     global CNTRL_BRKINST
+    global CNTRL_FETCH
+    global CNTRL_STORE
     global REG_CNTRL
     global REG_BRKBANK
     global REG_BRKADDR
+    global REG_RWBANK
+    global REG_RWADDR
+    global REG_RWDATA
     global REG_A
     global REG_L
     global REG_Q
@@ -199,6 +210,72 @@ proc process_command {sock} {
                 exchange_register $REG_CNTRL $cntrl_reg
                 
                 puts $sock A
+            } else {
+                puts $sock N
+            }
+        } elseif {[string match "fetch*" $line]} {
+            set words [regexp -inline -all -- {[^ ,]+} $line]
+            set num_words [llength $words]
+            if {$num_words >= 2 && $num_words <= 3} {
+                if {$num_words == 3} {
+                    set sbank [lindex $words 1]
+                    set saddr [lindex $words 2]
+                } else {
+                    set sbank "0"
+                    set saddr [lindex $words 1]
+                }
+                if {[catch {process_addr $sbank $saddr} faddr]} {
+                    puts $sock N
+                } else {
+                    exchange_register $REG_RWBANK [expr {$WRITE | [lindex $faddr 0]}]
+                    exchange_register $REG_RWADDR [expr {$WRITE | [lindex $faddr 1]}]
+                    
+                    # Enable instruction breakpointing
+                    set cntrl_reg [exchange_register $REG_CNTRL 0]
+                    set cntrl_reg [expr {$WRITE | $cntrl_reg | $CNTRL_FETCH}]
+                    exchange_register $REG_CNTRL $cntrl_reg
+                    while {[expr {$cntrl_reg & $CNTRL_FETCH}] != 0} {
+                        set cntrl_reg [exchange_register $REG_CNTRL 0]
+                    }
+                    
+                    set data [exchange_register $REG_RWDATA 0]
+
+                    puts $sock [format %06o $data]
+                }
+            } else {
+                puts $sock N
+            }
+        } elseif {[string match "store*" $line]} {
+            set words [regexp -inline -all -- {[^ ,]+} $line]
+            set num_words [llength $words]
+            if {$num_words >= 3 && $num_words <= 4} {
+                if {$num_words == 4} {
+                    set sbank [lindex $words 1]
+                    set saddr [lindex $words 2]
+                    set sdata [lindex $words 3]
+                } else {
+                    set sbank "0"
+                    set saddr [lindex $words 1]
+                    set sdata [lindex $words 2]
+                }
+                set data [expr 0$sdata]
+                if {[catch {process_addr $sbank $saddr} faddr]} {
+                    puts $sock N
+                } else {
+                    exchange_register $REG_RWBANK [expr {$WRITE | [lindex $faddr 0]}]
+                    exchange_register $REG_RWADDR [expr {$WRITE | [lindex $faddr 1]}]
+                    exchange_register $REG_RWDATA $data
+                    
+                    # Enable instruction breakpointing
+                    set cntrl_reg [exchange_register $REG_CNTRL 0]
+                    set cntrl_reg [expr {$WRITE | $cntrl_reg | $CNTRL_STORE}]
+                    exchange_register $REG_CNTRL $cntrl_reg
+                    while {[expr {$cntrl_reg & $CNTRL_STORE}] != 0} {
+                        set cntrl_reg [exchange_register $REG_CNTRL 0]
+                    }
+
+                    puts $sock A
+                }
             } else {
                 puts $sock N
             }
