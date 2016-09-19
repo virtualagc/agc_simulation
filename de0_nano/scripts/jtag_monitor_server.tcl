@@ -72,20 +72,35 @@ proc accept {sock addr port} {
 }
 
 proc process_addr {sbank saddr} {
-    set bank [expr 0$sbank]
     set addr [expr 0$saddr]
+    set fbank 0
+    set ebank 0
+    set feb 0
     
-    set bb 0
-    if {$bank > 043} {
-        error "Bank too large!"
-    } elseif {$bank >= 040} {
-        set bb [expr {$bb | 0100}]
-        set bank [expr {$bank - 010}]
+    if {[string index $sbank 0] == "E"} {
+        set ebank [expr 0[string range $sbank 1 end]]
+        if {$ebank > 07} {
+            error "Erasable bank too large!"
+        }
+        
+        if {$ebank != 0 && ($addr < 01400 || $addr > 01777)} {
+            error "Address is unswitched-erasable or fixed, but got nonzero bank"
+        }
+    } else {
+        set fbank [expr 0$sbank]
+        if {$fbank > 043} {
+            error "Bank too large!"
+        } elseif {$fbank >= 040} {
+            set feb 0100
+            set fbank [expr {$fbank - 010}]
+        }
+        
+        if {$fbank != 0 && ($addr < 02000 || $addr > 03777)} {
+            error "Address is fixed-fixed or erasable, but got nonzero bank"
+        }
     }
-    set bb [expr {$bb | ($bank << 10)}]
-    if {$bank != 0 && ($addr < 02000 || $addr > 03777)} {
-        error "Address is fixed-fixed or erasable, but got nonzero bank"
-    }
+  
+    set bb [expr {($fbank << 10) | $feb | $ebank}]
     
     return [list $bb $addr]
 }
