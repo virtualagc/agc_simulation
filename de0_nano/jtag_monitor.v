@@ -178,6 +178,8 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     wire break_inst;
     wire fetch_data;
     wire store_data;
+    wire read_chan;
+    wire load_chan;
     
     // CONTROL register bits
     assign MSTP   = cntrl_reg[0] && !suppress_mstp; // Bit 0 = MSTP
@@ -186,8 +188,10 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     assign step_type = cntrl_reg[3]; // Bit 3 = Step type
     assign break_inst = cntrl_reg[4]; // Bit 4 = Break on instruction
     assign fetch_data = cntrl_reg[5]; // Bit 5 = Fetch data at specified address
-    assign store_data = cntrl_reg[6]; // Bit 5 = Store data to specified address
-    assign NHALGA = cntrl_reg[8]; // Bit 8 = NHALGA
+    assign store_data = cntrl_reg[6]; // Bit 6 = Store data to specified address
+    assign read_chan  = cntrl_reg[7]; // Bit 7 = Read the specified channel
+    assign load_chan  = cntrl_reg[8]; // Bit 8 = Load the specified channel
+    assign NHALGA = cntrl_reg[10]; // Bit 10 = NHALGA
 
     // Virtual JTAG implementation
     wire tck, tdi;
@@ -299,7 +303,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
             cntrl_reg[0] <= 1;
         end
         
-        // Handle FETCH sequences
+        // Handle STORE/FETCH sequences
         if (fetch_data || store_data) begin
             if (!MREQIN) begin
                 // Allow progression until our request is latched and T01 of the sequence starts
@@ -312,20 +316,26 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                         MREAD <= 1'b0;
                         MLOAD <= 1'b0;
                     end else if (MT04) begin
-                        monitor_data <= rw_bank;
+                        monitor_data[15] <= rw_bank[14];
+                        monitor_data[13:0] <= rw_bank[13:0];
+                    end else if (MT05) begin
+                        monitor_data <= 16'o0;
                     end else if (MT08) begin
                         monitor_data <= rw_addr;
-                    end else begin
+                    end else if (MT09) begin
                         monitor_data <= 16'o0;
                     end
                 end else if (stage == 3'o1) begin
-                    if (MT02 && store_data) begin
+                    if (MT04 && store_data) begin
                         monitor_data <= rw_data;
+                    end else if (MT05) begin
+                        monitor_data <= 16'b0;
                     end else if (MT07 && fetch_data) begin
                         rw_data <= write_bus;
                     end else if (MT09 && store_data) begin
                         monitor_data <= rw_data;
                     end else if (MT10) begin
+                        monitor_data <= 16'b0;
                         bb_reg[14] <= write_bus[15];
                         bb_reg[13:10] <= write_bus[13:10];
                         bb_reg[2:0] <= write_bus[2:0];
@@ -333,12 +343,36 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                         if (fetch_data) cntrl_reg[5] <= 1'b0;
                         else cntrl_reg[6] <= 1'b0;
                         suppress_mstp <= 1'b0;
-                    end else begin
-                        monitor_data <= 16'o0;
                     end
                 end
             end
         end
+
+        // Handle INOTLD/INOTRD sequences
+        if (read_chan || load_chan) begin
+            if (!MREQIN) begin
+                // Allow progression until our request is latched and T01 of the sequence starts
+                if (read_chan) MRDCH <= 1'b1;
+                else MLDCH <= 1'b1;
+                suppress_mstp <= 1'b1;
+           end else begin
+                if (MT01) begin
+                    MRDCH <= 1'b0;
+                    MLDCH <= 1'b0;
+                    monitor_data <= rw_addr;
+                end else if (MT05 && read_chan) begin
+                    rw_data <= write_bus;
+                end else if (MT07 && load_chan) begin
+                    monitor_data <= rw_data;
+                end else if (MT11) begin
+                    if (read_chan) cntrl_reg[7] <= 1'b0;
+                    else cntrl_reg[8] <= 1'b0;
+                    suppress_mstp <= 1'b0;
+                end else begin
+                    monitor_data <= 16'o0;
+                end
+           end
+       end
     end
     
     // During SDR, shift into either the temporary shift register or the bypass register, depending on whether
