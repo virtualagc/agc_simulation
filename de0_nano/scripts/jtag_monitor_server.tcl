@@ -31,6 +31,7 @@ set CNTRL_FETCH 0x0020
 set CNTRL_STORE 0x0040
 set CNTRL_RDCH  0x0080
 set CNTRL_LDCH  0x0100
+set CNTRL_TCSAJ 0x0200
 
 foreach hardware_name [get_hardware_names] {
     if {[string match "USB-Blaster*" $hardware_name]} {
@@ -58,6 +59,12 @@ proc exchange_register {reg val} {
     
     set old_val_int [expr 0x$old_val]
     return $old_val_int
+}
+
+proc sign_extend {val} {
+    set lower_sign [expr {$val & 040000}]
+    set sext_val [expr {$val | ($lower_sign << 1)}]
+    return $sext_val
 }
 
 proc process_addr {sbank saddr} {
@@ -215,6 +222,9 @@ proc store {sargs} {
     }
     
     set data [expr 0$sdata]
+    if {$addr != 0 && $addr != 3} {
+        set data [sign_extend $data]
+    }
     if {[catch {process_addr $sbank $saddr} faddr]} {
         return N
     }
@@ -278,7 +288,7 @@ proc loadch {sargs} {
     
     set schan [lindex $sargs 0]
     set sdata [lindex $sargs 1]
-    set data [expr 0$sdata]
+    set data [sign_extend [expr 0$sdata]]
     if {[catch {process_chan $schan} chan]} {
         return N
     }
@@ -296,6 +306,45 @@ proc loadch {sargs} {
     return A
 }
 
+proc jump {sargs} {
+    global WRITE
+    global REG_CNTRL
+    global REG_RWBANK
+    global REG_RWADDR
+    global CNTRL_TCSAJ
+
+    set nargs [llength $sargs]
+    if {$nargs == 2} {
+        set sbank [lindex $sargs 0]
+        set saddr [lindex $sargs 1]
+    } elseif {$nargs == 1} {
+        set sbank "0"
+        set saddr [lindex $sargs 0]
+    } else {
+        return N
+    }
+    if {[catch {process_addr $sbank $saddr} faddr]} {
+        return N
+    }
+    
+    set bb [sign_extend [lindex $faddr 0]]
+    set addr [lindex $faddr 1]
+    if {[expr $bb & 060000] == 060000} {
+        set old_fext [readch [list "7"]]
+        loadch [list "7" [format %03o [expr $bb & 0100]]]
+    }
+    store [list "6" [format %06o $bb]]
+    exchange_register $REG_RWADDR [expr {$WRITE | $addr}]
+    
+    set cntrl_reg [exchange_register $REG_CNTRL 0]
+    set cntrl_reg [expr {$WRITE | $cntrl_reg | $CNTRL_TCSAJ}]
+    exchange_register $REG_CNTRL $cntrl_reg
+    while {[expr {$cntrl_reg & $CNTRL_TCSAJ}] != 0} {
+        set cntrl_reg [exchange_register $REG_CNTRL 0]
+    }
+
+    return A
+}
 
 proc accept {sock addr port} {
     global REG_CNTRL
@@ -429,6 +478,9 @@ proc process_command {cmd sargs} {
         }
         loadch {
             return [loadch $sargs]
+        } 
+        jump {
+            return [jump $sargs]
         } 
         default {
            return N

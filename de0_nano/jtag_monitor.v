@@ -25,7 +25,7 @@
 `define STEP_INST 1'b1
 `define STEP_MCT  1'b0
 
-module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MONPAR, MREAD, MLOAD, MRDCH, MLDCH, MTCSAI, MONWBK, MNHRPT, MNHNC, MNHSBF, MAMU, NHALGA, DBLTST, DOSCAL, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, MWL01, MWL02, MWL03, MWL04, MWL05, MWL06, MWL07, MWL08, MWL09, MWL10, MWL11, MWL12, MWL13, MWL14, MWL15, MWL16, MSQ16, MSQ14, MSQ13, MSQ12, MSQ11, MSQ10, MSQEXT, MST1, MST2, MST3, MNISQ, MWAG, MWLG, MWQG, MWZG, MWBBEG, MWEBG, MWFBG, MWG, MWSG, MWBG, MWCH, MRGG, MREQIN);
+module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT06, MDT07, MDT08, MDT09, MDT10, MDT11, MDT12, MDT13, MDT14, MDT15, MDT16, MONPAR, MREAD, MLOAD, MRDCH, MLDCH, MTCSAI, MONWBK, MNHRPT, MNHNC, MNHSBF, MAMU, NHALGA, DBLTST, DOSCAL, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, MWL01, MWL02, MWL03, MWL04, MWL05, MWL06, MWL07, MWL08, MWL09, MWL10, MWL11, MWL12, MWL13, MWL14, MWL15, MWL16, MSQ16, MSQ14, MSQ13, MSQ12, MSQ11, MSQ10, MSQEXT, MST1, MST2, MST3, MNISQ, MWAG, MWLG, MWQG, MWZG, MWBBEG, MWEBG, MWFBG, MWG, MWSG, MWBG, MWCH, MRGG, MREQIN, MTCSA_n);
     input wire SIM_CLK;
 
     output wire MSTRT;     // Inject a Fresh Start when pulsed
@@ -122,6 +122,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     input wire MRGG;       // Read from G register
     
     input wire MREQIN;     // Monitor sequence request has been latched
+    input wire MTCSA_n;    // Monitor transfer control instruction sequence is selected
     
     wire [15:0] write_bus;
     assign write_bus = {MWL16, MWL15, MWL14, MWL13, MWL12, MWL11, MWL10, MWL09, MWL08, MWL07, MWL06, MWL05, MWL04, MWL03, MWL02, MWL01};
@@ -131,6 +132,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     assign stage = {MST3, MST2, MST1};
     
     reg suppress_mstp = 1'b0;
+    reg tcsaj_in_progress = 1'b0;
     
     reg [15:0] monitor_data;
     assign MDT01 = monitor_data[0];
@@ -180,6 +182,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     wire store_data;
     wire read_chan;
     wire load_chan;
+    wire transfer_control;
     
     // CONTROL register bits
     assign MSTP   = cntrl_reg[0] && !suppress_mstp; // Bit 0 = MSTP
@@ -191,6 +194,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
     assign store_data = cntrl_reg[6]; // Bit 6 = Store data to specified address
     assign read_chan  = cntrl_reg[7]; // Bit 7 = Read the specified channel
     assign load_chan  = cntrl_reg[8]; // Bit 8 = Load the specified channel
+    assign transfer_control  = cntrl_reg[9]; // Bit 9 = Transfer control to specified address
     assign NHALGA = cntrl_reg[10]; // Bit 10 = NHALGA
 
     // Virtual JTAG implementation
@@ -219,6 +223,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                           end
                 `BRKBANK: begin
                               if (tmp_reg[15] == 1'b1) begin
+                                  break_bank[15] <= tmp_reg[14];
                                   break_bank[14:0] <= tmp_reg[14:0];
                               end
                           end
@@ -229,6 +234,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                           end
                 `RWBANK: begin
                               if (tmp_reg[15] == 1'b1) begin
+                                  rw_bank[15] <= tmp_reg[14];
                                   rw_bank[14:0] <= tmp_reg[14:0];
                               end
                          end
@@ -239,7 +245,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                          end
                 `RWDATA: begin
                               // We care about all 16 bits, so RWDATA has no write bit.
-                              rw_data[14:0] <= tmp_reg[14:0];
+                              rw_data[15:0] <= tmp_reg[15:0];
                          end
             endcase
         end else begin
@@ -316,8 +322,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                         MREAD <= 1'b0;
                         MLOAD <= 1'b0;
                     end else if (MT04) begin
-                        monitor_data[15] <= rw_bank[14];
-                        monitor_data[13:0] <= rw_bank[13:0];
+                        monitor_data <= rw_bank;
                     end else if (MT05) begin
                         monitor_data <= 16'o0;
                     end else if (MT08) begin
@@ -327,6 +332,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                     end
                 end else if (stage == 3'o1) begin
                     if (MT04 && store_data) begin
+                        if (rw_addr == 16'o6) MONWBK <= 1'b1;
                         monitor_data <= rw_data;
                     end else if (MT05) begin
                         monitor_data <= 16'b0;
@@ -343,6 +349,7 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                         if (fetch_data) cntrl_reg[5] <= 1'b0;
                         else cntrl_reg[6] <= 1'b0;
                         suppress_mstp <= 1'b0;
+                        MONWBK <= 1'b0;
                     end
                 end
             end
@@ -355,26 +362,53 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
                 if (read_chan) MRDCH <= 1'b1;
                 else MLDCH <= 1'b1;
                 suppress_mstp <= 1'b1;
-           end else begin
+            end else begin
                 if (MT01) begin
                     MRDCH <= 1'b0;
                     MLDCH <= 1'b0;
                     monitor_data <= rw_addr;
+                end else if (MT02) begin
+                    monitor_data <= 16'o0;
                 end else if (MT05 && read_chan) begin
                     rw_data <= write_bus;
                 end else if (MT07 && load_chan) begin
                     monitor_data <= rw_data;
+                end else if (MT08) begin
+                    monitor_data <= 16'o0;
                 end else if (MT11) begin
                     if (read_chan) cntrl_reg[7] <= 1'b0;
                     else cntrl_reg[8] <= 1'b0;
                     suppress_mstp <= 1'b0;
-                end else begin
-                    monitor_data <= 16'o0;
                 end
-           end
-       end
-    end
+            end
+        end
     
+        // Handle TCSAJ
+        if (transfer_control) begin
+            if (!(!MTCSA_n || tcsaj_in_progress)) begin
+                MTCSAI <= 1'b1;
+                suppress_mstp <= 1'b1;
+            end else begin
+                if (stage == 3'o3) begin
+                    if (MT01) begin
+                        MTCSAI <= 1'b0;
+                        tcsaj_in_progress <= 1'b1;
+                    end else if (MT08) begin
+                        monitor_data <= rw_addr;
+                    end else if (MT09) begin
+                        monitor_data <= 16'o0;
+                    end
+                end else begin
+                    if (MT11) begin
+                        tcsaj_in_progress <= 1'b0;
+                        cntrl_reg[9] <= 1'b0;
+                        suppress_mstp <= 1'b0;
+                    end
+                end
+            end
+        end
+    end
+
     // During SDR, shift into either the temporary shift register or the bypass register, depending on whether
     // or not a real instruction has been selected. During CDR, copy the current register value into the
     // temporary register to prepare for shifting it out.
@@ -385,9 +419,15 @@ module jtag_monitor(SIM_CLK, MSTRT, MSTP, MDT01, MDT02, MDT03, MDT04, MDT05, MDT
             if (cdr) begin
                 case (ir_in)
                     `CONTROL: tmp_reg <= cntrl_reg;
-                    `BRKBANK: tmp_reg <= break_bank;
+                    `BRKBANK: begin
+                                  tmp_reg[15] <= 1'b0;
+                                  tmp_reg[14:0] <= break_bank[14:0];
+                              end
                     `BRKADDR: tmp_reg <= break_addr;
-                    `RWBANK:  tmp_reg <= rw_bank;
+                    `RWBANK:  begin
+                                  tmp_reg[15] <= 1'b0;
+                                  tmp_reg[14:0] <= rw_bank[14:0];
+                              end
                     `RWADDR:  tmp_reg <= rw_addr;
                     `RWDATA:  tmp_reg <= rw_data;
                     `REG_A:   tmp_reg <= a_reg;
