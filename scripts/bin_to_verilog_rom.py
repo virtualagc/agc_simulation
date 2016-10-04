@@ -1,5 +1,6 @@
 import argparse
 import array
+import os
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a Verilog ROM (switch statement) from a given binary")
@@ -9,7 +10,7 @@ if __name__ == "__main__":
     
     words = array.array('H')
     with open(args.input_file, 'rb') as f:
-        words.fromfile(f, 36864)
+        words.fromfile(f, int(os.path.getsize(args.input_file)/2))
 
         if f.read() != b'':
             raise RuntimeError("File larger than 36864 bytes supplied; this doesn't fit in the AGC's address space!")
