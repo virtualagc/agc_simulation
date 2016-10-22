@@ -5,8 +5,63 @@ import errno
 import time
 import argparse
 
-DEFAULT_TCP_IP = '127.0.0.1'
-DEFAULT_TCP_PORT = 6547
+DEFAULT_TCP_IP = '192.168.7.2'
+DEFAULT_TCP_PORT = 19697
+
+OUTPUTS = {
+    # Net        Pin    DE-0 Nano Pin
+    'MAINRS' : 'P8_7',  # GPIO_02 
+    'MKEY1'  : 'P8_8',  # GPIO_03 
+    'MKEY2'  : 'P8_9',  # GPIO_04
+    'MKEY3'  : 'P8_10', # GPIO_05 
+    'MKEY4'  : 'P8_11', # GPIO_06 
+    'MKEY5'  : 'P8_12', # GPIO_07 
+    'SBYBUT' : 'P9_21', # GPIO_123
+    'CAURST' : 'P9_22', # GPIO_122
+}
+
+INPUTS = {
+    # Net        Pin    DE-0 Nano Pin
+    'RLYB01' : 'P8_31', # GPIO_08
+    'RLYB02' : 'P8_32', # GPIO_09 
+    'RLYB03' : 'P8_33', # GPIO_010 
+    'RLYB04' : 'P8_34', # GPIO_011 
+    'RLYB05' : 'P8_35', # GPIO_012 
+    'RLYB06' : 'P8_36', # GPIO_013 
+    'RLYB07' : 'P8_37', # GPIO_014 
+    'RLYB08' : 'P8_38', # GPIO_015 
+    'RLYB09' : 'P8_39', # GPIO_016 
+    'RLYB10' : 'P8_40', # GPIO_017 
+    'RLYB11' : 'P8_41', # GPIO_018 
+    'RYWD12' : 'P8_42', # GPIO_019
+    'RYWD13' : 'P8_43', # GPIO_020
+    'RYWD14' : 'P8_44', # GPIO_021
+    'RYWD16' : 'P8_45', # GPIO_022
+    'VNFLSH' : 'P9_23', # GPIO_121
+    'COMACT' : 'P9_24', # GPIO_120
+    'UPLACT' : 'P9_25', # GPIO_119
+    'TMPCAU' : 'P9_26', # GPIO_118
+    'KYRLS'  : 'P9_27', # GPIO_117
+    'OPEROR' : 'P9_28', # GPIO_116
+    'RESTRT' : 'P9_29', # GPIO_115
+    'SBYLIT' : 'P9_30', # GPIO_114
+}
+
+RELAYWORD_NETS = ['RLYB%02u' % (i+1) for i in range(11)] + ['RYWD%u' % i for i in [12, 13, 14, 16]]
+
+CH163_BITS = {
+    'KYRLS'  : 0o00020,
+    'VNFLSH' : 0o00040,
+    'OPEROR' : 0o00100,
+    'RESTRT' : 0o00200,
+    'SBYLIT' : 0o00400,
+}
+
+CH11_BITS = {
+    'COMACT' : 0o00002,
+    'UPLACT' : 0o00004,
+    'TMPCAU' : 0o00010,
+}
 
 keydown_time = 0
 pressed_key = False
@@ -14,29 +69,16 @@ relayword_time = 0
 relays_latching = False
 
 def configure_gpio():
-    # Configure key lines
-    for pin in ['P8_%u' % n for n in range(7,13)]:
+    # Configure outputs
+    for _, pin in OUTPUTS.items():
         GPIO.setup(pin, GPIO.OUT)
         GPIO.output(pin, GPIO.LOW)
 
-    # Assert MAINRS
-    GPIO.output('P8_7', GPIO.HIGH)
+    # Assert MAINRS by default
+    GPIO.output(OUTPUTS['MAINRS'], GPIO.HIGH)
 
-    # Configure relay word
-    for pin in ['P8_%u' % n for n in range(31, 46)]:
-        GPIO.setup(pin, GPIO.IN)
-        GPIO.add_event_detect(pin, GPIO.BOTH)
-
-    # Configure PROCEED
-    GPIO.setup('P9_21', GPIO.OUT)
-    GPIO.output('P9_21', GPIO.LOW)
-
-    # Configure CAUTION RESET
-    GPIO.setup('P9_22', GPIO.OUT)
-    GPIO.output('P9_22', GPIO.LOW)
-
-    # Configure other lights and inputs
-    for pin in ['P9_%u' % n for n in range(23, 31)]:
+    # Configure inputs
+    for _,pin in INPUTS.items():
         GPIO.setup(pin, GPIO.IN)
         GPIO.add_event_detect(pin, GPIO.BOTH)
 
@@ -61,20 +103,17 @@ def send_io_packet(conn, ch, val):
 
 def assert_dsky_key(k):
     # Deassert MAINRS
-    GPIO.output('P8_7', GPIO.LOW)
+    GPIO.output(OUTPUTS['MAINRS'], GPIO.LOW)
 
     for i in xrange(5):
-        if k & (1<<i):
-            GPIO.output("P8_%u" % (8+i), GPIO.HIGH)
-        else:
-            GPIO.output("P8_%u" % (8+i), GPIO.LOW)
+        GPIO.output(OUTPUTS['MKEY%u' % (i+1)], GPIO.HIGH if k & (1<<i) else GPIO.LOW)
 
     # Handle RSET's associated discrete
-    if k == 0b11001:
-        GPIO.output("P9_22", GPIO.HIGH)
+    if k == 0b10010:
+        GPIO.output(OUTPUTS['CAURST'], GPIO.HIGH)
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="A simple server to interface GPIO to yaDSKY2")
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='A simple server to interface GPIO to yaDSKY2')
     parser.add_argument('-i', dest='ip', default=DEFAULT_TCP_IP, help='DSKY Server IP')
     parser.add_argument('-p', dest='port', default=DEFAULT_TCP_PORT, help='DSKY Server Port')
     args = parser.parse_args()
@@ -108,7 +147,7 @@ if __name__ == "__main__":
                 ch, val, ubit = parse_io_packet(msg)
 
                 if not ubit:
-                    if ch == 13:
+                    if ch == 0o15:
                         # Handle button presses
                         if not pressed_key:
                             pressed_key = True
@@ -120,28 +159,25 @@ if __name__ == "__main__":
                             print 'ERROR: key already down'
                     elif ch == 0o32:
                         # Handle PROCEED presses and releases
-                        if val:
-                            GPIO.output('P9_21', GPIO.HIGH)
-                        else:
-                            GPIO.output('P9_21', GPIO.LOW)
-
+                        GPIO.output(OUTPUTS['SBYBUT'], GPIO.LOW if val else GPIO.HIGH)
 
             # Handle timeout for button presses
             if pressed_key and time.time() >= (keydown_time + 0.1):
                 # Deassert all of the key lines
                 for i in xrange(5):
-                    GPIO.output('P8_%u' % (8+i), GPIO.LOW)
+                    GPIO.output(OUTPUTS['MKEY%u' % (i+1)], GPIO.LOW)
 
-                GPIO.output("P9_22", GPIO.LOW)
+                # Deassert RSET's line
+                GPIO.output(OUTPUTS['CAURST'], GPIO.LOW)
 
                 # Assert MAINRS
-                GPIO.output('P8_7', GPIO.HIGH)
+                GPIO.output(OUTPUTS['MAINRS'], GPIO.HIGH)
                 pressed_key = False
 
             # Handle relay words
             relayword_changed = False
-            for pin in ['P8_%u' % n for n in range(31, 46)]:
-                if GPIO.event_detected(pin):
+            for net in RELAYWORD_NETS:
+                if GPIO.event_detected(INPUTS[net]):
                     relayword_changed = True
 
             if relayword_changed:
@@ -151,10 +187,9 @@ if __name__ == "__main__":
             if relays_latching and time.time() >= (relayword_time + 0.005):
                 relays_latching = False
                 relayword = 0
-                for i in xrange(15):
-                    if GPIO.input('P8_%u' % (i+31)):
+                for i,net in enumerate(RELAYWORD_NETS):
+                    if GPIO.input(INPUTS[net]):
                         relayword |= (1 << i)
-
 
                 send_io_packet(conn, 0o10, relayword)
 
@@ -163,36 +198,32 @@ if __name__ == "__main__":
                 seg2 = (relayword >> 5) & 0x1f
                 print rywd, bin(seg1), bin(seg2)
 
-            # Handle V/N flash and hardware warning lights
-            ch42_changed = False
-            for pin in ['P9_%u' % n for n in [23, 29, 30]]:
-                if GPIO.event_detected(pin):
-                    ch42_changed = True
+            # Handle false channel 163 (V/N Flash, Restart, Standby, Key Rel, Oper Err)
+            ch163_changed = False
+            for net in CH163_BITS:
+                if GPIO.event_detected(INPUTS[net]):
+                    ch163_changed = True
 
-            if ch42_changed:
+            if ch163_changed:
                 val = 0
-                pins = [23, 29, 30]
-                for i,pin in enumerate(pins):
-                    if GPIO.input('P9_%u' % pin):
-                        val |= (1 << i)
+                for net in CH163_BITS:
+                    if GPIO.input(INPUTS[net]):
+                        val |= CH163_BITS[net]
 
-                send_io_packet(conn, 0o42, val)
+                send_io_packet(conn, 0o163, val)
 
-            # Handle channel 11 warning lights
+            # Handle channel 11 warning lights not covered in channel 163
             ch11_changed = False
-            for pin in ['P9_%u' % n for n in range(24, 29)]:
-                if GPIO.event_detected(pin):
+            for net in CH11_BITS:
+                if GPIO.event_detected(INPUTS[net]):
                     ch11_changed = True
 
             if ch11_changed:
                 val = 0
-                for i in xrange(4):
-                    if GPIO.input('P9_%u' % (i+24)):
-                        val |= (1 << (i+1))
-                if GPIO.input('P9_%u' % 28):
-                    val |= (1 << 6)
+                for net in CH11_BITS:
+                    if GPIO.input(INPUTS[net]):
+                        val |= CH11_BITS[net]
 
                 send_io_packet(conn, 0o11, val)
-                print 'Status light bits:', bin(val)
 
             time.sleep(0.0005)
