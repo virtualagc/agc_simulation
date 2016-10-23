@@ -278,7 +278,7 @@ class VerilogGenerator(object):
             f.write('\n')
 
             # Finally, dump the list of components
-            for ref, comp in sorted(self.components.items()):
+            for ref, comp in sorted(self.components.items(), key=lambda des: des[0][0] + des[0][-2:]):
                 if ref[0] == 'P':
                     continue
 
