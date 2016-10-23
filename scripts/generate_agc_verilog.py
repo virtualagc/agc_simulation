@@ -96,12 +96,12 @@ class Component(object):
         type_name = self.type
         if self.ref[0] == 'R':
             # Resistors (currently) always manifest as pullups or pulldowns.
-            if 'VCC' in pin_names:
-                return 'pullup %s(%s);' % (self.ref, pin_names[0] if pin_names[0] != 'VCC' else pin_names[1])
+            if 'p4VDC' in pin_names or 'p4VSW' in pin_names:
+                return 'pullup %s(%s);' % (self.ref, pin_names[0] if not pin_names[0].startswith('p4V') else pin_names[1])
             elif 'GND' in pin_names:
                 return 'pulldown %s(%s);' % (self.ref, pin_names[0] if pin_names[0] != 'GND' else pin_names[1])
             else:
-                raise RuntimeError("Error processing resistor %s, not connected to VCC" % self.ref)
+                raise RuntimeError("Error processing resistor %s, not connected to p4V" % self.ref)
         else:
             if type_name[0].isdigit():
                 # Lots of parts (like 74xx chips) start with a number, so prepend a U
@@ -233,25 +233,35 @@ class VerilogGenerator(object):
             f.write('`default_nettype none\n\n')
             
             # Write the module name, along with the standard inputs
-            f.write('module %s(VCC, GND, SIM_RST, SIM_CLK' % self.module)
+            f.write('module %s(SIM_RST, SIM_CLK' % self.module)
+
+            if 'p4VDC' in self.net_types:
+                f.write(', p4VDC')
+            if 'p4VSW' in self.net_types:
+                f.write(', p4VSW')
+
+            f.write(', GND')
             
             # Assuming P1 is the 'backplane connector', write out its attached
             # pins in order as the module inputs
             for pin in self.components['P1'].pins:
                 # Write out all 
-                if pin.net == 'VCC' or pin.net == 'GND':
+                if pin.net in ['p4VDC', 'p4VSW', 'GND']:
                     continue
                 f.write(', ' + pin.net)
 
             f.write(');\n')
-            f.write('    input wire VCC;\n')
-            f.write('    input wire GND;\n')
             f.write('    input wire SIM_RST;\n')
             f.write('    input wire SIM_CLK;\n')
+            if 'p4VDC' in self.net_types:
+                f.write('    input wire p4VDC;\n')
+            if 'p4VSW' in self.net_types:
+                f.write('    input wire p4VSW;\n')
+            f.write('    input wire GND;\n')
 
             # Write out all of the wire declarations
             for net, net_type in sorted(self.net_types.items()):
-                if net in ['VCC', 'GND']:
+                if net in ['p4VDC', 'p4VSW', 'GND']:
                     continue
                 f.write('    ')
                 io_type = ''
