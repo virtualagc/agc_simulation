@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2015 Altera Corporation. All rights reserved.
+Copyright (C) 1991-2016 Altera Corporation. All rights reserved.
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -131,7 +131,7 @@ agreement for further details.
 		(text "virtual_state_uir" (rect 101 243 304 496)(font "Arial" (color 0 0 0)))
 		(text "tck" (rect 209 43 436 99)(font "Arial" (color 128 0 0)(font_size 9)))
 		(text "clk" (rect 193 67 404 144)(font "Arial" (color 0 0 0)))
-		(text " system " (rect 269 264 586 538)(font "Arial" ))
+		(text " vjtag " (rect 280 264 602 538)(font "Arial" ))
 		(line (pt 96 32)(pt 208 32)(line_width 1))
 		(line (pt 208 32)(pt 208 264)(line_width 1))
 		(line (pt 96 264)(pt 208 264)(line_width 1))

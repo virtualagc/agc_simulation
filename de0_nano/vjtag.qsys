@@ -58,7 +58,7 @@
  <module
    name="virtual_jtag_0"
    kind="altera_virtual_jtag"
-   version="15.1"
+   version="16.0"
    enabled="1"
    autoexport="1">
   <parameter name="CREATE_PRIMITIVE_JTAG_STATE_SIGNAL_PORTS" value="false" />

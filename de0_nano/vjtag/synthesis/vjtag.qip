@@ -1,8 +1,8 @@
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_TOOL_NAME "Qsys"
-set_global_assignment -entity "vjtag" -library "vjtag" -name IP_TOOL_VERSION "15.1"
+set_global_assignment -entity "vjtag" -library "vjtag" -name IP_TOOL_VERSION "16.0"
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_TOOL_ENV "Qsys"
 set_global_assignment -library "vjtag" -name SOPCINFO_FILE [file join $::quartus(qip_path) "../../vjtag.sopcinfo"]
-set_global_assignment -entity "vjtag" -library "vjtag" -name SLD_INFO "QSYS_NAME vjtag HAS_SOPCINFO 1 GENERATION_ID 1474143692"
+set_global_assignment -entity "vjtag" -library "vjtag" -name SLD_INFO "QSYS_NAME vjtag HAS_SOPCINFO 1 GENERATION_ID 1478111233"
 set_global_assignment -library "vjtag" -name MISC_FILE [file join $::quartus(qip_path) "../vjtag.cmp"]
 set_global_assignment -library "vjtag" -name SLD_FILE [file join $::quartus(qip_path) "vjtag.debuginfo"]
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_TARGETED_DEVICE_FAMILY "Cyclone IV E"
@@ -15,7 +15,7 @@ set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_DISPLA
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_REPORT_HIERARCHY "On"
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_VERSION "MS4w"
-set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTQ3NDE0MzY5Mg==::QXV0byBHRU5FUkFUSU9OX0lE"
+set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_PARAMETER "QVVUT19HRU5FUkFUSU9OX0lE::MTQ3ODExMTIzMw==::QXV0byBHRU5FUkFUSU9OX0lE"
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfRkFNSUxZ::Q3ljbG9uZSBJViBF::QXV0byBERVZJQ0VfRkFNSUxZ"
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0U=::RVA0Q0UyMkYxN0M2::QXV0byBERVZJQ0U="
 set_global_assignment -entity "vjtag" -library "vjtag" -name IP_COMPONENT_PARAMETER "QVVUT19ERVZJQ0VfU1BFRURHUkFERQ==::Ng==::QXV0byBERVZJQ0VfU1BFRURHUkFERQ=="
@@ -24,7 +24,7 @@ set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPO
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_REPORT_HIERARCHY "Off"
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_INTERNAL "Off"
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_AUTHOR "QWx0ZXJhIENvcnBvcmF0aW9u"
-set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_VERSION "MTUuMQ=="
+set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_VERSION "MTYuMA=="
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_DESCRIPTION "VmlydHVhbCBKVEFHIEludGVyZmFjZSAoVkpJKSBtZWdhZnVuY3Rpb24uIFRoaXMgbWVnYWZ1bmN0aW9uIHByb3ZpZGVzIGFjY2VzcyB0byB0aGUgUExEIHNvdXJjZSB0aHJvdWdoIHRoZSBKVEFHIGludGVyZmFjZS4KVGhlIFF1YXJ0dXMgUHJpbWUgc29mdHdhcmUgb3IgSlRBRyBjb250cm9sIGhvc3QgaWRlbnRpZmllcyBlYWNoIGluc3RhbmNlIG9mIHRoaXMgbWVnYWZ1bmN0aW9uIGJ5IGEgdW5pcXVlIGluZGV4LiBFYWNoIG1lZ2FmdW5jdGlvbiBpbnN0YW5jZQpmdW5jdGlvbnMgaW4gYSBmbG93IHRoYXQgcmVzZW1ibGVzIHRoZSBKVEFHIG9wZXJhdGlvbiBvZiBhIGRldmljZS4gVGhlIGxvZ2ljIHRoYXQgdXNlcyB0aGlzIGludGVyZmFjZSBtdXN0IG1haW50YWluIHRoZSBjb250aW51aXR5IG9mCnRoZSBKVEFHIGNoYWluIG9uIGJlaGFsZiB0aGUgUExEIGRldmljZSB3aGVuIHRoaXMgaW5zdGFuY2UgYmVjb21lcyBhY3RpdmUu"
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_PARAMETER "ZGV2aWNlX2ZhbWlseQ==::Q3ljbG9uZSBJViBF::ZGV2aWNlX2ZhbWlseQ=="
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPONENT_PARAMETER "Z3VpX3VzZV9hdXRvX2luZGV4::ZmFsc2U=::QXV0b21hdGljIEluc3RhbmNlIEluZGV4IEFzc2lnbm1lbnQ="
@@ -36,5 +36,5 @@ set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_COMPO
 set_global_assignment -library "vjtag" -name VERILOG_FILE [file join $::quartus(qip_path) "vjtag.v"]
 
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_TOOL_NAME "altera_virtual_jtag"
-set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_TOOL_VERSION "15.1"
+set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_TOOL_VERSION "16.0"
 set_global_assignment -entity "sld_virtual_jtag" -library "vjtag" -name IP_TOOL_ENV "Qsys"
