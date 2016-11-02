@@ -146,7 +146,8 @@ for m in modules:
 
 
 # These should always end up in the input set -- they're special, so we want to handle them separately
-inputs.remove('VCC')
+inputs.remove('p4VDC')
+inputs.remove('p4VSW')
 inputs.remove('GND')
 inputs.remove('SIM_RST')
 inputs.remove('SIM_CLK')
@@ -163,12 +164,13 @@ with open(args.filename, 'w') as f:
     f.write('module ');
     if args.fpga:
         f.write('fpga_')
-    f.write('agc(VCC, GND, SIM_RST, SIM_CLK, ' + ', '.join(sorted_inputs))
+    f.write('agc(p4VDC, p4VSW, GND, SIM_RST, SIM_CLK, ' + ', '.join(sorted_inputs))
     f.write(', ' + ', '.join(sorted_outputs))
     f.write(');\n')
 
     # Write out wire declarations
-    f.write('    input wire VCC;\n')
+    f.write('    input wire p4VDC;\n')
+    f.write('    input wire p4VSW;\n')
     f.write('    input wire GND;\n')
     f.write('    input wire SIM_RST;\n')
     f.write('    input wire SIM_CLK;\n')
