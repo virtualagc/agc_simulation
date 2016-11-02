@@ -111,6 +111,9 @@ class Component(object):
             if any([iv == "1'b1" for _,iv in self.initial_values.items()]):
                 # If any of the initial conditions for this component are 1, we need to print them out
                 ivs = [self.initial_values[part] for part in sorted(self.initial_values.keys())]
+                # Multipart components have a separate voltage pin that we need to filter out
+                if len(ivs) > 1:
+                    ivs = ivs[:-1]
                 iv_string = ' #(' + ', '.join(ivs) + ') '
             else:
                 # Otherwise we'll just let everything default to 0.
