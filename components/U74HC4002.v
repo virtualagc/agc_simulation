@@ -10,6 +10,10 @@ module U74HC4002(y1, a1, b1, c1, d1, nc1, gnd, nc2, a2, b2, c2, d2, y2, vcc, rst
     input wire nc1, nc2;
     output wire y1, y2;
 
-    nor_4 #(delay, ic1) A(y1, a1, b1, c1, d1, rst, clk);
-    nor_4 #(delay, ic2) B(y2, a2, b2, c2, d2, rst, clk);
+    // Treat loss of power like a reset hold
+    wire vrst;
+    assign vrst = (rst || !vcc);
+
+    nor_4 #(delay, ic1) A(y1, a1, b1, c1, d1, vrst, clk);
+    nor_4 #(delay, ic2) B(y2, a2, b2, c2, d2, vrst, clk);
 endmodule
