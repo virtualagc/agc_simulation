@@ -1,4 +1,4 @@
-ROM=luminary099
+ROM=Aurora12
 
 MODULES = scaler\
 	  timer\
@@ -52,13 +52,32 @@ FPGA_SOURCES = $(COMMON_SOURCES)\
 	       de0_nano/fpga_agc.v\
 	       test_agc.v
 
+ROMS = Retread44 \
+       Aurora12 \
+       Sunburst120 \
+       Luminary099 \
+       Luminary131 \
+       Luminary210 \
+       Colossus237 \
+       Colossus249 \
+       Comanche055 \
+       Artemis072 \
+       Validation
+#       Borealis
+
+VIRTUALAGC_DIR=../virtualagc/
+ROM_FILES = $(addsuffix .v, $(addprefix roms/, $(ROMS)))
+BIN_FILES = $(addsuffix .bin, $(join $(addprefix $(VIRTUALAGC_DIR), $(ROMS)), $(addprefix /, $(ROMS))))
+
 HARDWARE_DIR=../agc_hardware/
 
 .phony: all
-all: test_agc de0_nano/fpga_agc.v roms/$(ROM).hex
+all: test_agc de0_nano/fpga_agc.v $(ROM_FILES)
 
-roms/rom.v: roms/$(ROM).v
+roms/rom.v: roms/$(ROM).v FORCE
 	cp roms/$(ROM).v roms/rom.v
+
+FORCE:
 
 test_agc: $(SIM_SOURCES) roms/rom.v
 	iverilog -o $@ $(SIM_SOURCES)
@@ -72,11 +91,11 @@ agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 de0_nano/fpga_agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 	python scripts/generate_agc_backplane.py $@ modules/ --fpga
 
-roms/%.v: roms/$(ROM).bin scripts/bin_to_verilog_rom.py
-	python scripts/bin_to_verilog_rom.py $< $@
+$(BIN_FILES):
+	make -C$(VIRTUALAGC_DIR) $(ROMS)
 
-roms/%.hex: roms/$(ROM).bin
-	python /usr/bin/bin2hex.py $< $@
+roms/%.v: $(BIN_FILES) scripts/bin_to_verilog_rom.py
+	python scripts/bin_to_verilog_rom.py --to-hardware --hex $(VIRTUALAGC_DIR)/$*/$*.bin $@
 
 .SECONDEXPANSION:
 $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/generate_agc_verilog.py
