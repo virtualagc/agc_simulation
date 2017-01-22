@@ -1,15 +1,15 @@
 [*]
-[*] GTKWave Analyzer v3.3.72 (w)1999-2016 BSI
-[*] Wed Sep 14 21:28:01 2016
+[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
+[*] Sun Jan 22 07:29:54 2017
 [*]
-[dumpfile] "/home/mstewart/agc_simulation/dump.lxt"
-[dumpfile_mtime] "Wed Sep 14 21:22:55 2016"
-[dumpfile_size] 76980763
-[savefile] "/home/mstewart/agc_simulation/agc.gtkw"
+[dumpfile] "dump.lxt"
+[dumpfile_mtime] "Sun Jan 22 06:36:00 2017"
+[dumpfile_size] 79278144
+[savefile] "agc.gtkw"
 [timestart] 0
-[size] 1920 894
+[size] 1880 1182
 [pos] -1 -1
-*-23.000000 202300000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-24.000000 53850000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] main.
 [treeopen] main.AGC.
 [treeopen] main.AGC.A03.U3017.
@@ -23,7 +23,6 @@
 [treeopen] main.AGC.A05.U5064.
 [treeopen] main.AGC.A06.U6012.
 [treeopen] main.AGC.A06.U6017.
-[treeopen] main.AGC.A07.U7039.
 [treeopen] main.AGC.A11.U11009.
 [treeopen] main.AGC.A13.U13004.
 [treeopen] main.AGC.A13.U13042.
@@ -37,7 +36,6 @@
 [treeopen] main.AGC.A20.U20038.
 [treeopen] main.AGC.A20.U20044.
 [treeopen] main.AGC.A20.U20051.
-[treeopen] main.AGC.A20.U20058.
 [treeopen] main.AGC.A21.U21039.
 [treeopen] main.AGC.A21.U21045.
 [treeopen] main.AGC.A21.U21052.
@@ -47,7 +45,7 @@
 [sst_width] 205
 [signals_width] 266
 [sst_expanded] 1
-[sst_vpaned_height] 370
+[sst_vpaned_height] 510
 @c02084
 [color] 6
 ^1 timepulses.txt
@@ -70,7 +68,7 @@ main.AGC.T12[0]
 @10c00022
 [color] 5
 [transaction_args] ""
-^<1 scripts/instruction_trans_decoder.py
+^<1 ./scripts/instruction_trans_decoder.py
 #{Inst} main.AGC.MINC[0] main.AGC.DINC[0] main.AGC.PINC[0] main.AGC.INKL[0] main.AGC.T07[0] main.AGC.T01[0] main.AGC.TSUDO_n[0] main.AGC.G16[0] main.AGC.G15[0] main.AGC.G14[0] main.AGC.G13[0] main.AGC.G12[0] main.AGC.G11[0] main.AGC.G10[0] main.AGC.G09[0] main.AGC.G08[0] main.AGC.G07[0] main.AGC.G06[0] main.AGC.G05[0] main.AGC.G04[0] main.AGC.G03[0] main.AGC.G02[0] main.AGC.G01[0] main.AGC.FUTEXT[0] main.AGC.A03.IC2[0] main.AGC.A04.__A04_1__STG3[0] main.AGC.A04.__A04_1__STG2[0] main.AGC.A04.__A04_1__STG1[0] main.AGC.A03.__A03_1__WSQG_n[0] main.AGC.GOJAM[0]
 @28
 main.AGC.GOJAM[0]
@@ -126,27 +124,6 @@ main.AGC.A15_n[0]
 main.AGC.A16_n[0]
 @1401200
 -group_end
-@c000f0
-#{B} main.AGC.A08.__A08_1___B1_n[0] main.AGC.A08.__A08_1___B2_n[0] main.AGC.A08.__A08_2___B1_n[0] main.AGC.A08.__A08_2___B2_n[0] main.AGC.A09.__A09_1___B1_n[0] main.AGC.A09.__A09_1___B2_n[0] main.AGC.A09.__A09_2___B1_n[0] main.AGC.A09.__A09_2___B2_n[0] main.AGC.A10.__A10_1___B1_n[0] main.AGC.A10.__A10_1___B2_n[0] main.AGC.A10.__A10_2___B1_n[0] main.AGC.A10.__A10_2___B2_n[0] main.AGC.A11.__A11_1___B1_n[0] main.AGC.A11.__A11_1___B2_n[0] main.AGC.A11.__A11_2___B1_n[0] main.AGC.A11.__A11_2___B2_n[0]
-@28
-main.AGC.A08.__A08_1___B1_n[0]
-main.AGC.A08.__A08_1___B2_n[0]
-main.AGC.A08.__A08_2___B1_n[0]
-main.AGC.A08.__A08_2___B2_n[0]
-main.AGC.A09.__A09_1___B1_n[0]
-main.AGC.A09.__A09_1___B2_n[0]
-main.AGC.A09.__A09_2___B1_n[0]
-main.AGC.A09.__A09_2___B2_n[0]
-main.AGC.A10.__A10_1___B1_n[0]
-main.AGC.A10.__A10_1___B2_n[0]
-main.AGC.A10.__A10_2___B1_n[0]
-main.AGC.A10.__A10_2___B2_n[0]
-main.AGC.A11.__A11_1___B1_n[0]
-main.AGC.A11.__A11_1___B2_n[0]
-main.AGC.A11.__A11_2___B1_n[0]
-main.AGC.A11.__A11_2___B2_n[0]
-@1401200
--group_end
 @c00070
 #{L} main.AGC.L16_n[0] main.AGC.L15_n[0] main.AGC.A11.__L14_n[0] main.AGC.A11.__L13_n[0] main.AGC.L12_n[0] main.AGC.A10.__L11_n[0] main.AGC.A10.__L10_n[0] main.AGC.A10.__L09_n[0] main.AGC.L08_n[0] main.AGC.A09.__L07_n[0] main.AGC.A09.__L06_n[0] main.AGC.A09.__L05_n[0] main.AGC.L04_n[0] main.AGC.A08.__L03_n[0] main.AGC.L02_n[0] main.AGC.L01_n[0]
 @28
@@ -166,27 +143,27 @@ main.AGC.A11.__L13_n[0]
 main.AGC.A11.__L14_n[0]
 main.AGC.L15_n[0]
 main.AGC.L16_n[0]
-@1401250
+@1401200
 -group_end
-@c000b0
-#{G} main.AGC.G01[0] main.AGC.G02[0] main.AGC.G03[0] main.AGC.G04[0] main.AGC.G05[0] main.AGC.G06[0] main.AGC.G07[0] main.AGC.G08[0] main.AGC.G09[0] main.AGC.G10[0] main.AGC.G11[0] main.AGC.G12[0] main.AGC.G13[0] main.AGC.G14[0] main.AGC.G15[0] main.AGC.G16[0]
+@c00070
+#{Q} main.AGC.A11.__A11_2___Q2_n[0] main.AGC.A11.__A11_2___Q1_n[0] main.AGC.A11.__A11_1___Q2_n[0] main.AGC.A11.__A11_1___Q1_n[0] main.AGC.A10.__A10_2___Q2_n[0] main.AGC.A10.__A10_2___Q1_n[0] main.AGC.A10.__A10_1___Q2_n[0] main.AGC.A10.__A10_1___Q1_n[0] main.AGC.A09.__A09_2___Q2_n[0] main.AGC.A09.__A09_2___Q1_n[0] main.AGC.A09.__A09_1___Q2_n[0] main.AGC.A09.__A09_1___Q1_n[0] main.AGC.A08.__A08_2___Q2_n[0] main.AGC.A08.__A08_2___Q1_n[0] main.AGC.A08.__A08_1___Q2_n[0] main.AGC.A08.__A08_1___Q1_n[0]
 @28
-main.AGC.G01[0]
-main.AGC.G02[0]
-main.AGC.G03[0]
-main.AGC.G04[0]
-main.AGC.G05[0]
-main.AGC.G06[0]
-main.AGC.G07[0]
-main.AGC.G08[0]
-main.AGC.G09[0]
-main.AGC.G10[0]
-main.AGC.G11[0]
-main.AGC.G12[0]
-main.AGC.G13[0]
-main.AGC.G14[0]
-main.AGC.G15[0]
-main.AGC.G16[0]
+main.AGC.A08.__A08_1___Q1_n[0]
+main.AGC.A08.__A08_1___Q2_n[0]
+main.AGC.A08.__A08_2___Q1_n[0]
+main.AGC.A08.__A08_2___Q2_n[0]
+main.AGC.A09.__A09_1___Q1_n[0]
+main.AGC.A09.__A09_1___Q2_n[0]
+main.AGC.A09.__A09_2___Q1_n[0]
+main.AGC.A09.__A09_2___Q2_n[0]
+main.AGC.A10.__A10_1___Q1_n[0]
+main.AGC.A10.__A10_1___Q2_n[0]
+main.AGC.A10.__A10_2___Q1_n[0]
+main.AGC.A10.__A10_2___Q2_n[0]
+main.AGC.A11.__A11_1___Q1_n[0]
+main.AGC.A11.__A11_1___Q2_n[0]
+main.AGC.A11.__A11_2___Q1_n[0]
+main.AGC.A11.__A11_2___Q2_n[0]
 @1401200
 -group_end
 @c000f0
@@ -208,6 +185,48 @@ main.AGC.A11.__A11_1___Z1_n[0]
 main.AGC.A11.__A11_1___Z2_n[0]
 main.AGC.A11.Z15_n[0]
 main.AGC.A11.Z16_n[0]
+@1401200
+-group_end
+@c000f0
+#{B} main.AGC.A08.__A08_1___B1_n[0] main.AGC.A08.__A08_1___B2_n[0] main.AGC.A08.__A08_2___B1_n[0] main.AGC.A08.__A08_2___B2_n[0] main.AGC.A09.__A09_1___B1_n[0] main.AGC.A09.__A09_1___B2_n[0] main.AGC.A09.__A09_2___B1_n[0] main.AGC.A09.__A09_2___B2_n[0] main.AGC.A10.__A10_1___B1_n[0] main.AGC.A10.__A10_1___B2_n[0] main.AGC.A10.__A10_2___B1_n[0] main.AGC.A10.__A10_2___B2_n[0] main.AGC.A11.__A11_1___B1_n[0] main.AGC.A11.__A11_1___B2_n[0] main.AGC.A11.__A11_2___B1_n[0] main.AGC.A11.__A11_2___B2_n[0]
+@28
+main.AGC.A08.__A08_1___B1_n[0]
+main.AGC.A08.__A08_1___B2_n[0]
+main.AGC.A08.__A08_2___B1_n[0]
+main.AGC.A08.__A08_2___B2_n[0]
+main.AGC.A09.__A09_1___B1_n[0]
+main.AGC.A09.__A09_1___B2_n[0]
+main.AGC.A09.__A09_2___B1_n[0]
+main.AGC.A09.__A09_2___B2_n[0]
+main.AGC.A10.__A10_1___B1_n[0]
+main.AGC.A10.__A10_1___B2_n[0]
+main.AGC.A10.__A10_2___B1_n[0]
+main.AGC.A10.__A10_2___B2_n[0]
+main.AGC.A11.__A11_1___B1_n[0]
+main.AGC.A11.__A11_1___B2_n[0]
+main.AGC.A11.__A11_2___B1_n[0]
+main.AGC.A11.__A11_2___B2_n[0]
+@1401200
+-group_end
+@c000b0
+#{G} main.AGC.G01[0] main.AGC.G02[0] main.AGC.G03[0] main.AGC.G04[0] main.AGC.G05[0] main.AGC.G06[0] main.AGC.G07[0] main.AGC.G08[0] main.AGC.G09[0] main.AGC.G10[0] main.AGC.G11[0] main.AGC.G12[0] main.AGC.G13[0] main.AGC.G14[0] main.AGC.G15[0] main.AGC.G16[0]
+@28
+main.AGC.G01[0]
+main.AGC.G02[0]
+main.AGC.G03[0]
+main.AGC.G04[0]
+main.AGC.G05[0]
+main.AGC.G06[0]
+main.AGC.G07[0]
+main.AGC.G08[0]
+main.AGC.G09[0]
+main.AGC.G10[0]
+main.AGC.G11[0]
+main.AGC.G12[0]
+main.AGC.G13[0]
+main.AGC.G14[0]
+main.AGC.G15[0]
+main.AGC.G16[0]
 @1401200
 -group_end
 @c00030
@@ -250,6 +269,64 @@ main.AGC.A11.__A11_1__Y1[0]
 main.AGC.A11.__A11_1__Y2[0]
 main.AGC.A11.__A11_2__Y1[0]
 main.AGC.A11.__A11_2__Y2[0]
+@1401200
+-group_end
+@10c00023
+[color] 4
+[transaction_args] ""
+^<2 ./scripts/u_trans_decoder.py
+#{U} main.AGC.A11.SUMB16_n[0] main.AGC.A11.SUMB15_n[0] main.AGC.A11.SUMB14_n[0] main.AGC.A11.SUMB13_n[0] main.AGC.A10.SUMB12_n[0] main.AGC.A10.SUMB11_n[0] main.AGC.A10.__A10_1___SUMB2[0] main.AGC.A10.__A10_1___SUMB1[0] main.AGC.A09.__A09_2___SUMB2[0] main.AGC.A09.__A09_2___SUMB1[0] main.AGC.A09.__A09_1___SUMB2[0] main.AGC.A09.__A09_1___SUMB1[0] main.AGC.A08.__A08_2___SUMB2[0] main.AGC.A08.SUMB03_n[0] main.AGC.A08.SUMB02_n[0] main.AGC.A08.SUMB01_n[0] main.AGC.A11.SUMA16_n[0] main.AGC.A11.SUMA15_n[0] main.AGC.A11.SUMA14_n[0] main.AGC.A11.SUMA13_n[0] main.AGC.A10.SUMA12_n[0] main.AGC.A10.SUMA11_n[0] main.AGC.A10.__A10_1___SUMA2[0] main.AGC.A10.__A10_1___SUMA1[0] main.AGC.A09.__A09_2___SUMA2[0] main.AGC.A09.__A09_2___SUMA1[0] main.AGC.A09.__A09_1___SUMA2[0] main.AGC.A09.__A09_1___SUMA1[0] main.AGC.A08.__A08_2___SUMA2[0] main.AGC.A08.SUMA03_n[0] main.AGC.A08.SUMA02_n[0] main.AGC.A08.SUMA01_n[0]
+@28
+main.AGC.A08.SUMA01_n[0]
+main.AGC.A08.SUMA02_n[0]
+main.AGC.A08.SUMA03_n[0]
+main.AGC.A08.__A08_2___SUMA2[0]
+main.AGC.A09.__A09_1___SUMA1[0]
+main.AGC.A09.__A09_1___SUMA2[0]
+main.AGC.A09.__A09_2___SUMA1[0]
+main.AGC.A09.__A09_2___SUMA2[0]
+main.AGC.A10.__A10_1___SUMA1[0]
+main.AGC.A10.__A10_1___SUMA2[0]
+main.AGC.A10.SUMA11_n[0]
+main.AGC.A10.SUMA12_n[0]
+main.AGC.A11.SUMA13_n[0]
+main.AGC.A11.SUMA14_n[0]
+main.AGC.A11.SUMA15_n[0]
+main.AGC.A11.SUMA16_n[0]
+main.AGC.A08.SUMB01_n[0]
+main.AGC.A08.SUMB02_n[0]
+main.AGC.A08.SUMB03_n[0]
+main.AGC.A08.__A08_2___SUMB2[0]
+main.AGC.A09.__A09_1___SUMB1[0]
+main.AGC.A09.__A09_1___SUMB2[0]
+main.AGC.A09.__A09_2___SUMB1[0]
+main.AGC.A09.__A09_2___SUMB2[0]
+main.AGC.A10.__A10_1___SUMB1[0]
+main.AGC.A10.__A10_1___SUMB2[0]
+main.AGC.A10.SUMB11_n[0]
+main.AGC.A10.SUMB12_n[0]
+main.AGC.A11.SUMB13_n[0]
+main.AGC.A11.SUMB14_n[0]
+main.AGC.A11.SUMB15_n[0]
+main.AGC.A11.SUMB16_n[0]
+@1401201
+-group_end
+@c00030
+#{FB} main.AGC.A15.__A15_1__FB16[0] main.AGC.A15.__A15_1__FB14[0] main.AGC.A15.__A15_1__FB13[0] main.AGC.A15.__A15_1__FB12[0] main.AGC.A15.__A15_1__FB11[0]
+@28
+main.AGC.A15.__A15_1__FB16[0]
+main.AGC.A15.__A15_1__FB14[0]
+main.AGC.A15.__A15_1__FB13[0]
+main.AGC.A15.__A15_1__FB12[0]
+main.AGC.A15.__A15_1__FB11[0]
+@1401200
+-group_end
+@c000b0
+#{EB} main.AGC.A15.EB9[0] main.AGC.A15.EB10[0] main.AGC.A15.__A15_1__EB11[0]
+@28
+main.AGC.A15.EB9[0]
+main.AGC.A15.EB10[0]
+main.AGC.A15.__A15_1__EB11[0]
 @1401200
 -group_end
 @c000b0
@@ -299,24 +376,6 @@ main.AGC.WL13_n[0]
 main.AGC.WL14_n[0]
 main.AGC.WL15_n[0]
 main.AGC.WL16_n[0]
-@1401200
--group_end
-@c000b0
-#{EB} main.AGC.A15.EB9[0] main.AGC.A15.EB10[0] main.AGC.A15.__A15_1__EB11[0]
-@28
-main.AGC.A15.EB9[0]
-main.AGC.A15.EB10[0]
-main.AGC.A15.__A15_1__EB11[0]
-@1401200
--group_end
-@c00030
-#{FB} main.AGC.A15.__A15_1__FB16[0] main.AGC.A15.__A15_1__FB14[0] main.AGC.A15.__A15_1__FB13[0] main.AGC.A15.__A15_1__FB12[0] main.AGC.A15.__A15_1__FB11[0]
-@28
-main.AGC.A15.__A15_1__FB16[0]
-main.AGC.A15.__A15_1__FB14[0]
-main.AGC.A15.__A15_1__FB13[0]
-main.AGC.A15.__A15_1__FB12[0]
-main.AGC.A15.__A15_1__FB11[0]
 @1401200
 -group_end
 @c000b0
