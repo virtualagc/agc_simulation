@@ -24,7 +24,8 @@ MODULES = scaler\
 	  counter_cell_ii\
 	  inout_v\
 	  inout_vi\
-	  inout_vii
+	  inout_vii\
+	  ch77_alarm_box
 
 AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
 
@@ -38,6 +39,7 @@ COMMON_SOURCES = components/nor_1.v\
 		 components/U74HC02.v\
 		 components/U74HC27.v\
 		 components/U74HC4002.v\
+		 components/U74LVC06.v\
 		 components/U74LVC07.v\
 		 components/U74HC244.v\
 		 components/MR0A16A.v\

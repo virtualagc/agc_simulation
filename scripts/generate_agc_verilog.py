@@ -211,7 +211,7 @@ class VerilogGenerator(object):
                     break
                 elif pin_type == 'output':
                     output_connected = True
-                elif pin_type == 'openCol':
+                elif pin_type == 'openCol' or ref[0] == 'R':
                     open_drain_connected = True
                 elif pin_type == '3state':
                     tristate_connected = True
@@ -274,15 +274,17 @@ class VerilogGenerator(object):
                         io_type = 'inout '
                     elif net_type.output_connected or net_type.open_drain_connected or net_type.tristate_connected:
                         io_type = 'output '
-                    else:
+                    elif net_type.input_connected:
                         io_type = 'input '
+                    else:
+                        io_type = 'output '
 
-                if net_type.open_drain_connected:
-                    # Open drains become wands on the FPGA
-                    comment = ' //FPGA#wand'
-                elif net_type.tristate_connected:
+                if net_type.tristate_connected:
                     # Tristates become wors on the FPGA
                     comment = ' //FPGA#wor'
+                elif net_type.open_drain_connected:
+                    # Open drains become wands on the FPGA
+                    comment = ' //FPGA#wand'
                 else:
                     comment = ''
 

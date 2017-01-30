@@ -21,6 +21,8 @@ wands = set()
 wors = set()
 
 for m in modules:
+    if 'ch77' in m:
+        continue
     with open(m, 'r') as f:
         s = f.read()
 

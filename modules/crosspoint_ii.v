@@ -68,7 +68,7 @@ module crosspoint_ii(SIM_RST, SIM_CLK, p4VSW, GND, GOJAM, T01, T01_n, T02, T02_n
     input wire MP1;
     input wire MP1_n;
     input wire MP3_n;
-    output wire MRCH;
+    output wire MRCH; //FPGA#wand
     input wire MSU0;
     input wire NDXX1_n;
     output wire NEAC;
@@ -425,5 +425,5 @@ module crosspoint_ii(SIM_RST, SIM_CLK, p4VSW, GND, GOJAM, T01, T01_n, T02, T02_n
     U74HC04 #(1'b0, 1'b0, 1'b0, 1'b1, 1'b0, 1'b0) U6055(R1C_n, R1C, RB1_n, RB1, L02_n, __A06_NET_341, GND, __A06_1__L02A_n, __A06_NET_341, __A06_NET_339, L15_n, __A06_NET_288, __A06_NET_339, p4VSW, SIM_RST, SIM_CLK);
     U74HC04 #(1'b1, 1'b0, 1'b1, 1'b0, 1'b0, 1'b0) U6056(__A06_NET_323, __A06_NET_322, __A06_1__WHOMP_n, WHOMPA, __A06_NET_269, WOVR_n, GND, POUT_n, __A06_2__POUT, MOUT_n, __A06_2__MOUT, ZOUT_n, __A06_2__ZOUT, p4VSW, SIM_RST, SIM_CLK);
     U74HC02 #(1'b1, 1'b0, 1'b0, 1'b0) U6057(__A06_1__WHOMP_n, WHOMP, CLXC,  ,  ,  , GND,  ,  ,  ,  ,  ,  , p4VSW, SIM_RST, SIM_CLK);
-    U74HC04 U6058(RCH_n, MRCH,  ,  ,  ,  , GND,  ,  ,  ,  ,  ,  , p4VSW, SIM_RST, SIM_CLK);
+    U74LVC06 U6058(RCH_n, MRCH,  ,  ,  ,  , GND,  ,  ,  ,  ,  ,  , p4VSW, SIM_RST, SIM_CLK); //FPGA#OD:2
 endmodule
