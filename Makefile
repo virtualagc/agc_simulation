@@ -1,8 +1,7 @@
 ROM=Aurora12
 
 MODULES = scaler\
-	  timer\
-	  sq_register\
+	  timer\ sq_register\
 	  stage_branch\
 	  crosspoint_nqi\
 	  crosspoint_ii\
@@ -69,9 +68,10 @@ ROMS = Retread44 \
 
 VIRTUALAGC_DIR=../virtualagc/
 ROM_FILES = $(addsuffix .v, $(addprefix roms/, $(ROMS)))
-BIN_FILES = $(addsuffix .bin, $(join $(addprefix $(VIRTUALAGC_DIR), $(ROMS)), $(addprefix /, $(ROMS))))
 
 HARDWARE_DIR=../agc_hardware/
+export EXTRA_YAYUL_ARGS=--hardware
+export NO_BINSOURCE=yes
 
 .phony: all
 all: test_agc de0_nano/fpga_agc.v $(ROM_FILES)
@@ -93,11 +93,13 @@ agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 de0_nano/fpga_agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
 	python scripts/generate_agc_backplane.py $@ modules/ --fpga
 
-$(BIN_FILES):
-	make -C$(VIRTUALAGC_DIR) $(ROMS)
+roms/%.bin:
+	make -C$(VIRTUALAGC_DIR)/$* clean
+	make -C$(VIRTUALAGC_DIR) $* EXTRA_TARGETS=
+	mv $(VIRTUALAGC_DIR)/$*/$*.bin $@
 
-roms/%.v: $(BIN_FILES) scripts/bin_to_verilog_rom.py
-	python scripts/bin_to_verilog_rom.py --to-hardware --hex $(VIRTUALAGC_DIR)/$*/$*.bin $@
+roms/%.v: roms/%.bin scripts/bin_to_verilog_rom.py
+	python scripts/bin_to_verilog_rom.py --hex $< $@
 
 .SECONDEXPANSION:
 $(AUTOGEN_FILES): modules/%.v: $$(wildcard $(HARDWARE_DIR)/%/*.sch) scripts/generate_agc_verilog.py
