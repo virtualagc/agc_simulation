@@ -1,7 +1,8 @@
 ROM=Aurora12
 
 MODULES = scaler\
-	  timer\ sq_register\
+	  timer\
+	  sq_register\
 	  stage_branch\
 	  crosspoint_nqi\
 	  crosspoint_ii\
