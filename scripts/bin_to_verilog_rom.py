@@ -1,7 +1,10 @@
 import argparse
 import array
 import os
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except:
+    from io import StringIO
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate a Verilog ROM (switch statement) from a given binary")
@@ -32,5 +35,5 @@ if __name__ == "__main__":
         from intelhex import bin2hex
         output_hex = os.path.splitext(args.output_file)[0] + '.hex'
         words.byteswap()
-        hw_file = StringIO(words.tostring())
+        hw_file = StringIO(str(words.tostring()))
         bin2hex(hw_file, output_hex, 0)
