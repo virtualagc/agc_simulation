@@ -211,12 +211,17 @@ class VerilogGenerator(object):
                     break
                 elif pin_type == 'output':
                     output_connected = True
-                elif pin_type == 'openCol' or ref[0] == 'R':
+                elif pin_type == 'openCol':
                     open_drain_connected = True
                 elif pin_type == '3state':
                     tristate_connected = True
                 elif pin_type == 'input':
                     input_connected = True
+                elif ref[0] == 'R':
+                    for pin in self.components[ref].pins:
+                        if str(pin) == 'GND':
+                            output_connected = True
+                            break
                 
                 # Determine the wire type
                 if ref[0] == 'P':

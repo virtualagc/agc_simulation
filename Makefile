@@ -25,9 +25,10 @@ MODULES = scaler\
 	  inout_v\
 	  inout_vi\
 	  inout_vii\
-	  ch77_alarm_box
 
-AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES)))
+TEST_CONNECTOR = ch77_alarm_box
+
+AUTOGEN_FILES = $(addsuffix .v, $(addprefix modules/, $(MODULES) $(TEST_CONNECTOR)))
 
 COMMON_SOURCES = components/nor_1.v\
 		 components/nor_2.v\
@@ -58,14 +59,16 @@ ROMS = Retread44 \
        Aurora12 \
        Sunburst120 \
        Luminary099 \
+       Luminary116 \
        Luminary131 \
        Luminary210 \
        Colossus237 \
        Colossus249 \
        Comanche055 \
        Artemis072 \
-       Validation
-#       Borealis
+       SuperJob \
+       Validation \
+       #Borealis
 
 VIRTUALAGC_DIR=../virtualagc/
 ROM_FILES = $(addsuffix .v, $(addprefix roms/, $(ROMS)))
@@ -75,7 +78,7 @@ export EXTRA_YAYUL_ARGS=--hardware
 export NO_BINSOURCE=yes
 
 .phony: all
-all: test_agc de0_nano/fpga_agc.v $(ROM_FILES)
+all: test_agc de0_nano/fpga_agc.v de0_nano/fpga_ch77_alarm_box.v $(ROM_FILES)
 
 roms/rom.v: roms/$(ROM).v FORCE
 	cp roms/$(ROM).v roms/rom.v
@@ -89,10 +92,13 @@ test_fpga: $(FPGA_SOURCES)
 	iverilog -DTARGET_FPGA -o $@ $(FPGA_SOURCES)
 
 agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
-	python scripts/generate_agc_backplane.py $@ modules/
+	python scripts/generate_agc_backplane.py -o $@ -d modules/ $(MODULES)
 
 de0_nano/fpga_agc.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
-	python scripts/generate_agc_backplane.py $@ modules/ --fpga
+	python scripts/generate_agc_backplane.py -o $@ -d modules/ --fpga $(MODULES)
+
+de0_nano/fpga_ch77_alarm_box.v: $(AUTOGEN_FILES) scripts/generate_agc_backplane.py
+	python scripts/generate_agc_backplane.py -o $@ -d modules/ --fpga $(TEST_CONNECTOR)
 
 roms/%.bin:
 	make -C$(VIRTUALAGC_DIR)/$* clean

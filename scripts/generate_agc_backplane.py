@@ -4,12 +4,13 @@ import os
 import glob
 
 parser = argparse.ArgumentParser(description="Generate a backplane module from a folder containing AGC modules")
-parser.add_argument("filename", help="Output filename")
-parser.add_argument("dir", help="Directory of AGC modules")
+parser.add_argument("-o", "--output", help="Output filename")
+parser.add_argument("-d", "--dir", help="Directory of AGC modules")
 parser.add_argument("--fpga", action="store_true", default=False, help="Generate a conglomerated module for FPGA synthesis")
+parser.add_argument("modules", nargs="+", help="List of modules to generate from")
 args = parser.parse_args()
 
-modules = glob.glob(os.path.join(args.dir, '*.v'))
+modules = [os.path.join(args.dir, '%s.v' % m) for m in args.modules]
 
 inputs = set()
 outputs = set()
@@ -21,13 +22,14 @@ wands = set()
 wors = set()
 
 for m in modules:
-    if 'ch77' in m:
-        continue
     with open(m, 'r') as f:
         s = f.read()
 
         # Find the number of the module somewhere in the file (most intramodule signal names should have it)
-        module_number = re.search('([AB]\d+)_\d+', s).group(1)
+        if 'ch77' in m:
+            module_number = 'ch77'
+        else:
+            module_number = re.search('([AB]\d+)_\d+', s).group(1)
 
         # Pull out the name of the module and its arguments from the module declaration line
         module_header = re.search('^module ([^(]+)(\(.*?);', s, re.MULTILINE)
@@ -91,8 +93,13 @@ for m in modules:
             lines = s.split('\n')
             for line in lines:
                 if (line and (not 'wire' in line) and (not 'timescale' in line) and 
-                        (not 'module' in line) and (not 'pull' in line) and
+                        (not 'module' in line) and (not 'pullup' in line) and
                         (not 'default_nettype' in line)):
+                    if 'pulldown' in line:
+                        sig = line[line.find('(')+1 : line.find(')')]
+                        module_body += '    assign %s = GND;\n' % sig
+                        continue
+
                     # Look for lines that have a codegen comment
                     parts = re.match('(.*?)(U\d+)\((.*?)\); //(.*)', line)
                     if parts is not None:
@@ -148,25 +155,23 @@ for m in modules:
 
 
 # These should always end up in the input set -- they're special, so we want to handle them separately
-inputs.remove('p4VDC')
-inputs.remove('p4VSW')
-inputs.remove('GND')
-inputs.remove('SIM_RST')
-inputs.remove('SIM_CLK')
+inputs.discard('p4VDC')
+inputs.discard('p4VSW')
+inputs.discard('GND')
+inputs.discard('SIM_RST')
+inputs.discard('SIM_CLK')
 
 sorted_inputs = sorted(inputs)
 sorted_outputs = sorted(outputs)
 sorted_internals = sorted(internals)
 
-with open(args.filename, 'w') as f:
+with open(args.output, 'w') as f:
     f.write('`timescale 1ns/1ps\n')
     f.write('`default_nettype none\n\n')
 
     # Write the module declaration
-    f.write('module ');
-    if args.fpga:
-        f.write('fpga_')
-    f.write('agc(p4VDC, p4VSW, GND, SIM_RST, SIM_CLK, ' + ', '.join(sorted_inputs))
+    module_name = os.path.splitext(os.path.basename(args.output))[0]
+    f.write('module ' + module_name + '(p4VDC, p4VSW, GND, SIM_RST, SIM_CLK, ' + ', '.join(sorted_inputs))
     f.write(', ' + ', '.join(sorted_outputs))
     f.write(');\n')
 
