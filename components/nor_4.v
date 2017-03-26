@@ -9,15 +9,20 @@ module nor_4(y, a, b, c, d, rst, clk);
 `ifdef TARGET_FPGA
     output reg y = iv;
     reg next_val = iv;
+    reg prev_val = iv;
+    wire result;
+    
+    assign result = ~(a|b|c|d);
 
     always @(posedge clk)
     begin
+        prev_val = y;
         y = next_val;
     end
 
     always @(negedge clk)
     begin
-        next_val = ~(a|b|c|d);
+        next_val = ((result == prev_val) && (y == iv)) ? iv : result;
     end
 `else
     output wire y;
