@@ -149,6 +149,8 @@ set_location_assignment PIN_N9 -to SBYLIT
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SBYLIT
 set_location_assignment PIN_B12 -to MT12
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MT12
+set_global_assignment -name VERILOG_FILE fpga_ch77_alarm_box.v
+set_global_assignment -name VERILOG_FILE ../components/U74LVC06.v
 set_global_assignment -name QIP_FILE vjtag/synthesis/vjtag.qip
 set_global_assignment -name VERILOG_FILE ../components/U74HC244.v
 set_global_assignment -name VERILOG_FILE ../components/tri_buf.v

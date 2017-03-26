@@ -14,15 +14,16 @@
 		</bit0>
 	</sof_data>
 	<hex_block>
-		<hex_filename>../roms/comanche055.hex</hex_filename>
+		<hex_filename>../roms/Aurora12.hex</hex_filename>
 		<hex_addressing>relative</hex_addressing>
 		<hex_offset>8257536</hex_offset>
+		<hex_little_endian>0</hex_little_endian>
 	</hex_block>
-	<version>9</version>
+	<version>10</version>
 	<create_cvp_file>0</create_cvp_file>
 	<create_hps_iocsr>0</create_hps_iocsr>
 	<auto_create_rpd>0</auto_create_rpd>
-	<create_fif_file>0</create_fif_file>
+	<rpd_little_endian>1</rpd_little_endian>
 	<options>
 		<map_file>1</map_file>
 	</options>
