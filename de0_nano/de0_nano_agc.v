@@ -161,7 +161,7 @@ module de0_nano_agc(OSC_50, KEY0, EPCS_DATA, EPCS_CSN, EPCS_DCLK, EPCS_ASDI, CAU
     reg XLNK0 = 0; //input
     reg XLNK1 = 0; //input
     reg ZEROP = 0; //input
-    reg n2FSFAL = 0;
+    reg n2FSFAL = 1;
     wire CDUXDP; //output
     wire CDUXDM; //output
     wire CDUYDP; //output
