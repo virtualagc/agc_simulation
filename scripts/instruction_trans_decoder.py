@@ -29,7 +29,7 @@ def decode_instruction(opcode, ext):
             return 'TCF %04o' % s
     elif sq == 0o2:
         if qc == 0o0:
-            return 'DAS %04o' % es
+            return 'DAS %04o' % (es-1)
         elif qc == 0o1:
             return 'LXCH %04o' % es
         elif qc == 0o2:
@@ -42,9 +42,12 @@ def decode_instruction(opcode, ext):
         return 'CS %04o' % s
     elif sq == 0o5:
         if qc == 0o0:
-            return 'INDEX %04o' % es
+            if s == 0o17:
+                return 'RESUME'
+            else:
+                return 'INDEX %04o' % es
         elif qc == 0o1:
-            return 'DXCH %04o' % es
+            return 'DXCH %04o' % (es-1)
         elif qc == 0o2:
             return 'TS %04o' % es
         elif qc == 0o3:
@@ -73,6 +76,8 @@ def decode_instruction(opcode, ext):
         elif qc == 0o3:
             if s10 == 0o0:
                 return 'RXOR %04o' % (es & 0o777)
+            else:
+                return 'RUPT'
     elif sq == 0o11:
         if qc == 0o0:
             return 'DV %04o' % es
@@ -88,9 +93,9 @@ def decode_instruction(opcode, ext):
         elif qc == 0o3:
             return 'DIM %04o' % es
     elif sq == 0o13:
-        return 'DCA %04o' % s
+        return 'DCA %04o' % (s-1)
     elif sq == 0o14:
-        return 'DCS %04o' % s
+        return 'DCS %04o' % (s-1)
     elif sq == 0o15:
         return 'INDEX %04o' % s
     elif sq == 0o16:
@@ -165,12 +170,22 @@ while True:
                 for i in range(1,16):
                     G = G | signals['G%02u' % i] << (i-1)
                 staged_inst = decode_instruction(G, signals['FUTEXT'])
+        elif sig_name == 'RPTFRC' and state == 1:
+            staged_inst = 'RUPT'
         elif sig_name == 'PINC' and state == 1:
             print('#%u PINC' % time)
         elif sig_name == 'MINC' and state == 1:
             print('#%u MINC' % time)
         elif sig_name == 'DINC' and state == 1:
             print('#%u DINC' % time)
+        elif sig_name == 'PCDU' and state == 1:
+            print('#%u PCDU' % time)
+        elif sig_name == 'MCDU' and state == 1:
+            print('#%u MCDU' % time)
+        elif sig_name == 'SHINC' and state == 1:
+            print('#%u SHINC' % time)
+        elif sig_name == 'SHANC' and state == 1:
+            print('#%u SHANC' % time)
         elif sig_name == 'INKL' and state == 0 and inkl_inst is not None:
             staged_inst = inkl_inst
             inkl_inst = None

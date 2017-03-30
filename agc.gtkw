@@ -1,15 +1,15 @@
 [*]
-[*] GTKWave Analyzer v3.3.58 (w)1999-2014 BSI
-[*] Sun Jan 22 07:29:54 2017
+[*] GTKWave Analyzer v3.3.72 (w)1999-2016 BSI
+[*] Thu Mar 30 06:40:21 2017
 [*]
 [dumpfile] "dump.lxt"
-[dumpfile_mtime] "Sun Jan 22 06:36:00 2017"
-[dumpfile_size] 79278144
+[dumpfile_mtime] "Sun Mar 26 04:22:19 2017"
+[dumpfile_size] 82918347
 [savefile] "agc.gtkw"
-[timestart] 0
-[size] 1880 1182
+[timestart] 9158599000
+[size] 952 885
 [pos] -1 -1
-*-24.000000 53850000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-20.000000 9159495000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] main.
 [treeopen] main.AGC.
 [treeopen] main.AGC.A03.U3017.
@@ -43,12 +43,12 @@
 [treeopen] main.AGC.A21.U21059.
 [treeopen] main.AGC.B01.U31013.
 [sst_width] 205
-[signals_width] 266
+[signals_width] 138
 [sst_expanded] 1
 [sst_vpaned_height] 510
 @c02084
 [color] 6
-^1 timepulses.txt
+^1 ./timepulses.txt
 +{Timepulse} #{Timepulses} main.AGC.T01[0] main.AGC.T02[0] main.AGC.T03[0] main.AGC.T04[0] main.AGC.T05[0] main.AGC.T06[0] main.AGC.T07[0] main.AGC.T08[0] main.AGC.T09[0] main.AGC.T10[0] main.AGC.T11[0] main.AGC.T12[0]
 @28
 main.AGC.T01[0]
@@ -65,11 +65,11 @@ main.AGC.T11[0]
 main.AGC.T12[0]
 @1401200
 -group_end
-@10c00022
+@10c00023
 [color] 5
 [transaction_args] ""
 ^<1 ./scripts/instruction_trans_decoder.py
-#{Inst} main.AGC.MINC[0] main.AGC.DINC[0] main.AGC.PINC[0] main.AGC.INKL[0] main.AGC.T07[0] main.AGC.T01[0] main.AGC.TSUDO_n[0] main.AGC.G16[0] main.AGC.G15[0] main.AGC.G14[0] main.AGC.G13[0] main.AGC.G12[0] main.AGC.G11[0] main.AGC.G10[0] main.AGC.G09[0] main.AGC.G08[0] main.AGC.G07[0] main.AGC.G06[0] main.AGC.G05[0] main.AGC.G04[0] main.AGC.G03[0] main.AGC.G02[0] main.AGC.G01[0] main.AGC.FUTEXT[0] main.AGC.A03.IC2[0] main.AGC.A04.__A04_1__STG3[0] main.AGC.A04.__A04_1__STG2[0] main.AGC.A04.__A04_1__STG1[0] main.AGC.A03.__A03_1__WSQG_n[0] main.AGC.GOJAM[0]
+#{Inst} main.AGC.MINC[0] main.AGC.DINC[0] main.AGC.PINC[0] main.AGC.INKL[0] main.AGC.T07[0] main.AGC.T01[0] main.AGC.TSUDO_n[0] main.AGC.G16[0] main.AGC.G15[0] main.AGC.G14[0] main.AGC.G13[0] main.AGC.G12[0] main.AGC.G11[0] main.AGC.G10[0] main.AGC.G09[0] main.AGC.G08[0] main.AGC.G07[0] main.AGC.G06[0] main.AGC.G05[0] main.AGC.G04[0] main.AGC.G03[0] main.AGC.G02[0] main.AGC.G01[0] main.AGC.FUTEXT[0] main.AGC.A03.IC2[0] main.AGC.A04.__A04_1__STG3[0] main.AGC.A04.__A04_1__STG2[0] main.AGC.A04.__A04_1__STG1[0] main.AGC.A03.__A03_1__WSQG_n[0] main.AGC.GOJAM[0] main.AGC.A03.__A03_1__RPTFRC[0] main.AGC.PCDU[0] main.AGC.MCDU[0] main.AGC.A21.__A21_1__SHINC[0] main.AGC.A21.__A21_1__SHANC[0]
 @28
 main.AGC.GOJAM[0]
 main.AGC.A03.__A03_1__WSQG_n[0]
@@ -95,13 +95,18 @@ main.AGC.G14[0]
 main.AGC.G15[0]
 main.AGC.G16[0]
 main.AGC.TSUDO_n[0]
+main.AGC.A03.__A03_1__RPTFRC[0]
 main.AGC.T01[0]
 main.AGC.T07[0]
 main.AGC.INKL[0]
 main.AGC.PINC[0]
 main.AGC.DINC[0]
 main.AGC.MINC[0]
-@1401200
+main.AGC.PCDU[0]
+main.AGC.MCDU[0]
+main.AGC.A21.__A21_1__SHINC[0]
+main.AGC.A21.__A21_1__SHANC[0]
+@1401201
 -group_end
 @c00070
 #{A} main.AGC.A16_n[0] main.AGC.A15_n[0] main.AGC.A11.__A11_1___A2_n[0] main.AGC.A11.__A11_1___A1_n[0] main.AGC.A10.__A10_2___A2_n[0] main.AGC.A10.__A10_2___A1_n[0] main.AGC.A10.__A10_1___A2_n[0] main.AGC.A10.__A10_1___A1_n[0] main.AGC.A09.__A09_2___A2_n[0] main.AGC.A09.__A09_2___A1_n[0] main.AGC.A09.__A09_1___A2_n[0] main.AGC.A09.__A09_1___A1_n[0] main.AGC.A08.__A08_2___A2_n[0] main.AGC.A08.__A08_2___A1_n[0] main.AGC.A08.__A08_1___A2_n[0] main.AGC.A08.__A08_1___A1_n[0]
@@ -271,7 +276,7 @@ main.AGC.A11.__A11_2__Y1[0]
 main.AGC.A11.__A11_2__Y2[0]
 @1401200
 -group_end
-@10c00023
+@10c00022
 [color] 4
 [transaction_args] ""
 ^<2 ./scripts/u_trans_decoder.py
@@ -309,7 +314,7 @@ main.AGC.A11.SUMB13_n[0]
 main.AGC.A11.SUMB14_n[0]
 main.AGC.A11.SUMB15_n[0]
 main.AGC.A11.SUMB16_n[0]
-@1401201
+@1401200
 -group_end
 @c00030
 #{FB} main.AGC.A15.__A15_1__FB16[0] main.AGC.A15.__A15_1__FB14[0] main.AGC.A15.__A15_1__FB13[0] main.AGC.A15.__A15_1__FB12[0] main.AGC.A15.__A15_1__FB11[0]
@@ -399,5 +404,7 @@ main.AGC.SA14[0]
 main.AGC.SA16[0]
 @1401200
 -group_end
+@28
+main.AGC.RUPT0[0]
 [pattern_trace] 1
 [pattern_trace] 0
