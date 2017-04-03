@@ -68,7 +68,7 @@ ROMS = Retread44 \
        Artemis072 \
        SuperJob \
        Validation \
-       #Borealis
+       Borealis
 
 VIRTUALAGC_DIR=../virtualagc/
 ROM_FILES = $(addsuffix .v, $(addprefix roms/, $(ROMS)))
