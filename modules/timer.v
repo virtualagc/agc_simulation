@@ -1,14 +1,14 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module timer(SIM_RST, SIM_CLK, p4VDC, p4VSW, GND, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP, SBY, GOJ1, WL15, WL15_n, WL16, WL16_n, GOJAM, STOP, PHS2_n, PHS3_n, PHS4, PHS4_n, CT, CT_n, RT_n, WT_n, TT_n, P02, P02_n, P03, P03_n, P04_n, SB0_n, SB1_n, SB2, SB2_n, SB4, FS01, FS01_n, F01A, F01B, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, T12A, TIMR, OVF_n, UNF_n, MGOJAM, MSTPIT_n, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, MONWT);
+module timer(SIM_RST, SIM_CLK, p4VDC, p4VSW, GND, CLOCK, ALGA, STRT1, STRT2, MSTP, MSTRTP, SBY, GOJ1, WL15, WL15_n, WL16, WL16_n, CLK, GOJAM, STOP, PHS2_n, PHS3_n, PHS4, PHS4_n, CT, CT_n, RT_n, WT_n, TT_n, P02, P02_n, P03, P03_n, P04_n, SB0_n, SB1_n, SB2, SB2_n, SB4, FS01, FS01_n, F01A, F01B, T01, T01_n, T02, T02_n, T03, T03_n, T04, T04_n, T05, T05_n, T06, T06_n, T07, T07_n, T08, T08_n, T09, T09_n, T10, T10_n, T11, T11_n, T12, T12_n, T12A, TIMR, OVF_n, UNF_n, MGOJAM, MSTPIT_n, MT01, MT02, MT03, MT04, MT05, MT06, MT07, MT08, MT09, MT10, MT11, MT12, MONWT);
     input wire SIM_RST;
     input wire SIM_CLK;
     input wire p4VDC;
     input wire p4VSW;
     input wire GND;
     input wire ALGA;
-    wire CLK;
+    output wire CLK;
     input wire CLOCK;
     output wire CT;
     output wire CT_n;
