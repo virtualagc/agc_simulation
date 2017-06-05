@@ -10,5 +10,4 @@ de0_nano/output_files
 de0_nano/simulation
 de0_nano/greybox_tmp
 PLLJ_PLLSPE_INFO.txt
-roms/*.v
-roms/*.hex
+roms/rom.v

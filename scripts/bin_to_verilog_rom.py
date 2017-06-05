@@ -22,8 +22,9 @@ if __name__ == "__main__":
         words[0:0o4000] = words[0o4000:0o10000]
         words[0o4000:0o10000] = temp
 
+        # Add in parity in bit position 15
         for i in range(len(words)):
-            words[i] |= (bin(words[i]).count('1') + 1) % 2
+            words[i] = (words[i] & 0o100000) | (((bin(words[i]).count('1') + 1) % 2) << 14) | ((words[i] & 77776) >> 1)
 
     with open(args.output_file, 'w') as of:
         for i,word in enumerate(words):
