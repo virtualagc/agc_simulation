@@ -57,6 +57,7 @@ FPGA_SOURCES = $(COMMON_SOURCES)\
 
 ROMS = Retread44 \
        Aurora12 \
+       Sunburst37 \
        Sunburst120 \
        Luminary099 \
        Luminary116 \
