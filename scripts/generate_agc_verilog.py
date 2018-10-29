@@ -134,13 +134,16 @@ class Component(object):
                 comment = ''
 
             return type_name + iv_string + self.ref + '(' + ', '.join(pin_names) + ', SIM_RST, SIM_CLK);' + comment
-        
+
+symbolFile = ""
 class VerilogGenerator(object):
-    def __init__(self, module, root):
+
+    def __init__(self, module, root, symbolFile):
         self.module = module
         self.root = root
         self.components = {}
         self.net_types = {}
+	self.symbolFile = symbolFile
 
         # Find the module number for signal naming
         self.module_name = 'Z99'
@@ -163,8 +166,12 @@ class VerilogGenerator(object):
         # Otherwise, they're path seperators for a local symbol
 
         name = name.replace('/','__')
+        self.symbolFile.write(name + " ")
         if name.startswith('Net-'):
-            name = '__' + self.module_name + '_NET_' + net.attrib['code']
+            #name = '__' + self.module_name + '_NET_' + net.attrib['code']
+            name = name.replace("Net-(","net_").replace("-","_").replace(")","")
+	self.symbolFile.write('__' + self.module_name + '_NET_' + net.attrib['code'] + " ")
+        self.symbolFile.write(name + "\n")
 
         if name[0].isdigit():
             name = 'n' + name
@@ -321,6 +328,8 @@ if __name__ == "__main__":
     if ext == '':
         filename += '.v'
 
+    symbolFile = open(filename + ".symbols", "w")
+
     if args.gui:
         top = Tk()
 
@@ -330,7 +339,7 @@ if __name__ == "__main__":
         root = tree.getroot()
 
         # Make a verilog generator and use it to generate some verilog!
-        verilog_generator = VerilogGenerator(module, root)
+        verilog_generator = VerilogGenerator(module, root, symbolFile)
         verilog_generator.generate_file(filename)
 
         if args.gui:
