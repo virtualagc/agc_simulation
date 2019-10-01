@@ -1,5 +1,5 @@
 # AGC Simulation
-This repository contains scripts, Verilog modules, and test harnesses for simulation of my [Apollo Guidance Computer replica hardware designs](https://github.com/thewonderidiot/agc_hardware). It also contains an Altera Quartus II project for the DE0-Nano development board. Auto-generated Verilog files are committed to the repository as well, because in addition to being quite a chore to generate, I've found historical diffs of them to be quite useful.
+This repository contains scripts, Verilog modules, and test harnesses for simulation of my [Apollo Guidance Computer replica hardware designs](https://github.com/thewonderidiot/agc_hardware). It also contains an [Altera Quartus II](https://www.intel.com/content/www/us/en/programmable/downloads/software/quartus-ii-we/120.html) project for the [DE0-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=593) development board. Auto-generated Verilog files are committed to the repository as well, because in addition to being quite a chore to generate, I've found historical diffs of them to be quite useful.
 
 ## Requirements
 * [Icarus Verilog](http://iverilog.icarus.com/). Used for digital simulations.
@@ -84,7 +84,7 @@ And voila! The fundamental timepulses, all of the central and special registers,
 
 ## How It Works
 ### Code Generation
-####generate\_agc\_verilog.py
+#### generate\_agc\_verilog.py
 This script functions as a KiCad netlist exporter function, translates KiCad netlists into board-level Verilog modules. At a basic level, it does the following:
 * Generates a module declaration that includes all nets attached to the backplane connector. Currently, this connector must be designated as P1 on every module.
 * Processes the connectivity of every backplane-connected net to determine whether it is an output, an input, or an inout. The conditions for this determination are as follows:
