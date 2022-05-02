@@ -34,5 +34,5 @@ if __name__ == "__main__":
         from intelhex import bin2hex
         output_hex = os.path.splitext(args.output_file)[0] + '.hex'
         words.byteswap()
-        hw_file = BytesIO(words.tostring())
+        hw_file = BytesIO(words.tobytes())
         bin2hex(hw_file, output_hex, 0)

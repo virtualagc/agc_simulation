@@ -24,10 +24,13 @@ while True:
 
     for line in dump_lines:
         if line.startswith('$'):
-            if line.startswith('$var wire'):
+            if line.startswith('$var'):
+                idx = 2
+                if 'var wire' in line:
+                    idx += 1
                 toks = line.split()
-                sig_num = int(toks[3])
-                name_match = re.match('^(__.*?___)?(.+?)\[', toks[4])
+                sig_num = int(toks[idx])
+                name_match = re.match('^(__.*?___)?(.+?)\[', toks[idx+1])
                 sig_name = name_match.group(2)
                 if name_match.group(1) is not None:
                     nums = re.match('__A(\d+)_(\d+)', name_match.group(1)).groups()

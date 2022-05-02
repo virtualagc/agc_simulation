@@ -123,12 +123,17 @@ while True:
         dump_lines.append(line)
         continue
 
+    dbgf = open('/home/mike/agc_simulation/dbg.txt', 'w+')
     for line in dump_lines:
         if line.startswith('$'):
-            if line.startswith('$var wire'):
+            if line.startswith('$var'):
+                idx = 2
+                if 'var wire' in line:
+                    idx += 1
                 toks = line.split()
-                sig_num = int(toks[3])
-                sig_name = re.match('^(?:__.*?__)?(.+?)\[', toks[4]).groups()[0]
+                sig_num = int(toks[idx])
+                sig_name = re.match('^(?:__.*?__)?(.+?)\[', toks[idx+1]).groups()[0]
+                dbgf.write('%u: %s\n' % (sig_num, sig_name))
                 signal_names[sig_num] = sig_name
                 signals[sig_name] = 0
             elif line.startswith('$dumpvars'):
